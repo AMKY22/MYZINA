@@ -11,9 +11,6 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        /* ══════════════════════════════
-           VARIABLES & RESET
-        ══════════════════════════════ */
         :root {
             --burg:   #4a0404;
             --dark:   #2d0202;
@@ -31,7 +28,7 @@
         [dir="ltr"] { font-family: 'Lora', Georgia, serif; }
 
         * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-        html { scroll-behavior:smooth; font-size:20px; } /* BASE AUGMENTÉE: 18→20px */
+        html { scroll-behavior:smooth; font-size:20px; }
 
         body {
             background: var(--burg);
@@ -53,15 +50,9 @@
             letter-spacing:0;
         }
 
-        /* ══════════════════════════════
-           PAGE SYSTEM
-        ══════════════════════════════ */
         .page { display:none; }
         .page.active { display:block; }
 
-        /* ══════════════════════════════
-           LANG SWITCH
-        ══════════════════════════════ */
         .lang-switch {
             position:absolute; top:20px; right:20px; z-index:200;
         }
@@ -70,23 +61,20 @@
             background: rgba(201,153,58,0.15);
             border: 2px solid var(--gold);
             color: var(--gold2);
-            padding: 13px 26px; /* augmenté */
+            padding: 13px 26px;
             border-radius: 50px;
-            font-size: 1.1rem; /* augmenté */
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             letter-spacing: 0.5px;
             transition: background 0.3s;
             font-family: 'Lora', serif;
-            min-height: 50px; /* touch target */
+            min-height: 50px;
         }
         .lang-btn:hover { background: rgba(201,153,58,0.3); }
 
-        /* ══════════════════════════════
-           HEADER
-        ══════════════════════════════ */
         header {
-            padding: 6rem 1.5rem 5rem; /* plus de padding */
+            padding: 6rem 1.5rem 5rem;
             text-align: center;
             background: linear-gradient(175deg, var(--dark) 0%, var(--burg) 100%);
             border-bottom: 1px solid rgba(201,153,58,0.25);
@@ -108,9 +96,9 @@
             position:relative; z-index:1;
         }
         .logo-img {
-            width: 175px; height: 175px; /* augmenté: 140→175 */
+            width: 175px; height: 175px;
             border-radius: 50%;
-            border: 3px solid var(--gold); /* plus épais */
+            border: 3px solid var(--gold);
             padding: 5px;
             object-fit: cover;
             background: white;
@@ -133,7 +121,7 @@
             display: block;
             font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1.25rem; /* augmenté: 1.1→1.25 */
+            font-size: 1.25rem;
             color: rgba(232,200,109,0.8);
             letter-spacing: 2.5px;
             text-transform: uppercase;
@@ -141,9 +129,6 @@
         }
         [dir="rtl"] .site-tagline { letter-spacing:0; font-size:1.4rem; }
 
-        /* ══════════════════════════════
-           NAV
-        ══════════════════════════════ */
         nav {
             margin-top: 3rem;
             display: flex;
@@ -158,11 +143,11 @@
             color: rgba(255,255,255,0.92);
             text-decoration: none;
             font-family: 'Lora', serif;
-            font-size: 1.1rem; /* augmenté: 1→1.1 */
+            font-size: 1.1rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-transform: uppercase;
-            padding: 12px 8px; /* touch target augmenté */
+            padding: 12px 8px;
             border-bottom: 2px solid transparent;
             transition: color 0.25s, border-color 0.25s;
             cursor: pointer;
@@ -177,16 +162,13 @@
             background: linear-gradient(135deg, #3b1a08, #1a0a00) !important;
             border: 2px solid var(--gold) !important;
             color: var(--gold2) !important;
-            padding: 14px 26px !important; /* augmenté */
+            padding: 14px 26px !important;
             border-radius: 50px !important;
             border-bottom: none !important;
-            font-size: 1.1rem !important; /* augmenté */
+            font-size: 1.1rem !important;
         }
         .choco-nav-link:hover { background: linear-gradient(135deg,#5a2a10,#3b1a08) !important; }
 
-        /* ══════════════════════════════
-           HERO
-        ══════════════════════════════ */
         .hero {
             padding: 6rem 1.5rem 6rem;
             text-align: center;
@@ -194,7 +176,7 @@
             margin: 0 auto;
         }
         .hero h2 {
-            font-size: clamp(2.4rem, 8vw, 4.2rem); /* augmenté */
+            font-size: clamp(2.4rem, 8vw, 4.2rem);
             color: var(--gold2);
             margin-bottom: 2.5rem;
             font-weight: 700;
@@ -202,64 +184,49 @@
         .ornament {
             color: var(--gold);
             margin: 3rem 0;
-            font-size: 1.3rem; /* augmenté */
+            font-size: 1.3rem;
             letter-spacing: 18px;
             opacity: 0.65;
         }
         .hero p {
-            font-size: clamp(1.2rem, 3.5vw, 1.5rem); /* augmenté */
+            font-size: clamp(1.2rem, 3.5vw, 1.5rem);
             color: rgba(245,234,214,0.92);
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.85;
         }
 
-        /* ══════════════════════════════
-           SECTION WRAPPER
-        ══════════════════════════════ */
         section {
-            padding: 6rem 1.5rem; /* augmenté */
+            padding: 6rem 1.5rem;
             background: var(--cream);
             color: var(--ink);
         }
         .sec-title { text-align:center; margin-bottom:4rem; }
         .sec-title h3 {
-            font-size: clamp(2.1rem, 6vw, 3.2rem); /* augmenté */
+            font-size: clamp(2.1rem, 6vw, 3.2rem);
             color: var(--burg);
             margin-bottom: 0.8rem;
         }
         .sec-title p {
             font-style: italic;
             color: var(--muted);
-            font-size: clamp(1.15rem, 3vw, 1.35rem); /* augmenté */
+            font-size: clamp(1.15rem, 3vw, 1.35rem);
         }
 
-        /* ══════════════════════════════
-           PRODUCT GRID
-        ══════════════════════════════ */
         .products-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 2rem; /* augmenté */
+            gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
-        @media (min-width: 520px) {
-            .products-grid { grid-template-columns: repeat(2, 1fr); }
-        }
-        @media (min-width: 900px) {
-            .products-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (min-width: 1200px) {
-            .products-grid { grid-template-columns: repeat(4, 1fr); }
-        }
+        @media (min-width: 520px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 900px) { .products-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1200px) { .products-grid { grid-template-columns: repeat(4, 1fr); } }
 
-        /* ══════════════════════════════
-           PRODUCT CARD
-        ══════════════════════════════ */
         .product-card {
             background: var(--white);
-            border-radius: 20px; /* augmenté */
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(201,153,58,0.18);
             box-shadow: 0 6px 24px rgba(0,0,0,0.08);
@@ -274,13 +241,11 @@
             border-color: var(--gold);
         }
         .product-img-wrap {
-            height: 260px; /* augmenté: 220→260 */
+            height: 260px;
             overflow: hidden;
             position: relative;
         }
-        @media (min-width: 520px) {
-            .product-img-wrap { height: 280px; } /* augmenté */
-        }
+        @media (min-width: 520px) { .product-img-wrap { height: 280px; } }
         .product-img {
             width: 100%; height: 100%;
             object-fit: cover;
@@ -289,7 +254,7 @@
         .product-card:hover .product-img { transform: scale(1.07); }
 
         .product-info {
-            padding: 1.75rem 1.5rem 1.75rem; /* augmenté */
+            padding: 1.75rem 1.5rem 1.75rem;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -297,7 +262,7 @@
             gap: 1.2rem;
         }
         .product-info h4 {
-            font-size: clamp(1.35rem, 3.5vw, 1.55rem); /* augmenté */
+            font-size: clamp(1.35rem, 3.5vw, 1.55rem);
             color: var(--burg);
             font-weight: 700;
             line-height: 1.3;
@@ -314,25 +279,24 @@
             font-family: 'Playfair Display', serif;
             color: var(--gold);
             font-weight: 800;
-            font-size: 1.45rem; /* augmenté */
+            font-size: 1.45rem;
         }
         .price-original {
             color: #b0a090;
-            font-size: 1.1rem; /* augmenté */
+            font-size: 1.1rem;
             text-decoration: line-through;
         }
         .price-badge {
             background: #c0392b;
             color: white;
-            font-size: 0.82rem; /* augmenté */
+            font-size: 0.82rem;
             font-weight: 900;
-            padding: 5px 12px; /* augmenté */
+            padding: 5px 12px;
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* CHOCO PROMO CARD */
         .choco-promo-card {
             background: linear-gradient(150deg, #3b1a08, #1a0a00);
             border: 2px solid var(--gold);
@@ -360,7 +324,7 @@
         }
         .choco-promo-info p {
             color: rgba(245,234,214,0.7);
-            font-size: 1.05rem; /* augmenté */
+            font-size: 1.05rem;
             font-style: italic;
             margin-bottom: 1.2rem;
             line-height: 1.6;
@@ -375,16 +339,13 @@
         [dir="rtl"] .choco-promo-new-badge { left:auto; right:16px; }
         .choco-promo-cta {
             display:flex; align-items:center; justify-content:center;
-            gap:8px; padding:16px 20px; /* augmenté */
+            gap:8px; padding:16px 20px;
             background: var(--gold); color:#1a0a00;
             border-radius:12px; font-weight:900;
-            font-size:1.05rem; /* augmenté */
+            font-size:1.05rem;
             text-transform:uppercase; letter-spacing:1.5px; margin-top:auto;
         }
 
-        /* ══════════════════════════════
-           QUALITY SECTION
-        ══════════════════════════════ */
         .quality-section {
             background: var(--dark);
             color: var(--white);
@@ -400,29 +361,26 @@
 
         .quality-card {
             background: rgba(255,255,255,0.04);
-            padding: 3.5rem 2.5rem; /* augmenté */
+            padding: 3.5rem 2.5rem;
             text-align: center;
             border: 1.5px solid rgba(201,153,58,0.25);
             border-radius: 20px;
             transition: border-color 0.3s, background 0.3s;
         }
         .quality-card:hover { border-color: var(--gold); background: rgba(255,255,255,0.07); }
-        .q-icon { font-size: 3.8rem; display:block; margin-bottom:1.75rem; } /* augmenté */
+        .q-icon { font-size: 3.8rem; display:block; margin-bottom:1.75rem; }
         .q-name {
             font-family:'Playfair Display',serif;
-            font-size: 1.85rem; /* augmenté */
+            font-size: 1.85rem;
             color: var(--gold2);
             margin-bottom:1.2rem;
         }
         .q-desc {
-            font-size: 1.1rem; /* augmenté */
+            font-size: 1.1rem;
             color: rgba(245,234,214,0.85);
             line-height: 1.75;
         }
 
-        /* ══════════════════════════════
-           ORDER SECTION
-        ══════════════════════════════ */
         .order-section {
             background: var(--parchment);
             padding: 6rem 1.5rem 8rem;
@@ -435,18 +393,17 @@
             margin: 0 auto;
         }
 
-        /* SUMMARY */
         .summary-card {
             background: var(--burg);
             color: var(--white);
-            padding: 3rem 2rem; /* augmenté */
+            padding: 3rem 2rem;
             border-radius: 20px;
             border: 1.5px solid rgba(201,153,58,0.4);
             box-shadow: 0 12px 40px rgba(0,0,0,0.18);
         }
         .summary-title {
             font-family:'Playfair Display',serif;
-            font-size: 1.7rem; /* augmenté */
+            font-size: 1.7rem;
             color: var(--gold2);
             display:block;
             margin-bottom: 1.75rem;
@@ -455,8 +412,8 @@
         }
         .summary-item {
             display:flex; justify-content:space-between;
-            padding: 0.8rem 0; /* augmenté */
-            font-size: 1.15rem; /* augmenté */
+            padding: 0.8rem 0;
+            font-size: 1.15rem;
         }
         .summary-total-box {
             margin-top: 2.5rem;
@@ -470,26 +427,24 @@
         .total-label {
             color: var(--gold2);
             text-transform: uppercase;
-            font-size: 1rem; /* augmenté */
+            font-size: 1rem;
             font-weight:700;
             letter-spacing:1px;
         }
         .total-val {
             font-family:'Playfair Display',serif;
-            font-size: 2.6rem; /* augmenté */
+            font-size: 2.6rem;
             font-weight:900;
         }
 
-        /* FORM CARD */
         .order-form-container {
             background: var(--white);
-            padding: 3rem 2rem; /* augmenté */
+            padding: 3rem 2rem;
             border-radius: 20px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.07);
             border: 1px solid #e8dfd0;
         }
 
-        /* FORM CONTROLS */
         .form-row {
             display:grid;
             grid-template-columns: 1fr;
@@ -502,7 +457,7 @@
         .form-group label {
             font-family:'Lora',serif;
             font-weight:700;
-            font-size: 0.95rem; /* augmenté: 0.82→0.95 */
+            font-size: 0.95rem;
             text-transform:uppercase;
             letter-spacing: 1.2px;
             color: var(--burg);
@@ -510,17 +465,17 @@
         [dir="rtl"] .form-group label { letter-spacing:0; font-size:1.1rem; font-family:'Amiri',serif; }
 
         input, select, textarea {
-            padding: 18px 20px; /* augmenté */
+            padding: 18px 20px;
             border: 2px solid #ddd5c8;
             border-radius: 12px;
             font-family: 'Lora', serif;
-            font-size: 1.15rem; /* augmenté */
+            font-size: 1.15rem;
             background: #fff !important;
             color: #1e0e00 !important;
             width: 100%;
             transition: border-color 0.25s, box-shadow 0.25s;
             -webkit-appearance: none;
-            min-height: 58px; /* touch target */
+            min-height: 58px;
         }
         [dir="rtl"] input,[dir="rtl"] select,[dir="rtl"] textarea { font-family:'Amiri',serif; font-size:1.25rem; }
         input:focus, select:focus, textarea:focus {
@@ -530,15 +485,14 @@
         }
         textarea { resize:vertical; min-height:130px; line-height:1.7; }
 
-        /* SUBMIT */
         .submit-btn {
-            width: 100%; padding: 22px; /* augmenté */
+            width: 100%; padding: 22px;
             background: var(--gold);
             color: var(--dark);
             border: none;
             border-radius: 14px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.25rem; /* augmenté */
+            font-size: 1.25rem;
             font-weight: 900;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -563,13 +517,12 @@
         }
         @keyframes spin { to { transform:rotate(360deg); } }
 
-        /* CHOCO BANNER */
         #choco_transfer_banner {
             display:none;
             background: linear-gradient(135deg, #3b1a08, #1a0a00);
             border: 2px solid var(--gold);
             border-radius: 16px;
-            padding: 1.75rem 2rem; /* augmenté */
+            padding: 1.75rem 2rem;
             margin-bottom: 2rem;
             color: var(--parchment);
             position: relative;
@@ -577,7 +530,7 @@
         }
         @keyframes slideDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
         #choco_transfer_banner .banner-title {
-            font-size: 1.15rem; /* augmenté */
+            font-size: 1.15rem;
             font-weight:900; color: var(--gold2);
             text-transform:uppercase; letter-spacing:1.5px;
             margin-bottom:0.8rem; display:flex; align-items:center; gap:8px;
@@ -591,9 +544,6 @@
         }
         [dir="rtl"] #choco_transfer_banner .close-banner { right:auto; left:16px; }
 
-        /* ══════════════════════════════
-           FOOTER
-        ══════════════════════════════ */
         footer {
             padding: 6rem 1.5rem;
             text-align:center;
@@ -602,66 +552,57 @@
             color: var(--ink);
         }
         .footer-logo {
-            width:150px; height:150px; /* augmenté: 120→150 */
+            width:150px; height:150px;
             border-radius:50%;
             margin:0 auto 2.5rem;
             border:3px solid var(--gold); padding:5px;
             object-fit:cover; display:block;
         }
-        .footer-info { font-size: 1.25rem; color: #555; line-height:2.3; } /* augmenté */
+        .footer-info { font-size: 1.25rem; color: #555; line-height:2.3; }
         .footer-info strong {
             font-family:'Playfair Display',serif;
             color: var(--burg);
-            font-size: 1.8rem; /* augmenté */
+            font-size: 1.8rem;
             display:block; margin-bottom:1rem;
         }
 
-        /* ══════════════════════════════
-           CART BAR
-        ══════════════════════════════ */
         .cart-bar {
             position:fixed; bottom:20px; left:50%;
             transform: translateX(-50%) translateY(200%);
             width: calc(100% - 32px); max-width:540px;
             background: var(--dark); border:2px solid var(--gold);
             color:var(--white);
-            padding: 18px 24px; /* augmenté */
+            padding: 18px 24px;
             display:flex; justify-content:space-between; align-items:center;
             border-radius: 60px; z-index:900;
             box-shadow: 0 12px 40px rgba(0,0,0,0.45);
             transition: transform 0.5s var(--r);
         }
         .cart-bar.active { transform: translateX(-50%) translateY(0); }
-        .cart-bar-info { font-size:1.15rem; font-weight:600; } /* augmenté */
+        .cart-bar-info { font-size:1.15rem; font-weight:600; }
         .cart-bar-info strong { color:var(--gold2); }
         .cart-bar-btn {
             background: var(--gold); color: var(--dark);
-            padding: 13px 26px; /* augmenté */
+            padding: 13px 26px;
             border-radius:50px;
-            font-weight:900; font-size:1rem; /* augmenté */
+            font-weight:900; font-size:1rem;
             cursor:pointer; border:none; white-space:nowrap;
             min-height: 48px;
         }
 
-        /* ══════════════════════════════
-           NOTIFICATION
-        ══════════════════════════════ */
         .notif {
             position:fixed; top:24px; right:24px;
             background: var(--gold); color: var(--dark);
-            padding:18px 32px; /* augmenté */
+            padding:18px 32px;
             border-radius:12px;
             transform:translateX(200%); transition:transform 0.4s var(--r);
-            z-index:3000; font-weight:800; font-size:1.2rem; /* augmenté */
+            z-index:3000; font-weight:800; font-size:1.2rem;
             box-shadow:0 8px 28px rgba(0,0,0,0.25);
         }
         .notif.show { transform:translateX(0); }
         [dir="rtl"] .notif { right:auto; left:24px; transform:translateX(-200%); }
         [dir="rtl"] .notif.show { transform:translateX(0); }
 
-        /* ══════════════════════════════
-           MODAL
-        ══════════════════════════════ */
         .modal-bg {
             position:fixed; inset:0;
             background:rgba(0,0,0,0.88);
@@ -679,7 +620,7 @@
             .modal-bg { align-items:center; }
             .modal { border-radius:24px; transform:scale(0.9); max-height:90vh; }
         }
-        .modal-img { height:300px; position:relative; overflow:hidden; } /* augmenté */
+        .modal-img { height:300px; position:relative; overflow:hidden; }
         @media (min-width:520px) { .modal-img { height:340px; } }
         .modal-img img {
             width:100%; height:100%; object-fit:cover;
@@ -693,21 +634,20 @@
             color:var(--white);
         }
         .modal-img-overlay h3 {
-            font-size: clamp(1.7rem, 5vw, 2.3rem); /* augmenté */
+            font-size: clamp(1.7rem, 5vw, 2.3rem);
             text-shadow:0 2px 6px rgba(0,0,0,0.6);
         }
         .modal-img-overlay span { font-size:1.15rem; opacity:0.9; }
         .modal-close-btn {
             position:absolute; top:16px; right:16px;
             background:rgba(0,0,0,0.55); color:white; border:none;
-            width:44px; height:44px; /* augmenté: 36→44 touch target */
+            width:44px; height:44px;
             border-radius:50%;
             cursor:pointer; font-size:1.2rem; z-index:10;
             display:flex; align-items:center; justify-content:center;
         }
-        .modal-body { padding:2.5rem 2rem; color:var(--ink); } /* augmenté */
+        .modal-body { padding:2.5rem 2rem; color:var(--ink); }
 
-        /* VARIANT TABS */
         .variant-tabs {
             display:flex; gap:10px; margin-bottom:2rem;
             overflow-x:auto; padding-bottom:4px;
@@ -716,12 +656,12 @@
         .variant-tabs::-webkit-scrollbar { display:none; }
         .variant-tab {
             flex-shrink:0;
-            padding: 14px 22px; /* augmenté */
+            padding: 14px 22px;
             border: 2px solid #ddd;
             border-radius:50px;
             background:white; color:#666;
             font-family:'Lora',serif;
-            font-size:1.05rem; /* augmenté */
+            font-size:1.05rem;
             font-weight:600;
             cursor:pointer; white-space:nowrap;
             transition: all 0.22s;
@@ -735,18 +675,20 @@
             box-shadow:0 3px 12px rgba(201,153,58,0.2);
         }
 
-        /* VARIANT DETAILS */
         .variant-details { transition: opacity 0.25s, transform 0.25s; }
         .variant-details.fading { opacity:0; transform:translateY(5px); }
 
         .modal-price-block {
             display:flex; align-items:baseline; gap:12px; flex-wrap:wrap; margin-bottom:1rem;
         }
+        /* ===== FIX: Price display always LTR to prevent "DA / pièce 120" in Arabic ===== */
         .modal-price-current {
             font-family:'Playfair Display',serif;
-            font-size:2.3rem; /* augmenté */ font-weight:900; color:var(--burg);
+            font-size:2.3rem; font-weight:900; color:var(--burg);
+            direction: ltr;
+            unicode-bidi: embed;
         }
-        .modal-price-original { font-size:1.3rem; color:#aaa; text-decoration:line-through; }
+        .modal-price-original { font-size:1.3rem; color:#aaa; text-decoration:line-through; direction:ltr; unicode-bidi:embed; }
         .modal-price-badge {
             background:#c0392b; color:white;
             font-size:0.85rem; font-weight:900;
@@ -757,7 +699,7 @@
         .modal-divider { height:1px; background:#f0ebe0; margin:1.5rem 0; }
 
         .ing-label {
-            font-size:0.85rem; /* augmenté */
+            font-size:0.85rem;
             font-weight:900;
             text-transform:uppercase; letter-spacing:1.5px;
             color:#999; margin-bottom:10px; display:block;
@@ -765,9 +707,9 @@
         .ingredients-list { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:1.75rem; }
         .ingredient-chip {
             background:#fdf8f0; border:1px solid rgba(201,153,58,0.3);
-            color:var(--ink); padding:8px 16px; /* augmenté */
+            color:var(--ink); padding:8px 16px;
             border-radius:50px;
-            font-size:1rem; /* augmenté */
+            font-size:1rem;
             font-weight:500;
         }
 
@@ -776,22 +718,21 @@
         }
         .nutri-cell {
             background:#faf7f2; border:1px solid #eee;
-            border-radius:12px; padding:14px; /* augmenté */
+            border-radius:12px; padding:14px;
             text-align:center;
         }
-        .nutri-val { font-size:1.25rem; font-weight:800; color:var(--burg); display:block; } /* augmenté */
+        .nutri-val { font-size:1.25rem; font-weight:800; color:var(--burg); display:block; }
         .nutri-key { font-size:0.78rem; color:#999; text-transform:uppercase; letter-spacing:0.8px; }
 
-        /* QTY SECTION */
         .qty-section { border-top:2px solid #f0ebe0; padding-top:2rem; margin-top:0.5rem; }
         .qty-label {
-            font-size:0.85rem; /* augmenté */
+            font-size:0.85rem;
             font-weight:900; text-transform:uppercase;
             letter-spacing:1.5px; color:#999; margin-bottom:14px; display:block;
         }
         .qty-control { display:flex; align-items:center; gap:14px; margin-bottom:1.5rem; }
         .qty-control button {
-            width:56px; height:56px; /* augmenté: 46→56 */
+            width:56px; height:56px;
             border:2px solid #ddd; border-radius:12px;
             background:#fff; color:#000; font-size:1.6rem; font-weight:700;
             cursor:pointer; transition:border-color 0.2s;
@@ -801,19 +742,19 @@
 
         .cart-total-preview {
             background:#fdf8f0; border:1px solid rgba(201,153,58,0.3);
-            border-radius:12px; padding:16px 20px; /* augmenté */
+            border-radius:12px; padding:16px 20px;
             display:flex; justify-content:space-between; align-items:center;
             margin-bottom:1.5rem;
         }
         .cart-total-preview span:first-child { font-size:0.9rem; color:#999; text-transform:uppercase; letter-spacing:1px; font-weight:700; }
-        .cart-total-preview span:last-child { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:800; color:var(--burg); }
+        .cart-total-preview span:last-child { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:800; color:var(--burg); direction:ltr; unicode-bidi:embed; }
 
         .add-cart-btn-full {
-            width:100%; padding:20px; /* augmenté */
+            width:100%; padding:20px;
             background: var(--burg); color: var(--gold2);
             border:none; border-radius:14px;
             font-family:'Playfair Display',serif;
-            font-weight:900; font-size:1.25rem; /* augmenté */
+            font-weight:900; font-size:1.25rem;
             cursor:pointer; display:flex; align-items:center; justify-content:center; gap:10px;
             transition: background 0.25s, transform 0.15s; letter-spacing:0.5px;
             min-height: 62px;
@@ -821,9 +762,9 @@
         .add-cart-btn-full:hover { background: var(--dark); transform:scale(1.01); }
         .add-cart-btn-full:active { transform:scale(0.99); }
 
-        /* ══════════════════════════════
-           CHOCOLAT PAGE
-        ══════════════════════════════ */
+        /* ═══════════════════════════════════════
+           CHOCOLAT PAGE — FULL REDESIGN FOR MOBILE
+        ═══════════════════════════════════════ */
         #page_choco {
             background: #1a0a00;
             min-height:100vh;
@@ -833,12 +774,12 @@
             background:rgba(26,10,0,0.96);
             backdrop-filter:blur(20px);
             border-bottom:1px solid rgba(201,153,58,0.2);
-            padding: 18px 24px; /* augmenté */
+            padding: 18px 24px;
             display:flex; align-items:center; justify-content:space-between;
         }
         .choco-back-btn {
             display:flex; align-items:center; gap:8px;
-            color: var(--gold2); font-weight:700; font-size:1rem; /* augmenté */
+            color: var(--gold2); font-weight:700; font-size:1rem;
             text-transform:uppercase; letter-spacing:1.5px;
             cursor:pointer; transition:opacity 0.25s;
             background:none; border:none;
@@ -847,266 +788,351 @@
         .choco-back-btn:hover { opacity:0.7; }
         .choco-header-logo-wrap { display:flex; align-items:center; gap:12px; }
         .choco-header-logo-img {
-            width:48px; height:48px; /* augmenté: 40→48 */
+            width:48px; height:48px;
             border-radius:50%;
             border:2px solid var(--gold); object-fit:cover; background:white;
         }
         .choco-header-brand {
             font-family:'Playfair Display',serif;
-            font-size:1.25rem; /* augmenté */ color:var(--gold2); font-weight:700;
+            font-size:1.25rem; color:var(--gold2); font-weight:700;
         }
 
         .choco-hero {
-            text-align:center; padding:5.5rem 1.5rem 4.5rem;
+            text-align:center; padding:4rem 1.5rem 3rem;
             background: radial-gradient(ellipse at top, rgba(90,42,16,0.55) 0%, transparent 65%);
         }
         .choco-hero-eyebrow {
             display:inline-block;
             background:rgba(201,153,58,0.1); border:1px solid rgba(201,153,58,0.3);
-            border-radius:50px; padding:9px 22px; /* augmenté */
-            color:var(--gold2); font-size:0.9rem; /* augmenté */
-            font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:1.75rem;
+            border-radius:50px; padding:9px 22px;
+            color:var(--gold2); font-size:0.9rem;
+            font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:1.5rem;
         }
         .choco-hero h1 {
-            font-size: clamp(2.3rem, 7vw, 4.2rem); /* augmenté */
-            color:var(--white); margin-bottom:1.25rem; line-height:1.15;
+            font-size: clamp(2rem, 7vw, 3.6rem);
+            color:var(--white); margin-bottom:1rem; line-height:1.15;
         }
         .choco-hero h1 em { font-style:italic; color:var(--gold2); }
         .choco-hero-sub {
-            color:rgba(245,234,214,0.88); font-size:1.2rem; /* augmenté */
-            max-width:540px; margin:0 auto 2rem; line-height:1.75;
+            color:rgba(245,234,214,0.88); font-size:1.15rem;
+            max-width:540px; margin:0 auto; line-height:1.75;
         }
         .choco-gold-divider {
             display:flex; align-items:center; justify-content:center;
             gap:12px; color:var(--gold); opacity:0.55; font-size:1rem;
-            letter-spacing:8px; margin:2.5rem 0;
+            letter-spacing:8px; margin:2rem 0 0;
         }
         .choco-gold-divider::before,.choco-gold-divider::after {
             content:''; flex:1; max-width:80px; height:1px; background:var(--gold); opacity:0.5;
         }
 
-        /* STEPS */
+        /* ── STEPS BAR (improved) ── */
         .steps-bar {
-            display:flex; align-items:center; justify-content:center; gap:0;
-            padding:0 24px; margin-bottom:3.5rem;
-        }
-        .choco-step { display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; max-width:180px; }
-        .choco-step-circle {
-            width:50px; height:50px; /* augmenté: 40→50 */
-            border-radius:50%;
-            border:2px solid rgba(201,153,58,0.3);
             display:flex; align-items:center; justify-content:center;
-            font-weight:900; font-size:1.05rem; /* augmenté */
-            color:rgba(201,153,58,0.4);
-            background:rgba(26,10,0,0.9); position:relative; z-index:2;
-            transition:all 0.3s;
+            padding:1.5rem 2rem 0;
+            margin-bottom:2.5rem;
         }
-        .choco-step.active .choco-step-circle { border-color:var(--gold); color:var(--gold); box-shadow:0 0 20px rgba(201,153,58,0.3); }
-        .choco-step.done .choco-step-circle { border-color:var(--gold); background:var(--gold); color:var(--dark); }
-        .choco-step-label { font-size:0.82rem; /* augmenté */ text-transform:uppercase; letter-spacing:1.5px; color:rgba(201,153,58,0.4); font-weight:700; text-align:center; }
+        .choco-step { display:flex; flex-direction:column; align-items:center; gap:8px; flex:1; max-width:160px; }
+        .choco-step-circle {
+            width:52px; height:52px;
+            border-radius:50%;
+            border:2.5px solid rgba(201,153,58,0.25);
+            display:flex; align-items:center; justify-content:center;
+            font-weight:900; font-size:1.1rem;
+            color:rgba(201,153,58,0.35);
+            background:#1a0a00; position:relative; z-index:2;
+            transition:all 0.35s;
+        }
+        .choco-step.active .choco-step-circle {
+            border-color:var(--gold); color:var(--gold);
+            box-shadow:0 0 0 6px rgba(201,153,58,0.12), 0 0 24px rgba(201,153,58,0.3);
+            background: rgba(201,153,58,0.08);
+        }
+        .choco-step.done .choco-step-circle {
+            border-color:var(--gold); background:var(--gold); color:#1a0a00;
+            box-shadow:0 4px 16px rgba(201,153,58,0.4);
+        }
+        .choco-step-label {
+            font-size:0.78rem; text-transform:uppercase; letter-spacing:1.5px;
+            color:rgba(201,153,58,0.35); font-weight:800; text-align:center;
+            transition: color 0.3s;
+        }
         .choco-step.active .choco-step-label,.choco-step.done .choco-step-label { color:var(--gold2); }
-        .choco-step-line { flex:1; height:1px; background:rgba(201,153,58,0.2); margin:0 -2px; position:relative; top:-22px; }
-        .choco-step-line.done { background:var(--gold); }
+        .choco-step-line { flex:1; height:2px; background:rgba(201,153,58,0.15); margin:0 -2px; position:relative; top:-28px; border-radius:2px; transition: background 0.4s; }
+        .choco-step-line.done { background: linear-gradient(90deg, var(--gold), rgba(201,153,58,0.6)); }
 
-        .choco-section-wrap { max-width:1100px; margin:0 auto; padding:0 1.5rem 5rem; }
+        .choco-section-wrap { max-width:1100px; margin:0 auto; padding:0 1rem 2rem; }
 
         .choco-step-panel { display:none; animation: cpanelIn 0.45s ease; }
         .choco-step-panel.active { display:block; }
         @keyframes cpanelIn { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
 
-        .choco-panel-title { text-align:center; margin-bottom:3rem; }
-        .choco-panel-title h2 { font-size:clamp(2rem, 5vw, 3rem); color:var(--gold2); margin-bottom:0.6rem; } /* augmenté */
-        .choco-panel-title p { color:rgba(245,234,214,0.85); font-size:1.2rem; font-style:italic; } /* augmenté */
+        .choco-panel-title { text-align:center; margin-bottom:2.5rem; }
+        .choco-panel-title h2 { font-size:clamp(1.8rem, 5vw, 2.8rem); color:var(--gold2); margin-bottom:0.5rem; }
+        .choco-panel-title p { color:rgba(245,234,214,0.75); font-size:1.1rem; font-style:italic; }
 
-        /* BOX SIZES */
-        .box-sizes { display:flex; flex-wrap:wrap; gap:1.25rem; justify-content:center; margin-bottom:3.5rem; }
+        /* ── BOX SIZES (improved) ── */
+        .box-sizes { display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-bottom:3rem; }
         .box-size-card {
-            background:rgba(255,255,255,0.04); border:2px solid rgba(201,153,58,0.2);
-            border-radius:18px; padding:2rem 2.8rem; /* augmenté */
-            cursor:pointer; transition:all 0.3s; text-align:center; min-width:150px; position:relative;
+            background:rgba(255,255,255,0.04); border:2.5px solid rgba(201,153,58,0.2);
+            border-radius:20px; padding:1.75rem 2.2rem;
+            cursor:pointer; transition:all 0.3s; text-align:center; min-width:140px;
+            position:relative; flex:1; max-width:180px;
         }
-        .box-size-card:hover { border-color:rgba(201,153,58,0.5); transform:translateY(-4px); }
-        .box-size-card.selected { border-color:var(--gold); box-shadow:0 0 28px rgba(201,153,58,0.2); }
-        .box-size-num { font-family:'Playfair Display',serif; font-size:3.4rem; /* augmenté */ font-weight:700; color:var(--gold2); line-height:1; }
-        .box-size-label { font-size:0.9rem; /* augmenté */ text-transform:uppercase; letter-spacing:2px; opacity:0.6; margin-top:6px; color:var(--parchment); }
-        .box-size-price { font-size:0.95rem; /* augmenté */ color:var(--gold); opacity:0.75; margin-top:10px; font-weight:600; }
+        .box-size-card:hover { border-color:rgba(201,153,58,0.5); transform:translateY(-4px); background:rgba(201,153,58,0.05); }
+        .box-size-card.selected {
+            border-color:var(--gold);
+            background: rgba(201,153,58,0.1);
+            box-shadow:0 0 0 4px rgba(201,153,58,0.15), 0 8px 30px rgba(0,0,0,0.3);
+            transform:translateY(-4px);
+        }
+        .box-size-card.selected::after {
+            content:'✓';
+            position:absolute; bottom:10px; right:14px;
+            color:var(--gold); font-size:1.1rem; font-weight:900;
+        }
+        .box-size-num { font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:700; color:var(--gold2); line-height:1; }
+        .box-size-label { font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; opacity:0.6; margin-top:6px; color:var(--parchment); }
+        .box-size-price { font-size:0.92rem; color:var(--gold); opacity:0.85; margin-top:10px; font-weight:700; direction:ltr; unicode-bidi:embed; }
         .box-size-badge {
-            position:absolute; top:12px; right:12px;
+            position:absolute; top:-10px; left:50%; transform:translateX(-50%);
             background:var(--gold); color:#1a0a00;
-            font-size:0.72rem; font-weight:900; padding:4px 11px;
+            font-size:0.68rem; font-weight:900; padding:4px 14px;
             border-radius:50px; text-transform:uppercase; letter-spacing:1px;
+            white-space:nowrap;
         }
 
-        /* CHOCO PICKER GRID */
+        /* ── CHOCO PICKER GRID (improved mobile) ── */
         .choco-picker-grid {
-            display:grid; grid-template-columns:1fr; gap:1.5rem; margin-bottom:2.5rem;
+            display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem;
         }
-        @media (min-width:480px) { .choco-picker-grid { grid-template-columns:repeat(2,1fr); } }
-        @media (min-width:760px) { .choco-picker-grid { grid-template-columns:repeat(3,1fr); } }
-        @media (min-width:1024px) { .choco-picker-grid { grid-template-columns:repeat(4,1fr); } }
+        @media (min-width:600px) { .choco-picker-grid { grid-template-columns:repeat(3,1fr); gap:1.25rem; } }
+        @media (min-width:900px) { .choco-picker-grid { grid-template-columns:repeat(4,1fr); gap:1.5rem; } }
 
         .choco-picker-card {
-            background:linear-gradient(145deg, rgba(59,26,8,0.6), rgba(26,10,0,0.8));
-            border:2px solid rgba(201,153,58,0.15); border-radius:18px;
-            overflow:hidden; cursor:pointer; transition:all 0.3s;
+            background:linear-gradient(145deg, rgba(59,26,8,0.7), rgba(26,10,0,0.9));
+            border:2.5px solid rgba(201,153,58,0.12); border-radius:16px;
+            overflow:hidden; cursor:pointer;
+            transition:all 0.25s;
+            position:relative;
         }
-        .choco-picker-card:hover { border-color:rgba(201,153,58,0.45); transform:translateY(-4px); box-shadow:0 14px 36px rgba(0,0,0,0.35); }
-        .choco-picker-card.selected { border-color:var(--gold); box-shadow:0 0 22px rgba(201,153,58,0.25); }
+        .choco-picker-card:hover { border-color:rgba(201,153,58,0.4); transform:translateY(-3px); }
+        .choco-picker-card.selected {
+            border-color:var(--gold);
+            box-shadow:0 0 0 3px rgba(201,153,58,0.25), 0 8px 24px rgba(0,0,0,0.4);
+            background:linear-gradient(145deg, rgba(80,40,10,0.8), rgba(40,16,0,0.95));
+        }
 
-        .choco-picker-img-wrap { height:210px; overflow:hidden; position:relative; } /* augmenté: 185→210 */
+        .choco-picker-img-wrap { height:160px; overflow:hidden; position:relative; }
+        @media (min-width:520px) { .choco-picker-img-wrap { height:185px; } }
         .choco-picker-img { width:100%; height:100%; object-fit:cover; transition:transform 0.55s; }
         .choco-picker-card:hover .choco-picker-img { transform:scale(1.07); }
 
+        /* Selected overlay — bold gold tint */
         .choco-selected-overlay {
-            position:absolute; inset:0; background:rgba(201,153,58,0.15);
+            position:absolute; inset:0;
+            background:rgba(201,153,58,0.22);
             display:flex; align-items:center; justify-content:center;
-            opacity:0; transition:opacity 0.3s;
+            opacity:0; transition:opacity 0.25s;
         }
         .choco-picker-card.selected .choco-selected-overlay { opacity:1; }
         .check-circle {
-            width:60px; height:60px; /* augmenté: 52→60 */
+            width:52px; height:52px;
             border-radius:50%; background:var(--gold); color:#1a0a00;
             display:flex; align-items:center; justify-content:center;
-            font-size:1.6rem; font-weight:900;
+            font-size:1.5rem; font-weight:900;
             transform:scale(0); transition:transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow:0 4px 20px rgba(0,0,0,0.5);
         }
         .choco-picker-card.selected .check-circle { transform:scale(1); }
 
-        .choco-picker-info { padding:1.4rem 1.5rem; } /* augmenté */
+        /* Selected badge on image */
+        .choco-selected-badge {
+            position:absolute; top:8px; left:8px;
+            background:var(--gold); color:#1a0a00;
+            font-size:0.7rem; font-weight:900;
+            padding:4px 10px; border-radius:50px;
+            text-transform:uppercase; letter-spacing:1px;
+            opacity:0; transform:scale(0.8);
+            transition: all 0.25s;
+            z-index:5;
+        }
+        .choco-picker-card.selected .choco-selected-badge { opacity:1; transform:scale(1); }
+
+        .choco-picker-info { padding:0.9rem 1rem 0; }
         .choco-picker-name {
             font-family:'Playfair Display',serif;
-            font-size:1.25rem; /* augmenté: 1.1→1.25 */
-            color:var(--parchment); margin-bottom:0.4rem; line-height:1.3;
+            font-size:1.05rem;
+            color:var(--parchment); margin-bottom:0.2rem; line-height:1.3;
         }
-        [dir="rtl"] .choco-picker-name { font-family:'Amiri',serif; font-size:1.35rem; }
-        .choco-picker-desc { font-size:0.95rem; /* augmenté */ color:rgba(245,234,214,0.55); font-style:italic; line-height:1.5; margin-bottom:0.85rem; }
-        .choco-picker-price { font-size:0.92rem; /* augmenté */ color:var(--gold); font-weight:700; letter-spacing:0.8px; }
+        [dir="rtl"] .choco-picker-name { font-family:'Amiri',serif; font-size:1.15rem; }
+        .choco-picker-desc {
+            font-size:0.8rem; color:rgba(245,234,214,0.5); font-style:italic;
+            line-height:1.4; margin-bottom:0.5rem;
+            display:none; /* hidden on mobile for space */
+        }
+        @media (min-width:600px) { .choco-picker-desc { display:block; } }
+        .choco-picker-price { font-size:0.85rem; color:var(--gold); font-weight:700; direction:ltr; unicode-bidi:embed; }
 
+        /* ── QTY CONTROL (larger, clearer) ── */
         .choco-qty-control {
             display:flex; align-items:center; justify-content:space-between;
-            background:rgba(255,255,255,0.05); border-top:1px solid rgba(201,153,58,0.1);
-            padding:12px 16px; /* augmenté */
+            padding:10px 10px 10px;
+            background:rgba(0,0,0,0.25);
+            border-top:1px solid rgba(201,153,58,0.1);
+            margin-top:0.6rem;
         }
         .choco-qty-btn {
-            width:46px; height:46px; /* augmenté: 36→46 */
+            width:44px; height:44px;
             border-radius:10px;
             border:2px solid rgba(201,153,58,0.3); background:rgba(201,153,58,0.08);
             color:var(--gold2); font-size:1.4rem; font-weight:700;
-            cursor:pointer; transition:all 0.2s;
+            cursor:pointer; transition:all 0.18s;
             display:flex; align-items:center; justify-content:center;
+            -webkit-tap-highlight-color:transparent;
         }
-        .choco-qty-btn:hover { background:rgba(201,153,58,0.2); border-color:var(--gold); }
-        .choco-qty-btn:disabled { opacity:0.25; cursor:default; }
+        .choco-qty-btn:hover { background:rgba(201,153,58,0.22); border-color:var(--gold); }
+        .choco-qty-btn:active { transform:scale(0.9); background:rgba(201,153,58,0.3); }
+        .choco-qty-btn:disabled { opacity:0.2; cursor:default; transform:none; }
         .choco-qty-num {
-            font-family:'Playfair Display',serif; font-size:1.55rem; /* augmenté */
-            font-weight:700; color:var(--white); min-width:36px; text-align:center;
+            font-family:'Playfair Display',serif; font-size:1.5rem;
+            font-weight:800; color:var(--white); min-width:32px; text-align:center;
         }
+        .choco-picker-card.selected .choco-qty-num { color:var(--gold2); }
 
-        /* COUNTER BAR */
+        /* ── COUNTER BAR (prominent redesign) ── */
         .choco-counter-bar {
             position:sticky; bottom:0; z-index:50;
-            background:rgba(26,10,0,0.96); backdrop-filter:blur(20px);
-            border-top:2px solid rgba(201,153,58,0.25);
-            padding:1.25rem 1.5rem; /* augmenté */
-            display:flex; align-items:center; justify-content:space-between; gap:1.25rem; flex-wrap:wrap;
+            background:rgba(20,8,0,0.97); backdrop-filter:blur(24px);
+            border-top:2px solid rgba(201,153,58,0.35);
+            padding:1rem 1.25rem;
         }
-        .choco-counter-info { display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap; }
-        .choco-counter-pieces { display:flex; align-items:baseline; gap:6px; }
-        .choco-counter-num { font-family:'Playfair Display',serif; font-size:2.8rem; /* augmenté */ font-weight:700; color:var(--gold2); line-height:1; }
-        .choco-counter-denom { font-size:1.05rem; /* augmenté */ color:rgba(245,234,214,0.55); }
-        .choco-counter-progress { width:180px; height:6px; /* augmenté */ background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
-        .choco-counter-fill { height:100%; background:var(--gold); border-radius:5px; transition:width 0.35s; }
-        .choco-counter-fill.over { background:#c0392b; }
-        .choco-counter-text { font-size:0.92rem; /* augmenté */ color:rgba(245,234,214,0.85); margin-top:5px; }
+        .choco-counter-bar-inner {
+            display:flex; align-items:center; justify-content:space-between;
+            gap:1rem; flex-wrap:nowrap; max-width:1100px; margin:0 auto;
+        }
+        .choco-counter-left { display:flex; align-items:center; gap:14px; flex:1; min-width:0; }
+        .choco-counter-pill {
+            background: rgba(201,153,58,0.12);
+            border:2px solid rgba(201,153,58,0.3);
+            border-radius:50px;
+            padding:8px 18px;
+            display:flex; align-items:baseline; gap:4px;
+            flex-shrink:0;
+        }
+        .choco-counter-pill.complete {
+            background:rgba(201,153,58,0.2);
+            border-color:var(--gold);
+            box-shadow:0 0 16px rgba(201,153,58,0.25);
+        }
+        .choco-counter-pill.over { background:rgba(192,57,43,0.2); border-color:#e74c3c; }
+        .choco-counter-num { font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:700; color:var(--gold2); line-height:1; }
+        .choco-counter-denom { font-size:1rem; color:rgba(245,234,214,0.55); white-space:nowrap; }
+        .choco-counter-right { display:flex; flex-direction:column; gap:6px; flex:1; min-width:0; }
+        .choco-counter-progress { width:100%; height:7px; background:rgba(255,255,255,0.1); border-radius:5px; overflow:hidden; }
+        .choco-counter-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold2)); border-radius:5px; transition:width 0.35s cubic-bezier(0.23,1,0.32,1); }
+        .choco-counter-fill.complete { background:linear-gradient(90deg,#27ae60,#2ecc71); }
+        .choco-counter-fill.over { background:linear-gradient(90deg,#c0392b,#e74c3c); }
+        .choco-counter-text { font-size:0.88rem; color:rgba(245,234,214,0.8); font-weight:600; }
+        .choco-counter-text.complete { color:#2ecc71; font-weight:800; }
+        .choco-counter-text.over { color:#e74c3c; font-weight:800; }
 
+        .choco-counter-actions { display:flex; gap:8px; flex-shrink:0; }
         .choco-next-btn,.choco-back-step-btn,.choco-validate-btn {
-            padding:16px 30px; /* augmenté */
+            padding:14px 22px;
             border-radius:50px; font-weight:900;
-            font-size:1.05rem; /* augmenté */
+            font-size:0.95rem;
             cursor:pointer; border:none;
-            text-transform:uppercase; letter-spacing:1.5px;
+            text-transform:uppercase; letter-spacing:1.2px;
             transition:all 0.25s; font-family:'Playfair Display',serif; white-space:nowrap;
-            min-height: 56px;
+            min-height: 52px; display:flex; align-items:center; justify-content:center;
         }
         .choco-next-btn { background:var(--gold); color:#1a0a00; }
         .choco-next-btn:hover { background:var(--gold2); }
-        .choco-next-btn:disabled { opacity:0.35; cursor:not-allowed; }
-        .choco-back-step-btn { background:transparent; border:2px solid rgba(201,153,58,0.35); color:var(--gold2); }
+        .choco-next-btn:disabled { opacity:0.3; cursor:not-allowed; }
+        .choco-back-step-btn { background:transparent; border:2px solid rgba(201,153,58,0.35); color:var(--gold2); padding:14px 18px; }
         .choco-back-step-btn:hover { border-color:var(--gold); background:rgba(201,153,58,0.08); }
         .choco-validate-btn { background:linear-gradient(135deg,#c9993a,#b8841a); color:#1a0a00; }
         .choco-validate-btn:hover { background:linear-gradient(135deg,#e8c86d,#c9993a); }
 
-        /* RECAP */
+        /* ── RECAP ── */
         .choco-recap-box {
             background:linear-gradient(145deg, rgba(59,26,8,0.7), rgba(26,10,0,0.9));
             border:2px solid rgba(201,153,58,0.3); border-radius:24px;
-            padding:3rem 2.25rem; /* augmenté */
+            padding:2.5rem 2rem;
             max-width:660px; margin:0 auto;
         }
-        .choco-recap-box h3 { font-size:2rem; color:var(--gold2); margin-bottom:0.4rem; } /* augmenté */
-        .choco-recap-sub { color:rgba(245,234,214,0.85); font-size:1.1rem; margin-bottom:2.5rem; font-style:italic; }
+        .choco-recap-box h3 { font-size:1.9rem; color:var(--gold2); margin-bottom:0.4rem; }
+        .choco-recap-sub { color:rgba(245,234,214,0.85); font-size:1.05rem; margin-bottom:2rem; font-style:italic; }
         .choco-recap-item {
             display:flex; align-items:center; gap:14px;
-            padding:14px 0; border-bottom:1px solid rgba(201,153,58,0.1);
+            padding:12px 0; border-bottom:1px solid rgba(201,153,58,0.1);
         }
         .choco-recap-item:last-child { border-bottom:none; }
-        .choco-recap-item-img { width:60px; height:60px; /* augmenté: 50→60 */ border-radius:12px; object-fit:cover; border:2px solid rgba(201,153,58,0.2); flex-shrink:0; }
+        .choco-recap-item-img { width:56px; height:56px; border-radius:12px; object-fit:cover; border:2px solid rgba(201,153,58,0.2); flex-shrink:0; }
         .choco-recap-item-info { flex:1; }
-        .choco-recap-item-name { font-size:1.05rem; /* augmenté */ font-weight:700; color:var(--parchment); }
-        .choco-recap-item-qty { font-size:0.92rem; /* augmenté */ color:var(--gold); opacity:0.8; margin-top:3px; }
-        .choco-recap-item-subtotal { font-family:'Playfair Display',serif; font-weight:800; color:var(--gold2); font-size:1.2rem; } /* augmenté */
+        .choco-recap-item-name { font-size:1rem; font-weight:700; color:var(--parchment); }
+        .choco-recap-item-qty { font-size:0.88rem; color:var(--gold); opacity:0.85; margin-top:2px; direction:ltr; unicode-bidi:embed; }
+        .choco-recap-item-subtotal { font-family:'Playfair Display',serif; font-weight:800; color:var(--gold2); font-size:1.15rem; direction:ltr; unicode-bidi:embed; }
         .choco-recap-total-row {
-            background:rgba(201,153,58,0.08); border:1px solid rgba(201,153,58,0.2);
-            border-radius:14px; padding:1.25rem 1.5rem; /* augmenté */
+            background:rgba(201,153,58,0.08); border:1px solid rgba(201,153,58,0.25);
+            border-radius:14px; padding:1.2rem 1.5rem;
             display:flex; justify-content:space-between; align-items:center;
-            margin:1.25rem 0 2rem;
+            margin:1.2rem 0 2rem;
         }
-        .choco-recap-total-label { font-size:0.9rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,234,214,0.85); font-weight:700; }
-        .choco-recap-total-val { font-family:'Playfair Display',serif; font-size:2.2rem; /* augmenté */ font-weight:700; color:var(--gold2); }
+        .choco-recap-total-label { font-size:0.88rem; text-transform:uppercase; letter-spacing:2px; color:rgba(245,234,214,0.85); font-weight:700; }
+        .choco-recap-total-val { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; color:var(--gold2); direction:ltr; unicode-bidi:embed; }
 
-        .choco-error-msg { color:#e74c3c; font-weight:700; font-size:1rem; text-align:center; margin-bottom:1.25rem; display:none; }
+        .choco-error-msg { color:#e74c3c; font-weight:700; font-size:0.95rem; text-align:center; margin-bottom:1rem; display:none; }
 
-        /* TOAST */
+        /* Step footer buttons */
+        #c_step1_footer { text-align:center; padding:1.5rem 0 3rem; }
+        #c_step3_footer { text-align:center; padding:0.5rem 0 3rem; display:none; }
+
+        /* Toast */
         .choco-toast {
             position:fixed; top:86px; left:50%;
             transform:translateX(-50%) translateY(-16px);
-            background:#c0392b; color:white; padding:16px 30px; /* augmenté */
+            background:#c0392b; color:white; padding:14px 28px;
             border-radius:50px;
-            font-weight:800; font-size:1.05rem; /* augmenté */
+            font-weight:800; font-size:1rem;
             opacity:0; z-index:9999;
             transition:all 0.3s; pointer-events:none; white-space:nowrap;
         }
         .choco-toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+        .choco-toast.success { background: #27ae60; }
 
-        /* FLOAT PARTICLE */
+        /* Float particle */
         @keyframes floatUp { 0% { opacity:1; transform:translateY(0) scale(1); } 100% { opacity:0; transform:translateY(-75px) scale(1.4); } }
         .float-particle { position:fixed; pointer-events:none; z-index:9999; font-size:1.8rem; animation:floatUp 0.75s ease forwards; }
 
-        /* ══════════════════════════════
-           MOBILE OPTIMIZED TOUCH TARGETS
-        ══════════════════════════════ */
-        @media (max-width:520px) {
-            html { font-size:19px; } /* base légèrement réduite sur très petit écran */
-            .hero h2 { font-size:2.2rem; }
+        /* ── MOBILE OVERRIDES ── */
+        @media (max-width:480px) {
+            html { font-size:18px; }
+            .hero h2 { font-size:2.1rem; }
             .qty-control button { width:58px; height:58px; font-size:1.7rem; }
-            .variant-tab { padding:14px 20px; font-size:1rem; }
-            .choco-counter-bar { flex-direction:column; }
-            .choco-counter-info { justify-content:center; }
-            .choco-next-btn,.choco-back-step-btn,.choco-validate-btn { width:100%; text-align:center; }
-            .product-img-wrap { height:240px; }
-            .modal-img { height:270px; }
-            .choco-picker-img-wrap { height:200px; }
-            nav a { font-size:1.05rem; padding:14px 6px; }
-            .cart-bar-info { font-size:1.05rem; }
-            .submit-btn { font-size:1.15rem; padding:20px; }
+            .variant-tab { padding:12px 18px; font-size:0.95rem; }
+            .product-img-wrap { height:230px; }
+            .modal-img { height:260px; }
+            nav a { font-size:1rem; padding:12px 5px; }
+            .cart-bar-info { font-size:1rem; }
+            .submit-btn { font-size:1.1rem; padding:20px; }
+            .choco-picker-img-wrap { height:140px; }
+            .choco-picker-info { padding:0.7rem 0.8rem 0; }
+            .choco-picker-name { font-size:0.95rem; }
+            .choco-counter-pill { padding:6px 14px; }
+            .choco-counter-num { font-size:1.9rem; }
+            .choco-next-btn,.choco-back-step-btn { padding:12px 16px; font-size:0.88rem; letter-spacing:0.8px; }
+            .box-size-card { min-width:120px; padding:1.4rem 1.5rem; }
+            .box-size-num { font-size:2.6rem; }
         }
+
+        /* LTR price fix for summary */
+        .price-ltr { direction:ltr; unicode-bidi:embed; display:inline-block; }
     </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     PAGE PRINCIPALE
-═══════════════════════════════════════ -->
 <div class="page active" id="page_main">
 
 <div class="lang-switch">
@@ -1123,17 +1149,15 @@
         <a onclick="scrollToAnchor('produits')" data-key="nav1">Nos Créations</a>
         <a onclick="scrollToAnchor('qualite')" data-key="nav2">Nos Gammes</a>
         <a onclick="scrollToAnchor('commande')" data-key="nav3">Commander</a>
-        <a onclick="openChocoPage()" class="choco-nav-link" data-key="nav_choco"> Coffrets Chocolats</a>
+        <a onclick="openChocoPage()" class="choco-nav-link" data-key="nav_choco">🍫 Coffrets Chocolats</a>
     </nav>
 </header>
 
-<!-- HERO -->
 <div class="hero">
     <h2 id="hero_h">L'Art des Gâteaux<br>Traditionnels Algériens</h2>
     <div class="ornament">✦ ✦ ✦</div>
-    </div>
+</div>
 
-<!-- PRODUITS -->
 <section id="produits">
     <div class="sec-title">
         <h3 id="spec_h">Nos Spécialités</h3>
@@ -1142,7 +1166,6 @@
     <div class="products-grid" id="product_grid"></div>
 </section>
 
-<!-- QUALITE -->
 <section id="qualite" class="quality-section">
     <div class="sec-title">
         <h3 style="color:var(--gold2)" id="qual_h">Nos Standards d'Excellence</h3>
@@ -1167,7 +1190,6 @@
     </div>
 </section>
 
-<!-- COMMANDE -->
 <div class="order-section" id="commande">
     <div class="sec-title" style="color:var(--ink);">
         <h3 style="color:var(--burg)" id="order_h">Finaliser la Commande</h3>
@@ -1188,17 +1210,17 @@
             </div>
             <div class="summary-total-box">
                 <div class="summary-item">
-                    <span id="s_sub">Sous-total</span><span id="sum_subtotal">0 DA</span>
+                    <span id="s_sub">Sous-total</span><span id="sum_subtotal" class="price-ltr">0 DA</span>
                 </div>
                 <div class="summary-item" id="sum_discount_row" style="display:none; color:var(--gold2); font-weight:700;">
-                    <span id="s_disc">Remise Volume (-10%)</span><span id="sum_discount">-0 DA</span>
+                    <span id="s_disc">Remise Volume (-10%)</span><span id="sum_discount" class="price-ltr">-0 DA</span>
                 </div>
                 <div class="summary-item">
-                    <span id="s_ship">Frais de Livraison</span><span id="sum_shipping">0 DA</span>
+                    <span id="s_ship">Frais de Livraison</span><span id="sum_shipping" class="price-ltr">0 DA</span>
                 </div>
                 <div class="total-row">
                     <span class="total-label" id="s_total">Total Général</span>
-                    <span class="total-val" id="sum_total_final">0 DA</span>
+                    <span class="total-val price-ltr" id="sum_total_final">0 DA</span>
                 </div>
             </div>
         </div>
@@ -1257,7 +1279,6 @@
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer id="contact">
     <img src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/logosite.png"
          alt="MyZina" class="footer-logo"
@@ -1271,20 +1292,17 @@
     <small style="opacity:0.55; font-size:1rem;">© 2026 MyZina · Tous droits réservés.</small>
 </footer>
 
-<!-- CART BAR -->
 <div class="cart-bar" id="cart_bar">
     <div class="cart-bar-info">
-        🛒 <span id="cart_count">0</span> article(s) &nbsp;·&nbsp; <strong id="cart_total">0</strong> DA
+        🛒 <span id="cart_count">0</span> article(s) &nbsp;·&nbsp; <strong id="cart_total" class="price-ltr">0</strong> DA
     </div>
     <button class="cart-bar-btn" onclick="scrollToAnchor('commande')" id="cart_val_btn">Commander →</button>
 </div>
 
 </div><!-- end page_main -->
 
-<!-- NOTIFICATION -->
 <div class="notif" id="notif"></div>
 
-<!-- MODAL -->
 <div class="modal-bg" id="modal_bg" onclick="handleModalBgClick(event)">
     <div class="modal" id="modal">
         <div class="modal-img">
@@ -1314,7 +1332,7 @@
                     </div>
                     <div class="cart-total-preview">
                         <span id="m_line_lbl">Total ligne</span>
-                        <span id="m_line_total_val">0 DA</span>
+                        <span id="m_line_total_val" class="price-ltr">0 DA</span>
                     </div>
                     <button class="add-cart-btn-full" id="add_to_cart_btn" type="button">
                         🛒 <span id="m_add_txt">Ajouter au Panier</span>
@@ -1338,7 +1356,7 @@
              onerror="this.src='https://via.placeholder.com/40x40/4a0404/c9993a?text=M'">
         <span class="choco-header-brand">MyZina</span>
     </div>
-    <button class="lang-btn" onclick="toggleLang()" id="choco_lang_btn" style="font-size:0.9rem; padding:10px 18px;">العربية</button>
+    <button class="lang-btn" onclick="toggleLang()" id="choco_lang_btn" style="font-size:0.88rem; padding:10px 16px;">العربية</button>
 </header>
 
 <div class="choco-hero">
@@ -1395,7 +1413,7 @@
             <div id="c_recap_list"></div>
             <div class="choco-recap-total-row">
                 <span class="choco-recap-total-label" id="c_recap_total_lbl">Total Coffret</span>
-                <span class="choco-recap-total-val" id="c_recap_total_val">0 DA</span>
+                <span class="choco-recap-total-val price-ltr" id="c_recap_total_val">0 DA</span>
             </div>
             <div style="text-align:center;">
                 <button class="choco-validate-btn" onclick="validateCoffret()">
@@ -1406,29 +1424,32 @@
     </div>
 </div>
 
+<!-- Counter bar — new layout -->
 <div class="choco-counter-bar" id="c_counter_bar" style="display:none;">
-    <div class="choco-counter-info">
-        <div class="choco-counter-pieces">
-            <span class="choco-counter-num" id="c_cnt_num">0</span>
-            <span class="choco-counter-denom" id="c_cnt_denom">/ 0</span>
+    <div class="choco-counter-bar-inner">
+        <div class="choco-counter-left">
+            <div class="choco-counter-pill" id="c_counter_pill">
+                <span class="choco-counter-num" id="c_cnt_num">0</span>
+                <span class="choco-counter-denom" id="c_cnt_denom">/ 0</span>
+            </div>
+            <div class="choco-counter-right">
+                <div class="choco-counter-progress"><div class="choco-counter-fill" id="c_cnt_fill" style="width:0%"></div></div>
+                <div class="choco-counter-text" id="c_cnt_text">Sélectionnez vos chocolats</div>
+            </div>
         </div>
-        <div>
-            <div class="choco-counter-progress"><div class="choco-counter-fill" id="c_cnt_fill" style="width:0%"></div></div>
-            <div class="choco-counter-text" id="c_cnt_text">Sélectionnez vos chocolats</div>
+        <div class="choco-counter-actions">
+            <button class="choco-back-step-btn" onclick="chocoGoToStep(1)" id="c_back_to_1_btn">← <span id="c_back_to_1_lbl">Format</span></button>
+            <button class="choco-next-btn" id="c_to_step3_btn" onclick="chocoGoToStep(3)" disabled><span id="c_to_step3_lbl">Récap →</span></button>
         </div>
-    </div>
-    <div style="display:flex; gap:10px; flex-wrap:wrap;">
-        <button class="choco-back-step-btn" onclick="chocoGoToStep(1)" id="c_back_to_1_btn">← Format</button>
-        <button class="choco-next-btn" id="c_to_step3_btn" onclick="chocoGoToStep(3)">Récapitulatif →</button>
     </div>
 </div>
 
-<div style="text-align:center; padding:2rem 0 3.5rem;" id="c_step1_footer">
+<div id="c_step1_footer">
     <button class="choco-next-btn" onclick="chocoGoToStep(2)" id="c_to_step2_btn">Choisir mes chocolats →</button>
     <p class="choco-error-msg" id="c_err1_foot" style="margin-top:1rem;display:none;">Veuillez sélectionner un format.</p>
 </div>
 
-<div style="text-align:center; padding:0.5rem 0 3.5rem; display:none;" id="c_step3_footer">
+<div id="c_step3_footer">
     <button class="choco-back-step-btn" onclick="chocoGoToStep(2)" id="c_back_to_2_btn">← Modifier ma sélection</button>
 </div>
 
@@ -1436,9 +1457,6 @@
 
 <div class="choco-toast" id="choco_toast"></div>
 
-<!-- ═══════════════════════════════════════
-     SCRIPT (identique à l'original)
-═══════════════════════════════════════ -->
 <script>
 const WILAYAS = ["16 Alger"];
 
@@ -1512,8 +1530,8 @@ const CHOCO_DATA = {
       {id:"caramel_sale",name:"Caramel Fleur de Sel",desc:"Ganache caramel onctueux et une touche de fleur de sel de Guérande.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN5.png",price_per:33},
       {id:"pistache_rose",name:"Pistache & Rose",desc:"Pâte de pistache pure avec un effluve délicat de rose naturelle.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN8.png",price_per:36},
       {id:"blanc_framboise",name:"Blanc Framboise",desc:"Chocolat blanc soyeux avec un coulis de framboise acidulé.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN9.png",price_per:31},
-{id:"blanc_framboise",name:"Blanc Framboise",desc:"Chocolat blanc soyeux avec un coulis de framboise acidulé.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/bniwen7.png",price_per:31},
-{id:"blanc_framboise",name:"Blanc Framboise",desc:"Chocolat blanc soyeux avec un coulis de framboise acidulé.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
+      {id:"bniwen7",name:"Bniwen Classique",desc:"La recette originale, douce et fondante.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/bniwen7.png",price_per:31},
+      {id:"bniwen_special",name:"Bniwen Spécial",desc:"Édition spéciale aux saveurs intenses.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:34},
     ],
     box_sizes:[
       {size:6,price_per:280,label:"pièces",badge:""},
@@ -1531,8 +1549,8 @@ const CHOCO_DATA = {
       {id:"caramel_sale",name:"كراميل بملح البحر",desc:"غاناش كراميل كريمي مع رشة ملح بحر فاخر.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN5.png",price_per:33},
       {id:"pistache_rose",name:"فستق وورد",desc:"عجينة فستق خالصة مع نفحة ورد طبيعية رقيقة.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN8.png",price_per:36},
       {id:"blanc_framboise",name:"شوكولاتة بيضاء بالتوت",desc:"شوكولاتة بيضاء ناعمة مع مربى توت أحمر حامض.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/BNIWEN9.png",price_per:31},
-      {id:"blanc_framboise",name:"شوكولاتة بيضاء بالتوت",desc:"شوكولاتة بيضاء ناعمة مع مربى توت أحمر حامض.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/bniwen7.png",price_per:31},
-      {id:"blanc_framboise",name:"شوكولاتة بيضاء بالتوت",desc:"شوكولاتة بيضاء ناعمة مع مربى توت أحمر حامض.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
+      {id:"bniwen7",name:"بنيوان كلاسيك",desc:"الوصفة الأصلية، ناعمة وذائبة.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/bniwen7.png",price_per:31},
+      {id:"bniwen_special",name:"بنيوان خاص",desc:"إصدار خاص بنكهات مكثفة.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:34},
     ],
     box_sizes:[
       {size:6,price_per:280,label:"قطع",badge:""},
@@ -1548,7 +1566,7 @@ const I18N = {
     tagline:"L'Excellence de la Pâtisserie Algérienne",
     nav1:"Nos Créations",nav2:"Nos Gammes",nav3:"Commander",nav_choco:"🍫 Coffrets Chocolats",
     hero_h:"L'Art des Gâteaux<br>Traditionnels Algériens",
-    hero_p:"Une immersion sensorielle dans le patrimoine sucré de l'Algérie. Chaque pièce est une œuvre d'art, façonnée à la main avec passion.",
+    hero_p:"Une immersion sensorielle dans le patrimoine sucré de l'Algérie.",
     spec_h:"Nos Spécialités",spec_p:"Sélectionnez vos douceurs pour composer votre coffret",
     qual_h:"Nos Standards d'Excellence",qual_p:"Deux expériences adaptées à vos exigences",
     q1_n:"Classique",q1_d:"L'authenticité pure. Recettes familiales transmises et saveurs équilibrées pour vos moments quotidiens.",
@@ -1571,7 +1589,7 @@ const I18N = {
     order_ok:"Merci ! Votre commande a été transmise avec succès ✓",
     loading:"Traitement en cours...",error:"Une erreur est survenue. Veuillez réessayer.",
     promo:"Promo",nutri_cal:"Calories",nutri_sug:"Sucre",nutri_fat:"Lipides",
-    choco_banner_title:"🍫 Coffret Chocolats Ajouté !",
+    choco_banner_title:"Coffret Chocolats Ajouté !",
     choco_banner_msg:"Votre coffret chocolats a été ajouté. Remplissez le formulaire pour finaliser.",
     choco_cart_name:"Coffret Chocolats",
     choco_promo_h:"🍫 Nouvelle Collection",choco_promo_p:"Coffrets chocolats artisanaux à composer",
@@ -1581,25 +1599,26 @@ const I18N = {
     c_hero_sub:"Sélectionnez votre format, puis choisissez vos chocolats artisanaux préférés.",
     c_s1:"Format",c_s2:"Chocolats",c_s3:"Récap",
     c_p1_h:"Choisissez votre format",c_p1_sub:"Plus la boîte est grande, plus vous pouvez combiner de saveurs !",
-    c_p2_h:"Choisissez vos chocolats",c_p2_sub:"Ajustez les quantités – le compteur vous guide.",
+    c_p2_h:"Choisissez vos chocolats",c_p2_sub:"Ajustez les quantités – le compteur en bas vous guide.",
     c_p3_h:"Votre Coffret",c_p3_sub:"Vérifiez votre sélection avant de valider.",
     c_pieces:"pièces",c_err_format:"Veuillez sélectionner un format pour continuer.",
     c_err_total:"Le total sélectionné doit être exactement de",
-    c_cnt_select:"Sélectionnez vos chocolats",c_cnt_remaining:"pièce(s) restante(s)",
-    c_cnt_over:"Capacité dépassée !",
+    c_cnt_select:"Sélectionnez vos chocolats",c_cnt_remaining:"restante(s)",
+    c_cnt_over:"Capacité dépassée !",c_cnt_complete:"✓ Coffret complet !",
     c_recap_sub:"Composition de votre box artisanale",c_recap_total_lbl:"Total Coffret",
-    c_validate_lbl:"Valider & Commander",c_back_to_1:"← Format",c_go_recap:"Récapitulatif →",c_back_to_2:"← Modifier",
-    c_toast_over:"Capacité dépassée ! Réduisez la quantité.",c_toast_add:"Coffret ajouté au panier !",
-    c_to_step2:"Choisir mes chocolats →",c_da:"DA"
+    c_validate_lbl:"Valider & Commander",c_back_to_1:"Format",c_go_recap:"Récap →",c_back_to_2:"← Modifier",
+    c_toast_over:"Capacité dépassée ! Réduisez la quantité.",c_toast_add:"✓ Coffret ajouté !",
+    c_to_step2:"Choisir mes chocolats →",c_da:"DA",
+    selected_lbl:"Sélectionné"
   },
   ar:{
     tagline:"التميز في الحلويات الجزائرية التقليدية",
     nav1:"إبداعاتنا",nav2:"مجموعاتنا",nav3:"اطلب الآن",nav_choco:"🍫 علب الشوكولاتة",
     hero_h:"فن الحلويات<br>الجزائرية التقليدية",
-    hero_p:"انغماس حسي في التراث الحلوي للجزائر. كل قطعة هي لوحة فنية، مصنوعة يدوياً بكل شغف.",
+    hero_p:"انغماس حسي في التراث الحلوي للجزائر.",
     spec_h:"تخصصاتنا",spec_p:"اختر حلوياتك المفضلة لتكوين علبتك الخاصة",
     qual_h:"معايير التميز لدينا",qual_p:"تجربتان راقيتان تتناسبان مع جميع متطلباتكم",
-    q1_n:"كلاسيكي",q1_d:"الأصالة الخالصة. وصفات عائلية متوارثة ونكهات متوازنة لمناسباتكم اليومية.",
+    q1_n:"كلاسيكي",q1_d:"الأصالة الخالصة. وصفات عائلية متوارثة ونكهات متوازنة.",
     q2_n:"بريستيج",q2_d:"الفخامة المطلقة. لوز رفيع جداً، عسل جبلي حر ولمسات نهائية بماء الذهب.",
     q3_n:"علب الشوكولاتة",q3_d:"مجموعة جديدة. صمم علبتك من 6 أو 12 أو 24 شوكولاتة يدوية. مثالية كهدية.",
     order_h:"إتمام عملية الطلب",order_p:"خدمة راقية للحظات لا تُنسى",
@@ -1619,7 +1638,7 @@ const I18N = {
     order_ok:"شكراً لكم! تم استلام طلبيتكم بنجاح ✓",
     loading:"جاري المعالجة...",error:"حدث خطأ ما. يرجى المحاولة مرة أخرى.",
     promo:"عرض",nutri_cal:"سعرات",nutri_sug:"سكر",nutri_fat:"دهون",
-    choco_banner_title:"🍫 تم استلام طلب علبة الشوكولاتة",
+    choco_banner_title:"تم استلام طلب علبة الشوكولاتة",
     choco_banner_msg:"تمت إضافة علبة الشوكولاتة إلى سلتك. أكمل النموذج لإتمام طلبيتك.",
     choco_cart_name:"علبة شوكولاتة",
     choco_promo_h:"🍫 مجموعة جديدة",choco_promo_p:"علب شوكولاتة يدوية لتصميمها بنفسك",
@@ -1629,16 +1648,17 @@ const I18N = {
     c_hero_sub:"اختر الحجم المناسب ثم انتقِ الشوكولاتة التي تحبها.",
     c_s1:"الحجم",c_s2:"الشوكولاتة",c_s3:"الملخص",
     c_p1_h:"اختر حجم العلبة",c_p1_sub:"كلما كانت العلبة أكبر، زادت تشكيلة النكهات!",
-    c_p2_h:"اختر شوكولاتتك",c_p2_sub:"اضبط الكميات – العداد يرشدك.",
+    c_p2_h:"اختر شوكولاتتك",c_p2_sub:"اضبط الكميات – العداد في الأسفل يرشدك.",
     c_p3_h:"علبتك",c_p3_sub:"راجع اختيارك قبل التأكيد.",
     c_pieces:"قطعة",c_err_format:"يرجى اختيار حجم للمتابعة.",
     c_err_total:"يجب أن يكون المجموع المختار بالضبط",
-    c_cnt_select:"اختر شوكولاتتك",c_cnt_remaining:"قطعة متبقية",
-    c_cnt_over:"تجاوزت السعة !",
+    c_cnt_select:"اختر شوكولاتتك",c_cnt_remaining:"متبقية",
+    c_cnt_over:"تجاوزت السعة !",c_cnt_complete:"✓ العلبة مكتملة!",
     c_recap_sub:"تشكيلة علبتك الفاخرة",c_recap_total_lbl:"إجمالي العلبة",
-    c_validate_lbl:"تأكيد الطلب",c_back_to_1:"الحجم ←",c_go_recap:"الملخص →",c_back_to_2:"← تعديل",
-    c_toast_over:"تجاوزت السعة! قلّل الكمية.",c_toast_add:"تمت العلبة! جارٍ الإضافة…",
-    c_to_step2:"اختر شوكولاتتي →",c_da:"دج"
+    c_validate_lbl:"تأكيد الطلب",c_back_to_1:"الحجم",c_go_recap:"الملخص →",c_back_to_2:"← تعديل",
+    c_toast_over:"تجاوزت السعة! قلّل الكمية.",c_toast_add:"✓ تمت العلبة!",
+    c_to_step2:"اختر شوكولاتتي →",c_da:"دج",
+    selected_lbl:"مختار"
   }
 };
 
@@ -1678,7 +1698,7 @@ function toggleLang(){
 function applyI18N(){
     const T=I18N[currentLang];
     const map={
-        tagline_txt:'tagline',hero_h:'hero_h',hero_p:'hero_p',
+        tagline_txt:'tagline',hero_h:'hero_h',
         spec_h:'spec_h',spec_p:'spec_p',qual_h:'qual_h',qual_p:'qual_p',
         q1_n:'q1_n',q1_d:'q1_d',q2_n:'q2_n',q2_d:'q2_d',q3_n:'q3_n',q3_d:'q3_d',
         order_h:'order_h',order_p:'order_p',
@@ -1712,10 +1732,10 @@ function renderProducts(){
         const minPrice=Math.min(...p.variants.map(v=>v.prix_promo||v.prix));
         const maxPrice=Math.max(...p.variants.map(v=>v.prix));
         const priceHtml=hasPromo
-            ?`<span class="price-current">${minPrice} DA</span><span class="price-badge">${T.promo}</span>`
+            ?`<span class="price-current price-ltr">${minPrice} DA</span><span class="price-badge">${T.promo}</span>`
             :(p.variants.length>1
-                ?`<span class="price-current">${minPrice} – ${maxPrice} DA</span>`
-                :`<span class="price-current">${p.variants[0].prix} DA</span>`);
+                ?`<span class="price-current price-ltr">${minPrice} – ${maxPrice} DA</span>`
+                :`<span class="price-current price-ltr">${p.variants[0].prix} DA</span>`);
         return `<div class="product-card" onclick="openProduct('${p.id}')">
             <div class="product-img-wrap">
                 <img src="${p.variants[0].img}" class="product-img" alt="${p[currentLang]}"
@@ -1786,11 +1806,23 @@ function renderVariantDetails(index,animate){
     if(animate){details.classList.add('fading');setTimeout(doUpdate,200);}else{doUpdate();}
 }
 
+/* ══════════════════════════════
+   FIX ARABIC PRICE: use direction:ltr span so number always reads "140 DA / pièce"
+   regardless of document direction
+══════════════════════════════ */
 function renderModalPrice(v){
     const T=I18N[currentLang];
-    document.getElementById('m_price_block').innerHTML=v.prix_promo
-        ?`<span class="modal-price-current">${v.prix_promo} DA</span><span class="modal-price-original">${v.prix} DA</span><span class="modal-price-badge">${T.promo}</span>`
-        :`<span class="modal-price-current">${v.prix} DA <small style="font-size:0.85rem;font-weight:500;color:#999;">/ pièce</small></span>`;
+    // We wrap the entire price line in a ltr span to prevent RTL reordering
+    if(v.prix_promo){
+        document.getElementById('m_price_block').innerHTML=
+            `<span class="modal-price-current">${v.prix_promo} DA</span>`+
+            `<span class="modal-price-original">${v.prix} DA</span>`+
+            `<span class="modal-price-badge">${T.promo}</span>`;
+    } else {
+        const perPiece = currentLang==='ar' ? '/ قطعة' : '/ pièce';
+        document.getElementById('m_price_block').innerHTML=
+            `<span class="modal-price-current">${v.prix} DA <small style="font-size:0.78rem;font-weight:500;color:#999;direction:ltr;unicode-bidi:embed;">${perPiece}</small></span>`;
+    }
 }
 
 function updateLineTotalPreview(){
@@ -1851,7 +1883,7 @@ function updateCartUI(){
             cartText+=`${item.qty}x ${item.name} (${item.variantName}) - ${Math.round(final)} DA\n`;
             return `<div class="summary-item">
                 <span style="flex:1;">${item.qty}× ${item.name}<br><small style="opacity:0.6;font-size:0.9em;">${item.variantName}</small></span>
-                <span style="text-align:right;white-space:nowrap;">${Math.round(final)} DA${promoTag}
+                <span style="text-align:right;white-space:nowrap;direction:ltr;unicode-bidi:embed;">${Math.round(final)} DA${promoTag}
                 <button type="button" onclick="removeItem(${item.id})" style="color:#e74c3c;font-weight:bold;margin-left:12px;cursor:pointer;font-size:1.3rem;background:none;border:none;padding:4px;">✕</button></span>
             </div>`;
         }).join('');
@@ -1895,11 +1927,22 @@ async function handleOrder(e){
     finally{btn.disabled=false;btnText.textContent=I18N[currentLang].btn_order;spinner.style.display='none';}
 }
 
-/* === CHOCO PAGE === */
+/* ═══════════════════════════
+   CHOCO PAGE
+═══════════════════════════ */
 function applyChocoI18N(){
     const T=I18N[currentLang];
-    const map={choco_back_lbl:'c_back',c_eyebrow:'c_eyebrow',c_hero_h:'c_hero_h',c_hero_sub:'c_hero_sub',c_s_lbl_1:'c_s1',c_s_lbl_2:'c_s2',c_s_lbl_3:'c_s3',c_p1_h:'c_p1_h',c_p1_sub:'c_p1_sub',c_p2_h:'c_p2_h',c_p2_sub:'c_p2_sub',c_p3_h:'c_p3_h',c_p3_sub:'c_p3_sub',c_step1_err:'c_err_format',c_err1_foot:'c_err_format',c_recap_sub:'c_recap_sub',c_recap_total_lbl:'c_recap_total_lbl',c_validate_lbl:'c_validate_lbl',c_back_to_1_btn:'c_back_to_1',c_to_step3_btn:'c_go_recap',c_to_step2_btn:'c_to_step2',c_back_to_2_btn:'c_back_to_2'};
+    const map={
+        choco_back_lbl:'c_back',c_eyebrow:'c_eyebrow',c_hero_h:'c_hero_h',c_hero_sub:'c_hero_sub',
+        c_s_lbl_1:'c_s1',c_s_lbl_2:'c_s2',c_s_lbl_3:'c_s3',
+        c_p1_h:'c_p1_h',c_p1_sub:'c_p1_sub',c_p2_h:'c_p2_h',c_p2_sub:'c_p2_sub',c_p3_h:'c_p3_h',c_p3_sub:'c_p3_sub',
+        c_step1_err:'c_err_format',c_err1_foot:'c_err_format',
+        c_recap_sub:'c_recap_sub',c_recap_total_lbl:'c_recap_total_lbl',c_validate_lbl:'c_validate_lbl',
+        c_back_to_1_lbl:'c_back_to_1',c_to_step3_lbl:'c_go_recap',
+        c_to_step2_btn:'c_to_step2',c_back_to_2_btn:'c_back_to_2'
+    };
     Object.entries(map).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&T[key]!==undefined)el.innerHTML=T[key];});
+    updateChocoCounter();
 }
 
 function renderChocoBoxSizes(){
@@ -1915,24 +1958,38 @@ function renderChocoBoxSizes(){
     }).join('');
 }
 
-function chocoSelectBoxSize(size){selectedBoxSize=size;chocoQuantities={};renderChocoBoxSizes();renderChocoCards();updateChocoCounter();}
+function chocoSelectBoxSize(size){
+    selectedBoxSize=size;
+    // reset quantities that exceed new box size
+    let total=getChocoTotal();
+    if(total>size){chocoQuantities={};}
+    renderChocoBoxSizes();
+    renderChocoCards();
+    updateChocoCounter();
+    // hide error msgs
+    document.getElementById('c_step1_err').style.display='none';
+    document.getElementById('c_err1_foot').style.display='none';
+}
 
 function renderChocoCards(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
     document.getElementById('c_choco_grid').innerHTML=data.chocolates.map(c=>{
         const qty=chocoQuantities[c.id]||0;
-        return `<div class="choco-picker-card${qty>0?' selected':''}" id="ccard_${c.id}">
+        const isSelected=qty>0;
+        return `<div class="choco-picker-card${isSelected?' selected':''}" id="ccard_${c.id}">
             <div class="choco-picker-img-wrap">
-                <img class="choco-picker-img" src="${c.img}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/600x300/3b1a08/c9993a?text=MyZina'">
+                <img class="choco-picker-img" src="${c.img}" alt="${c.name}" loading="lazy"
+                     onerror="this.src='https://via.placeholder.com/300x200/3b1a08/c9993a?text=MyZina'">
                 <div class="choco-selected-overlay"><div class="check-circle">✓</div></div>
+                <div class="choco-selected-badge">${T.selected_lbl}</div>
             </div>
             <div class="choco-picker-info">
                 <div class="choco-picker-name">${c.name}</div>
                 <div class="choco-picker-desc">${c.desc}</div>
-                <div class="choco-picker-price">${c.price_per} ${T.c_da} / pièce</div>
+                <div class="choco-picker-price">${c.price_per} ${T.c_da} / ${currentLang==='ar'?'قطعة':'pièce'}</div>
             </div>
             <div class="choco-qty-control">
-                <button class="choco-qty-btn" onclick="chocoChangeQty('${c.id}',-1)">−</button>
+                <button class="choco-qty-btn" onclick="chocoChangeQty('${c.id}',-1)" ${qty===0?'disabled':''}>−</button>
                 <span class="choco-qty-num" id="cqnum_${c.id}">${qty}</span>
                 <button class="choco-qty-btn" onclick="chocoChangeQty('${c.id}',1)">+</button>
             </div>
@@ -1944,10 +2001,22 @@ function chocoChangeQty(id,delta){
     const T=I18N[currentLang];
     const total=getChocoTotal(),cur=chocoQuantities[id]||0,newQty=cur+delta;
     if(newQty<0)return;
-    if(delta>0){if(!selectedBoxSize){showChocoToast(T.c_err_format);return;}if(total>=selectedBoxSize){showChocoToast(T.c_toast_over);return;}}
+    if(delta>0){
+        if(!selectedBoxSize){showChocoToast(T.c_err_format,'error');return;}
+        if(total>=selectedBoxSize){showChocoToast(T.c_toast_over,'error');return;}
+    }
     chocoQuantities[id]=newQty;
-    const numEl=document.getElementById('cqnum_'+id);if(numEl)numEl.textContent=newQty;
-    const card=document.getElementById('ccard_'+id);if(card)card.classList.toggle('selected',newQty>0);
+    // Update qty display
+    const numEl=document.getElementById('cqnum_'+id);
+    if(numEl)numEl.textContent=newQty;
+    // Update card selected state
+    const card=document.getElementById('ccard_'+id);
+    if(card){
+        card.classList.toggle('selected',newQty>0);
+        // Update minus button disabled state
+        const minusBtn=card.querySelector('.choco-qty-btn');
+        if(minusBtn)minusBtn.disabled=newQty===0;
+    }
     if(delta>0)spawnParticle(id);
     updateChocoCounter();
 }
@@ -1956,32 +2025,60 @@ function getChocoTotal(){return Object.values(chocoQuantities).reduce((a,b)=>a+b
 
 function updateChocoCounter(){
     const T=I18N[currentLang];
-    const total=getChocoTotal(),cap=selectedBoxSize||0,pct=cap>0?Math.min(100,(total/cap)*100):0,remaining=cap-total;
+    const total=getChocoTotal(),cap=selectedBoxSize||0;
+    const pct=cap>0?Math.min(100,(total/cap)*100):0;
+    const remaining=cap-total;
+    const isComplete=cap>0&&total===cap;
+    const isOver=total>cap;
+
     document.getElementById('c_cnt_num').textContent=total;
     document.getElementById('c_cnt_denom').textContent=`/ ${cap} ${T.c_pieces}`;
-    const fill=document.getElementById('c_cnt_fill');fill.style.width=pct+'%';fill.classList.toggle('over',total>cap);
+
+    const fill=document.getElementById('c_cnt_fill');
+    fill.style.width=pct+'%';
+    fill.className='choco-counter-fill'+(isOver?' over':isComplete?' complete':'');
+
+    const pill=document.getElementById('c_counter_pill');
+    if(pill)pill.className='choco-counter-pill'+(isOver?' over':isComplete?' complete':'');
+
+    const txtEl=document.getElementById('c_cnt_text');
     let txt=T.c_cnt_select;
-    if(cap>0&&total<cap)txt=`${remaining} ${T.c_cnt_remaining}`;
-    if(total===cap)txt=currentLang==='fr'?'✓ Coffret complet !':'✓ العلبة مكتملة!';
-    if(total>cap)txt=T.c_cnt_over;
-    document.getElementById('c_cnt_text').textContent=txt;
-    const btn=document.getElementById('c_to_step3_btn');if(btn)btn.disabled=(total!==cap||cap===0);
+    if(cap>0&&total<cap) txt=`${remaining} ${T.c_pieces} ${T.c_cnt_remaining}`;
+    if(isComplete) txt=T.c_cnt_complete;
+    if(isOver) txt=T.c_cnt_over;
+    txtEl.textContent=txt;
+    txtEl.className='choco-counter-text'+(isOver?' over':isComplete?' complete':'');
+
+    const btn=document.getElementById('c_to_step3_btn');
+    if(btn)btn.disabled=(!isComplete||cap===0);
 }
 
 function chocoGoToStep(step){
     const T=I18N[currentLang];
-    if(step>1&&!selectedBoxSize){document.getElementById('c_err1_foot').style.display='block';document.getElementById('c_step1_err').style.display='block';return;}
-    document.getElementById('c_err1_foot').style.display='none';document.getElementById('c_step1_err').style.display='none';
+    if(step>1&&!selectedBoxSize){
+        document.getElementById('c_err1_foot').style.display='block';
+        document.getElementById('c_step1_err').style.display='block';
+        return;
+    }
+    document.getElementById('c_err1_foot').style.display='none';
+    document.getElementById('c_step1_err').style.display='none';
     if(step>2){
         const total=getChocoTotal();
-        if(total!==selectedBoxSize){const e=document.getElementById('c_step2_err');e.textContent=`${T.c_err_total} ${selectedBoxSize} ${T.c_pieces}.`;e.style.display='block';return;}
-        document.getElementById('c_step2_err').style.display='none';renderChocoRecap();
+        if(total!==selectedBoxSize){
+            const e=document.getElementById('c_step2_err');
+            e.textContent=`${T.c_err_total} ${selectedBoxSize} ${T.c_pieces}.`;
+            e.style.display='block';
+            return;
+        }
+        document.getElementById('c_step2_err').style.display='none';
+        renderChocoRecap();
     }
     chocoStep=step;
     document.querySelectorAll('.choco-step-panel').forEach((p,i)=>p.classList.toggle('active',i+1===step));
     [1,2,3].forEach(i=>{
         const ind=document.getElementById('c_step_ind_'+i),circle=document.getElementById('c_circle_'+i);
-        ind.classList.toggle('active',i===step);ind.classList.toggle('done',i<step);
+        ind.classList.toggle('active',i===step);
+        ind.classList.toggle('done',i<step);
         circle.textContent=i<step?'✓':i;
     });
     [1,2].forEach(i=>{const line=document.getElementById('c_step_line_'+i);if(line)line.classList.toggle('done',i<step);});
@@ -1999,8 +2096,11 @@ function renderChocoRecap(){
     document.getElementById('c_recap_list').innerHTML=items.map(c=>{
         const qty=chocoQuantities[c.id],sub=qty*c.price_per;grandTotal+=sub;
         return `<div class="choco-recap-item">
-            <img class="choco-recap-item-img" src="${c.img}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/50x50/3b1a08/c9993a?text=M'">
-            <div class="choco-recap-item-info"><div class="choco-recap-item-name">${c.name}</div><div class="choco-recap-item-qty">${qty} × ${c.price_per} ${T.c_da}</div></div>
+            <img class="choco-recap-item-img" src="${c.img}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/60x60/3b1a08/c9993a?text=M'">
+            <div class="choco-recap-item-info">
+                <div class="choco-recap-item-name">${c.name}</div>
+                <div class="choco-recap-item-qty">${qty} × ${c.price_per} ${T.c_da}</div>
+            </div>
             <div class="choco-recap-item-subtotal">${sub.toLocaleString()} ${T.c_da}</div>
         </div>`;
     }).join('');
@@ -2013,17 +2113,29 @@ function validateCoffret(){
     const priceTotal=items.reduce((sum,c)=>sum+(chocoQuantities[c.id]*c.price_per),0);
     const itemsStr=items.map(c=>`${chocoQuantities[c.id]}x ${c.name}`).join(', ');
     const boxLabel=currentLang==='fr'?`Coffret ${selectedBoxSize} pièces`:`علبة ${selectedBoxSize} قطعة`;
-    cart.push({id:Date.now(),variantKey:`choco_box_${selectedBoxSize}_${Date.now()}`,productId:'choco_box',name:`🍫 ${T.choco_cart_name} (${boxLabel})`,variantName:itemsStr.length>80?itemsStr.substring(0,80)+'…':itemsStr,variant:`box_${selectedBoxSize}`,qty:1,price:priceTotal,originalPrice:null,isChocoBox:true});
+    cart.push({id:Date.now(),variantKey:`choco_box_${selectedBoxSize}_${Date.now()}`,productId:'choco_box',
+        name:`🍫 ${T.choco_cart_name} (${boxLabel})`,
+        variantName:itemsStr.length>80?itemsStr.substring(0,80)+'…':itemsStr,
+        variant:`box_${selectedBoxSize}`,qty:1,price:priceTotal,originalPrice:null,isChocoBox:true});
+
     const banner=document.getElementById('choco_transfer_banner');
     banner.style.display='block';
     document.getElementById('banner_title_txt').textContent=T.choco_banner_title;
-    document.getElementById('banner_detail_txt').innerHTML=`${T.choco_banner_msg}<br><strong style="color:var(--gold2);">${boxLabel} — ${priceTotal.toLocaleString()} ${T.c_da}</strong><br><small style="opacity:0.65;">${itemsStr}</small>`;
+    document.getElementById('banner_detail_txt').innerHTML=
+        `${T.choco_banner_msg}<br><strong style="color:var(--gold2);">${boxLabel} — ${priceTotal.toLocaleString()} ${T.c_da}</strong><br><small style="opacity:0.65;">${itemsStr}</small>`;
+
     const msgBox=document.getElementById('f_message');
-    const msgNote=currentLang==='fr'?`🍫 COFFRET CHOCOLATS :\n• ${boxLabel}\n• Contenu : ${itemsStr}\n• Total : ${priceTotal.toLocaleString()} DA\n\n`:`🍫 علبة شوكولاتة:\n• ${boxLabel}\n• المحتوى: ${itemsStr}\n• الإجمالي: ${priceTotal.toLocaleString()} دج\n\n`;
+    const msgNote=currentLang==='fr'
+        ?`🍫 COFFRET CHOCOLATS :\n• ${boxLabel}\n• Contenu : ${itemsStr}\n• Total : ${priceTotal.toLocaleString()} DA\n\n`
+        :`🍫 علبة شوكولاتة:\n• ${boxLabel}\n• المحتوى: ${itemsStr}\n• الإجمالي: ${priceTotal.toLocaleString()} دج\n\n`;
     msgBox.value=msgNote+msgBox.value;
+
     confetti({particleCount:150,spread:120,origin:{y:0.6}});
-    showChocoToast(T.c_toast_add);
-    setTimeout(()=>{closeChocoPage();updateCartUI();setTimeout(()=>{document.getElementById('commande').scrollIntoView({behavior:'smooth'});},400);},1200);
+    showChocoToast(T.c_toast_add,'success');
+    setTimeout(()=>{
+        closeChocoPage();updateCartUI();
+        setTimeout(()=>{document.getElementById('commande').scrollIntoView({behavior:'smooth'});},400);
+    },1200);
 }
 
 function spawnParticle(id){
@@ -2034,9 +2146,12 @@ function spawnParticle(id){
     document.body.appendChild(el);setTimeout(()=>el.remove(),900);
 }
 
-function showChocoToast(msg){
-    const t=document.getElementById('choco_toast');t.textContent=msg;t.classList.add('show');
-    clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3000);
+function showChocoToast(msg, type='error'){
+    const t=document.getElementById('choco_toast');
+    t.textContent=msg;
+    t.className='choco-toast show'+(type==='success'?' success':'');
+    clearTimeout(t._t);
+    t._t=setTimeout(()=>{t.className='choco-toast';},3000);
 }
 
 document.addEventListener('error',e=>{if(e.target.tagName==='IMG'){e.target.onerror=null;e.target.src='https://via.placeholder.com/600x400/4a0404/c9993a?text=MyZina';}},true);
