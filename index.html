@@ -1123,7 +1123,7 @@
         <a onclick="scrollToAnchor('produits')" data-key="nav1">Nos Créations</a>
         <a onclick="scrollToAnchor('qualite')" data-key="nav2">Nos Gammes</a>
         <a onclick="scrollToAnchor('commande')" data-key="nav3">Commander</a>
-        <a onclick="openChocoPage()" class="choco-nav-link" data-key="nav_choco">🍫 Coffrets Chocolats</a>
+        <a onclick="openChocoPage()" class="choco-nav-link" data-key="nav_choco"> Coffrets Chocolats</a>
     </nav>
 </header>
 
@@ -1131,8 +1131,7 @@
 <div class="hero">
     <h2 id="hero_h">L'Art des Gâteaux<br>Traditionnels Algériens</h2>
     <div class="ornament">✦ ✦ ✦</div>
-    <p id="hero_p">Une immersion sensorielle dans le patrimoine sucré de l'Algérie. Chaque pièce est une œuvre d'art, façonnée à la main avec passion.</p>
-</div>
+    </div>
 
 <!-- PRODUITS -->
 <section id="produits">
@@ -1441,9 +1440,17 @@
      SCRIPT (identique à l'original)
 ═══════════════════════════════════════ -->
 <script>
-const WILAYAS = ["01 Adrar","02 Chlef","03 Laghouat","04 Oum El Bouaghi","05 Batna","06 Béjaïa","07 Biskra","08 Béchar","09 Blida","10 Bouira","11 Tamanrasset","12 Tébessa","13 Tlemcen","14 Tiaret","15 Tizi Ouzou","16 Alger","17 Djelfa","18 Jijel","19 Sétif","20 Saïda","21 Skikda","22 Sidi Bel Abbès","23 Annaba","24 Guelma","25 Constantine","26 Médéa","27 Mostaganem","28 M'Sila","29 Mascara","30 Ouargla","31 Oran","32 El Bayadh","33 Illizi","34 Bordj Bou Arreridj","35 Boumerdès","36 El Tarf","37 Tindouf","38 Tissemsilt","39 El Oued","40 Khenchela","41 Souk Ahras","42 Tipaza","43 Mila","44 Aïn Defla","45 Naâma","46 Aïn Témouchent","47 Ghardaïa","48 Relizane","49 El M'Ghair","50 El Meniaa","51 Ouled Djellal","52 Bordj Baji Mokhtar","53 Béni Abbès","54 Timimoun","55 Touggourt","56 Djanet","57 In Salah","58 In Guezzam"];
+const WILAYAS = ["16 Alger"];
 
 const CATALOG = [
+ {id:'Dziriya',fr:'Dziriya amandes',ar:'دزيرية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',variants:[
+    {key:'Dziriya amandes',fr:'amandes',ar:'دزيرية باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},
+    {key:'Dziriya cacahuète',fr:'Dziriya cacahuète',ar:'دزيرية كاوكاو',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriyakawa.png',prix:100,prix_promo:85,ingredients:{fr:['Farine d\'amandes','Beurre','Sucre','Fleur d\'oranger'],ar:['دقيق لوز','زبدة','سكر','ماء زهر']},nutrition:{calories:'245 kcal',sucre:'18 g',gras:'14 g'}}
+  ]},
+ {id:'Mshekla',fr:'Mshekla',ar:'مشكلة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',variants:[
+    {key:'Mshekla',fr:'Mshekla',ar:'مشكلة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},
+    {key:'Louziya',fr:'louziya',ar:'لوزية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/LOUZIYA.png',prix:100,prix_promo:85,ingredients:{fr:['Farine d\'amandes','Beurre','Sucre','Fleur d\'oranger'],ar:['دقيق لوز','زبدة','سكر','ماء زهر']},nutrition:{calories:'245 kcal',sucre:'18 g',gras:'14 g'}}
+  ]},
   {id:'baklava',fr:'Baklawa',ar:'بقلاوة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',variants:[
     {key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',prix:120,ingredients:{fr:['Pâte filo','Amandes','Miel','Beurre','Cannelle'],ar:['عجينة فيلو','لوز','عسل','زبدة','قرفة']},nutrition:{calories:'340 kcal',sucre:'22 g',gras:'18 g'}},
     {key:'Pistache',fr:'Pistache',ar:'فستق',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_rendre%20la%20photo%20variante%20baklawa%20prestige%20avec%20pistache%20%20766352.png',prix:180,ingredients:{fr:['Pâte filo premium','Pistache extra-fines','Miel de montagne','Beurre clarifié'],ar:['عجينة فيلو فاخرة','فستق ممتاز','عسل جبلي','سمن مذاب']},nutrition:{calories:'360 kcal',sucre:'24 g',gras:'20 g'}}
