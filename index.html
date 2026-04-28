@@ -2,7 +2,7 @@
 <html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>MyZina – Gâteaux Traditionnels Algériens</title>
     <meta name="description" content="Découvrez l'excellence de la pâtisserie traditionnelle algérienne avec MyZina.">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Amiri:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@600;700&display=swap" rel="stylesheet">
@@ -18,7 +18,18 @@
         [dir="rtl"]{font-family:'Amiri',Georgia,serif;}
         [dir="ltr"]{font-family:'Lora',Georgia,serif;}
         *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-        html{scroll-behavior:smooth;font-size:20px;}
+
+        /* ── SCALING FIX for hosted environments ── */
+        html{
+            scroll-behavior:smooth;
+            font-size:20px;
+            -webkit-text-size-adjust:100%;
+            -ms-text-size-adjust:100%;
+            text-size-adjust:100%;
+        }
+        @media(max-width:480px){html{font-size:18px;}}
+        @media(min-width:1400px){html{font-size:22px;}}
+
         body{background:var(--burg);color:var(--white);line-height:1.7;overflow-x:hidden;opacity:0;animation:fadeIn 0.8s ease 0.1s forwards;}
         @keyframes fadeIn{to{opacity:1;}}
         h1,h2,h3,h4,.display{font-family:'Playfair Display',Georgia,serif;line-height:1.2;letter-spacing:-0.01em;}
@@ -194,7 +205,7 @@
 
 
         /* ═══════════════════════════════════════
-           ██████  CHOCO PAGE — REDESIGNED ██████
+           ██████  CHOCO PAGE ██████
         ═══════════════════════════════════════ */
         #page_choco{background:var(--choco-deep);min-height:100vh;}
 
@@ -226,7 +237,7 @@
         .choco-hero-strip p{color:rgba(245,234,214,0.8);font-size:1rem;max-width:480px;margin:0 auto;}
 
         /* ─── Panel wrapper ─── */
-        .c-panels-wrap{max-width:1100px;margin:0 auto;padding:0 1rem 6rem;}
+        .c-panels-wrap{max-width:1100px;margin:0 auto;padding:0 1rem 8rem;}
         .c-panel{display:none;animation:panelIn 0.4s ease;}
         .c-panel.active{display:block;}
         @keyframes panelIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
@@ -235,37 +246,98 @@
         .c-panel-title h2{font-size:clamp(1.6rem,4vw,2.5rem);color:var(--gold2);margin-bottom:0.4rem;}
         .c-panel-title p{color:rgba(245,234,214,0.7);font-size:1rem;font-style:italic;}
 
-        /* ─── STEP 1: Box sizes ─── */
-        .box-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0.9rem;max-width:700px;margin:0 auto 2rem;}
-        @media(min-width:520px){.box-grid{grid-template-columns:repeat(4,1fr);}}
+        /* ─── STEP 1: Box sizes — SANS PRIX ─── */
+        .box-grid{
+            display:grid;
+            grid-template-columns:repeat(2,1fr);
+            gap:1.2rem;
+            max-width:800px;
+            margin:0 auto 2rem;
+        }
+        @media(min-width:520px){
+            .box-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem;}
+        }
 
-        .box-card{background:rgba(255,255,255,0.05);border:2.5px solid rgba(201,153,58,0.2);border-radius:18px;padding:1.5rem 0.8rem;cursor:pointer;transition:all 0.3s;text-align:center;position:relative;overflow:hidden;}
+        .box-card{
+            background:linear-gradient(160deg,rgba(59,26,8,0.7),rgba(20,8,0,0.9));
+            border:2.5px solid rgba(201,153,58,0.2);
+            border-radius:24px;
+            padding:2.5rem 1rem 2rem;
+            cursor:pointer;
+            transition:all 0.3s var(--r);
+            text-align:center;
+            position:relative;
+            overflow:hidden;
+            min-height:170px;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:0.5rem;
+        }
+        @media(min-width:520px){.box-card{min-height:200px;padding:3rem 1rem 2.5rem;}}
         .box-card::after{content:'';position:absolute;inset:0;background:rgba(201,153,58,0.06);opacity:0;transition:opacity 0.3s;}
-        .box-card:hover{border-color:rgba(201,153,58,0.55);transform:translateY(-4px);}
-        .box-card.selected{border-color:var(--gold);box-shadow:0 0 28px rgba(201,153,58,0.3);background:rgba(201,153,58,0.1);}
+        .box-card:hover{border-color:rgba(201,153,58,0.6);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+        .box-card.selected{border-color:var(--gold);box-shadow:0 0 35px rgba(201,153,58,0.35),0 12px 40px rgba(0,0,0,0.4);background:linear-gradient(160deg,rgba(90,42,16,0.6),rgba(40,16,0,0.95));}
         .box-card.selected::after{opacity:1;}
-        .box-check{position:absolute;top:10px;right:12px;color:var(--gold);font-size:1rem;font-weight:900;opacity:0;transition:opacity 0.2s;}
+        .box-check{position:absolute;top:12px;right:14px;color:var(--gold);font-size:1.1rem;font-weight:900;opacity:0;transition:opacity 0.2s;}
         .box-card.selected .box-check{opacity:1;}
-        .box-badge{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--choco-deep);font-size:0.65rem;font-weight:900;padding:3px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
-        .box-num{font-family:'Josefin Sans',sans-serif;font-size:2.8rem;font-weight:700;color:var(--gold2);line-height:1;}
-        .box-label{font-size:0.75rem;text-transform:uppercase;letter-spacing:2px;opacity:0.55;margin-top:5px;color:var(--parchment);}
-        .box-price{font-family:'Josefin Sans',sans-serif;font-size:0.9rem;color:var(--gold);font-weight:700;margin-top:8px;direction:ltr;unicode-bidi:embed;}
-        .box-price-orig{font-family:'Josefin Sans',sans-serif;font-size:0.78rem;color:rgba(201,153,58,0.4);text-decoration:line-through;direction:ltr;unicode-bidi:embed;margin-top:2px;}
-        .box-discount-pill{display:inline-block;background:linear-gradient(135deg,#27ae60,#1e8449);color:white;font-size:0.68rem;font-weight:900;padding:3px 10px;border-radius:50px;margin-top:5px;letter-spacing:1px;text-transform:uppercase;}
+        .box-badge{
+            position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+            background:var(--gold);color:var(--choco-deep);
+            font-size:0.7rem;font-weight:900;
+            padding:4px 14px;border-radius:0 0 12px 12px;
+            text-transform:uppercase;letter-spacing:1px;white-space:nowrap;
+        }
+        .box-num{
+            font-family:'Josefin Sans',sans-serif;
+            font-size:4.5rem;
+            font-weight:700;
+            color:var(--gold2);
+            line-height:1;
+        }
+        @media(min-width:520px){.box-num{font-size:5.5rem;}}
+        .box-label{
+            font-size:0.9rem;
+            text-transform:uppercase;
+            letter-spacing:2.5px;
+            color:rgba(245,234,214,0.7);
+            font-weight:700;
+        }
+        /* Discount pill — kept visible */
+        .box-discount-pill{
+            display:inline-flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,#27ae60,#1e8449);
+            color:white;
+            font-size:0.85rem;font-weight:900;
+            padding:6px 16px;
+            border-radius:50px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            margin-top:4px;
+        }
+        /* hide old price elements (safety) */
+        .box-price,.box-price-orig{display:none!important;}
 
         .step1-cta{text-align:center;padding:1.5rem 0 2rem;}
-        .step1-next-btn{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;background:var(--gold);color:var(--choco-deep);border:none;border-radius:50px;font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:all 0.25s;min-height:60px;}
+        .step1-next-btn{display:inline-flex;align-items:center;gap:10px;padding:20px 48px;background:var(--gold);color:var(--choco-deep);border:none;border-radius:50px;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:all 0.25s;min-height:64px;}
         .step1-next-btn:hover{background:var(--gold2);transform:scale(1.03);}
         .step1-next-btn:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
         .c-err-msg{color:#e74c3c;font-weight:700;font-size:0.95rem;text-align:center;margin:0.75rem auto;display:none;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);border-radius:10px;padding:12px;max-width:400px;}
 
-        /* ─── STEP 2: Chocolate picker — BIG CARDS ─── */
-        /* 2 columns on phone, 3 on tablet, 4 on desktop */
-        .choco-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:1rem;}
-        @media(min-width:560px){.choco-grid{grid-template-columns:repeat(3,1fr);gap:1.25rem;}}
-        @media(min-width:860px){.choco-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem;}}
+        /* ─── STEP 2: Chocolate picker — GRAND FORMAT MOBILE ─── */
+        .choco-grid{
+            display:grid;
+            grid-template-columns:1fr;
+            gap:1.2rem;
+            margin-bottom:1rem;
+        }
+        /* 2 colonnes dès 380px (quasi tous les smartphones) */
+        @media(min-width:380px){.choco-grid{grid-template-columns:repeat(2,1fr);gap:1rem;}}
+        @media(min-width:700px){.choco-grid{grid-template-columns:repeat(3,1fr);gap:1.3rem;}}
+        @media(min-width:1000px){.choco-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem;}}
 
-        /* ★ BIG card redesign ★ */
+        /* ★ BIG card ★ */
         .cc-card{
             background:linear-gradient(175deg,rgba(59,26,8,0.85),rgba(20,8,0,0.95));
             border:2.5px solid rgba(201,153,58,0.15);
@@ -273,74 +345,99 @@
             position:relative;cursor:pointer;
             transition:border-color 0.25s,transform 0.25s,box-shadow 0.25s;
             display:flex;flex-direction:column;
-            user-select:none;
-            -webkit-user-select:none;
+            user-select:none;-webkit-user-select:none;
         }
         .cc-card:active{transform:scale(0.97);}
         .cc-card.selected{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,153,58,0.3),0 10px 30px rgba(0,0,0,0.5);}
         .cc-card:hover{border-color:rgba(201,153,58,0.5);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,0.4);}
         .cc-card.selected:hover{transform:translateY(-3px);}
 
-        /* Image: tall on mobile */
-        .cc-img-wrap{position:relative;overflow:hidden;height:160px;flex-shrink:0;}
-        @media(min-width:400px){.cc-img-wrap{height:180px;}}
-        @media(min-width:560px){.cc-img-wrap{height:200px;}}
-        @media(min-width:860px){.cc-img-wrap{height:210px;}}
+        /* Image — grande hauteur sur mobile */
+        .cc-img-wrap{position:relative;overflow:hidden;height:180px;flex-shrink:0;}
+        @media(min-width:380px){.cc-img-wrap{height:200px;}}
+        @media(min-width:560px){.cc-img-wrap{height:220px;}}
+        @media(min-width:860px){.cc-img-wrap{height:240px;}}
         .cc-img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s;}
         .cc-card:hover .cc-img,.cc-card.selected .cc-img{transform:scale(1.07);}
 
-        /* Selected overlay tick */
-        .cc-tick{position:absolute;top:0;right:0;background:var(--gold);color:var(--choco-deep);width:38px;height:38px;border-radius:0 0 0 14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:900;opacity:0;transform:scale(0);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);}
+        /* Selected tick */
+        .cc-tick{position:absolute;top:0;right:0;background:var(--gold);color:var(--choco-deep);width:42px;height:42px;border-radius:0 0 0 16px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:900;opacity:0;transform:scale(0);transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);}
         .cc-card.selected .cc-tick{opacity:1;transform:scale(1);}
 
         /* Card body */
-        .cc-body{padding:0.75rem 0.85rem 0;flex:1;}
-        .cc-name{font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--parchment);font-weight:700;line-height:1.3;margin-bottom:0.15rem;}
-        @media(min-width:560px){.cc-name{font-size:1.05rem;}}
-        [dir="rtl"] .cc-name{font-family:'Amiri',serif;font-size:1.1rem;}
-        .cc-desc{font-size:0.72rem;color:rgba(245,234,214,0.45);font-style:italic;line-height:1.4;display:none;}
-        @media(min-width:560px){.cc-desc{display:block;}}
-        .cc-price{font-family:'Josefin Sans',sans-serif;font-size:0.82rem;color:var(--gold);font-weight:700;margin-top:2px;direction:ltr;unicode-bidi:embed;}
+        .cc-body{padding:1rem 1rem 0;flex:1;}
+        .cc-name{
+            font-family:'Playfair Display',serif;
+            font-size:1.1rem;
+            color:var(--parchment);
+            font-weight:700;
+            line-height:1.3;
+            margin-bottom:0.45rem;
+        }
+        @media(min-width:380px){.cc-name{font-size:1.15rem;}}
+        @media(min-width:560px){.cc-name{font-size:1.25rem;}}
+        [dir="rtl"] .cc-name{font-family:'Amiri',serif;font-size:1.2rem;}
 
-        /* ★ BIG tap-to-add control at bottom of card ★ */
-        .cc-qty{
-            display:flex;align-items:center;justify-content:space-between;
-            background:rgba(0,0,0,0.45);
-            border-top:1px solid rgba(201,153,58,0.18);
-            padding:10px 10px;
-            margin-top:8px;
-            gap:6px;
+        /* Description — TOUJOURS VISIBLE ★ */
+        .cc-desc{
+            font-size:0.82rem;
+            color:rgba(245,234,214,0.78);
+            font-style:italic;
+            line-height:1.55;
+            display:block; /* toujours affiché */
+            margin-bottom:0.4rem;
+        }
+        @media(min-width:380px){.cc-desc{font-size:0.86rem;}}
+        @media(min-width:560px){.cc-desc{font-size:0.9rem;}}
+
+        .cc-price{
+            font-family:'Josefin Sans',sans-serif;
+            font-size:0.9rem;
+            color:var(--gold);
+            font-weight:700;
+            margin-top:3px;
+            direction:ltr;unicode-bidi:embed;
         }
 
-        /* Minus / Plus — larger touch targets */
+        /* ★ Zone +/- en bas de carte — grands boutons ★ */
+        .cc-qty{
+            display:flex;align-items:center;justify-content:space-between;
+            background:rgba(0,0,0,0.55);
+            border-top:1.5px solid rgba(201,153,58,0.2);
+            padding:12px 12px;
+            margin-top:10px;
+            gap:8px;
+        }
+
         .cc-btn{
-            width:46px;height:46px;min-width:46px;
-            border-radius:12px;border:2px solid rgba(201,153,58,0.3);
-            background:rgba(201,153,58,0.1);
+            width:56px;height:56px;min-width:56px;
+            border-radius:14px;border:2px solid rgba(201,153,58,0.3);
+            background:rgba(201,153,58,0.12);
             color:var(--gold2);
-            font-size:1.6rem;font-weight:700;line-height:1;
+            font-size:1.9rem;font-weight:700;line-height:1;
             cursor:pointer;
             display:flex;align-items:center;justify-content:center;
             transition:all 0.18s;
             -webkit-tap-highlight-color:transparent;
         }
-        .cc-btn:hover{background:rgba(201,153,58,0.25);border-color:var(--gold);}
-        .cc-btn:active{transform:scale(0.88);background:rgba(201,153,58,0.4);}
+        .cc-btn:hover{background:rgba(201,153,58,0.28);border-color:var(--gold);}
+        .cc-btn:active{transform:scale(0.86);background:rgba(201,153,58,0.42);}
         .cc-btn:disabled{opacity:0.2;cursor:default;transform:none;}
 
         .cc-num{
-            font-family:'Josefin Sans',sans-serif;font-size:1.7rem;font-weight:700;
-            color:var(--white);min-width:36px;text-align:center;
+            font-family:'Josefin Sans',sans-serif;
+            font-size:2rem;font-weight:700;
+            color:var(--white);min-width:38px;text-align:center;
             transition:transform 0.15s,color 0.15s;
         }
-        .cc-num.bump{transform:scale(1.35);color:var(--gold2);}
+        .cc-num.bump{transform:scale(1.4);color:var(--gold2);}
 
         /* ─── STICKY COUNTER BAR (step 2) ─── */
         .c-counter{
             position:sticky;bottom:0;z-index:50;
             background:rgba(8,3,0,0.97);backdrop-filter:blur(20px);
             border-top:2px solid rgba(201,153,58,0.3);
-            padding:12px 16px;
+            padding:14px 16px;
             display:grid;
             grid-template-columns:1fr auto;
             gap:12px;
@@ -348,19 +445,19 @@
         }
         .c-cnt-left{display:flex;flex-direction:column;gap:6px;}
         .c-cnt-nums{display:flex;align-items:baseline;gap:8px;}
-        .c-cnt-big{font-family:'Josefin Sans',sans-serif;font-size:2.2rem;font-weight:700;color:var(--gold2);line-height:1;transition:color 0.25s;}
+        .c-cnt-big{font-family:'Josefin Sans',sans-serif;font-size:2.4rem;font-weight:700;color:var(--gold2);line-height:1;transition:color 0.25s;}
         .c-cnt-big.over-limit{color:#e74c3c;}
         .c-cnt-big.exact{color:#5dde87;}
         .c-cnt-of{font-size:0.9rem;color:rgba(245,234,214,0.45);}
-        .c-cnt-bar-wrap{position:relative;height:8px;background:rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;}
+        .c-cnt-bar-wrap{position:relative;height:10px;background:rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;}
         .c-cnt-fill{height:100%;border-radius:8px;transition:width 0.3s,background 0.25s;background:var(--gold);}
         .c-cnt-fill.over{background:#e74c3c;}
         .c-cnt-fill.done{background:#27ae60;}
-        .c-cnt-msg{font-size:0.8rem;color:rgba(245,234,214,0.7);font-weight:600;margin-top:3px;}
+        .c-cnt-msg{font-size:0.85rem;color:rgba(245,234,214,0.75);font-weight:600;margin-top:3px;}
         .c-cnt-right{display:flex;gap:8px;align-items:center;}
-        .c-cnt-back{padding:14px 16px;border-radius:50px;background:transparent;border:2px solid rgba(201,153,58,0.3);color:var(--gold2);font-weight:900;font-size:0.85rem;cursor:pointer;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;transition:all 0.22s;min-height:52px;}
+        .c-cnt-back{padding:14px 16px;border-radius:50px;background:transparent;border:2px solid rgba(201,153,58,0.3);color:var(--gold2);font-weight:900;font-size:0.85rem;cursor:pointer;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;transition:all 0.22s;min-height:54px;}
         .c-cnt-back:hover{border-color:var(--gold);}
-        .c-cnt-next{padding:14px 22px;border-radius:50px;background:var(--gold);color:var(--choco-deep);font-weight:900;font-size:0.9rem;cursor:pointer;border:none;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;transition:all 0.22s;min-height:52px;}
+        .c-cnt-next{padding:14px 24px;border-radius:50px;background:var(--gold);color:var(--choco-deep);font-weight:900;font-size:0.9rem;cursor:pointer;border:none;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;transition:all 0.22s;min-height:54px;}
         .c-cnt-next:hover{background:var(--gold2);}
         .c-cnt-next:disabled{opacity:0.3;cursor:not-allowed;}
 
@@ -370,12 +467,11 @@
         .recap-sub{color:rgba(245,234,214,0.75);font-size:0.95rem;font-style:italic;margin-bottom:1.5rem;}
         .recap-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(201,153,58,0.1);}
         .recap-item:last-child{border-bottom:none;}
-        .recap-thumb{width:56px;height:56px;border-radius:12px;object-fit:cover;border:2px solid rgba(201,153,58,0.25);flex-shrink:0;}
+        .recap-thumb{width:60px;height:60px;border-radius:12px;object-fit:cover;border:2px solid rgba(201,153,58,0.25);flex-shrink:0;}
         .recap-info{flex:1;}
         .recap-name{font-size:1rem;font-weight:700;color:var(--parchment);}
         .recap-qty{font-family:'Josefin Sans',sans-serif;font-size:0.85rem;color:var(--gold);opacity:0.8;margin-top:2px;direction:ltr;unicode-bidi:embed;}
         .recap-sub-total{font-family:'Josefin Sans',sans-serif;font-weight:700;color:var(--gold2);font-size:1.15rem;direction:ltr;unicode-bidi:embed;}
-
         .recap-total-block{background:rgba(201,153,58,0.1);border:1.5px solid rgba(201,153,58,0.25);border-radius:14px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
         .recap-total-row{display:flex;justify-content:space-between;align-items:center;}
         .recap-total-lbl{font-size:0.85rem;text-transform:uppercase;letter-spacing:2px;color:rgba(245,234,214,0.8);font-weight:700;}
@@ -384,7 +480,6 @@
         .recap-discount-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(201,153,58,0.15);}
         .recap-discount-lbl{font-size:0.82rem;color:#5dde87;font-weight:700;}
         .recap-discount-amt{font-family:'Josefin Sans',sans-serif;font-size:1.05rem;font-weight:700;color:#5dde87;direction:ltr;unicode-bidi:embed;}
-
         .recap-actions{display:flex;flex-direction:column;gap:12px;margin-top:1rem;}
         .recap-validate-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:20px;background:linear-gradient(135deg,var(--gold),#b8841a);color:var(--choco-deep);border:none;border-radius:14px;font-family:'Playfair Display',serif;font-weight:900;font-size:1.2rem;cursor:pointer;transition:all 0.25s;min-height:66px;}
         .recap-validate-btn:hover{background:linear-gradient(135deg,var(--gold2),var(--gold));transform:scale(1.01);}
@@ -400,14 +495,12 @@
         @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-70px) scale(1.5);}}
         .float-particle{position:fixed;pointer-events:none;z-index:9999;font-size:1.8rem;animation:floatUp 0.7s ease forwards;}
 
-        /* ─── Mobile tweaks ─── */
+        /* ─── Responsive mobile ─── */
         @media(max-width:480px){
-            html{font-size:17px;}
             .choco-hero-strip{padding:1.5rem 1rem 1rem;}
-            .c-panels-wrap{padding:0 0.75rem 5rem;}
-            .cc-img-wrap{height:150px;}
-            .box-num{font-size:2.4rem;}
-            .c-cnt-big{font-size:1.9rem;}
+            .c-panels-wrap{padding:0 0.75rem 7rem;}
+            .c-cnt-big{font-size:2rem;}
+            .box-num{font-size:4rem;}
         }
     </style>
 </head>
@@ -570,10 +663,9 @@
     </div>
 </div>
 
-<!-- ═══════════════════════ PAGE CHOCO — REDESIGNED ═══════════════════════ -->
+<!-- ═══════════════════════ PAGE CHOCO ═══════════════════════ -->
 <div class="page" id="page_choco">
 
-<!-- Sticky header -->
 <header class="choco-site-header">
     <button class="choco-back-btn" onclick="closeChocoPage()">← <span id="choco_back_lbl">Retour</span></button>
     <div class="choco-header-logo-wrap">
@@ -583,7 +675,6 @@
     <button class="lang-btn" onclick="toggleLang()" id="choco_lang_btn" style="font-size:0.85rem;padding:10px 16px;min-height:44px;">العربية</button>
 </header>
 
-<!-- Stepper -->
 <div class="c-stepper">
     <div class="c-stepper-inner">
         <div class="c-step-item active" id="csi1">
@@ -603,14 +694,12 @@
     </div>
 </div>
 
-<!-- Hero strip -->
 <div class="choco-hero-strip">
     <div class="choco-eyebrow" id="c_eyebrow">Nouvelle Collection</div>
     <h1 id="c_hero_h">Composer mon<br><em>Coffret Chocolat</em></h1>
     <p id="c_hero_sub">Sélectionnez votre format, puis choisissez vos chocolats artisanaux préférés.</p>
 </div>
 
-<!-- Panels -->
 <div class="c-panels-wrap">
 
     <!-- PANEL 1 -->
@@ -632,7 +721,7 @@
     <div class="c-panel" id="cpanel2">
         <div class="c-panel-title">
             <h2 id="cp2_h">Choisissez vos chocolats</h2>
-            <p id="cp2_sub">Appuyez sur <strong>+</strong> pour ajouter — le compteur vous guide en temps réel.</p>
+            <p id="cp2_sub">Appuyez sur <strong style="color:var(--gold2);">+</strong> pour ajouter — le compteur vous guide en temps réel.</p>
         </div>
         <div class="choco-grid" id="choco_grid"></div>
         <p class="c-err-msg" id="c_err2">Le total doit être exactement égal à la taille du coffret.</p>
@@ -670,7 +759,7 @@
 
 </div>
 
-<!-- Counter bar (step 2) -->
+<!-- Counter bar -->
 <div class="c-counter" id="c_counter" style="display:none;">
     <div class="c-cnt-left">
         <div class="c-cnt-nums">
@@ -771,10 +860,10 @@ const CHOCO_DATA = {
       {id:"speculoos",name:"Spéculoos Caramel",desc:"Biscuit spéculoos fondant dans un écrin de chocolat caramel.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
     ],
     box_sizes:[
-      {size:6,  price_per:280, label:"pièces",  badge:"",              discount:0},
-      {size:12, price_per:265, label:"pièces",  badge:"Populaire",     discount:0},
-      {size:20, price_per:250, label:"pièces",  badge:"-5%",           discount:0.05},
-      {size:30, price_per:235, label:"pièces",  badge:"Meilleur Prix", discount:0.10},
+      {size:6,  label:"pièces",  badge:"",              discount:0},
+      {size:12, label:"pièces",  badge:"Populaire",     discount:0},
+      {size:20, label:"pièces",  badge:"-5%",           discount:0.05},
+      {size:30, label:"pièces",  badge:"Meilleur Prix", discount:0.10},
     ]
   },
   ar:{
@@ -790,10 +879,10 @@ const CHOCO_DATA = {
       {id:"speculoos",name:"كراميل مقرمش",desc:"بسكويت مقرمش في شوكولاتة كراميل.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
     ],
     box_sizes:[
-      {size:6,  price_per:280, label:"قطع",    badge:"",                discount:0},
-      {size:12, price_per:265, label:"قطعة",   badge:"الأكثر طلبًا",   discount:0},
-      {size:20, price_per:250, label:"قطعة",   badge:"-5%",             discount:0.05},
-      {size:30, price_per:235, label:"قطعة",   badge:"أفضل سعر",        discount:0.10},
+      {size:6,  label:"قطع",    badge:"",                discount:0},
+      {size:12, label:"قطعة",   badge:"الأكثر طلبًا",   discount:0},
+      {size:20, label:"قطعة",   badge:"-5%",             discount:0.05},
+      {size:30, label:"قطعة",   badge:"أفضل سعر",        discount:0.10},
     ]
   }
 };
@@ -1172,19 +1261,16 @@ async function handleOrder(e){
 }
 
 /* ════════════════════════════════
-   CHOCO PAGE — REDESIGNED LOGIC
+   CHOCO PAGE LOGIC
 ════════════════════════════════ */
 
-/* ── Step navigation ── */
 function chocoGoToStep(step){
     const T=I18N[currentLang];
-    // validate step 1
     if(step>1&&!selectedBoxSize){
         document.getElementById('c_err1').style.display='block';
         return;
     }
     document.getElementById('c_err1').style.display='none';
-    // validate step 2
     if(step>2){
         const total=getChocoTotal();
         if(total!==selectedBoxSize){
@@ -1197,11 +1283,9 @@ function chocoGoToStep(step){
         renderRecap();
     }
     chocoStep=step;
-    // panels
     ['cpanel1','cpanel2','cpanel3'].forEach((id,i)=>{
         document.getElementById(id).classList.toggle('active',i+1===step);
     });
-    // stepper UI
     [1,2,3].forEach(i=>{
         const item=document.getElementById('csi'+i);
         const circle=document.getElementById('csc'+i);
@@ -1213,33 +1297,27 @@ function chocoGoToStep(step){
         const conn=document.getElementById('csconn'+i);
         if(conn)conn.classList.toggle('done',i<step);
     });
-    // counter bar
     document.getElementById('c_counter').style.display=step===2?'grid':'none';
     window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* ── Box sizes ── */
+/* ── Box sizes — SANS PRIX ── */
 function renderBoxSizes(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
     document.getElementById('box_grid_container').innerHTML=data.box_sizes.map(b=>{
-        const baseTotal=b.size*b.price_per;
-        const discounted=Math.round(baseTotal*(1-b.discount));
-        const savings=baseTotal-discounted;
-        let priceHtml='';
-        if(b.discount>0){
-            priceHtml=`<div class="box-price-orig">${baseTotal.toLocaleString()} ${T.c_da}</div>
-                       <div class="box-price">${discounted.toLocaleString()} ${T.c_da}</div>
-                       <div class="box-discount-pill">-${Math.round(b.discount*100)}% • -${savings} ${T.c_da}</div>`;
-        } else {
-            priceHtml=`<div class="box-price">${baseTotal.toLocaleString()} ${T.c_da}</div>`;
-        }
-        const badgeHtml=b.badge?`<span class="box-badge">${b.badge}</span>`:'';
+        /* Seulement: numéro + label + badge réduction (si applicable) — pas de prix */
+        const discountHtml = b.discount > 0
+            ? `<div class="box-discount-pill">-${Math.round(b.discount*100)}%</div>`
+            : '';
+        const badgeHtml = b.badge
+            ? `<span class="box-badge">${b.badge}</span>`
+            : '';
         return `<div class="box-card${selectedBoxSize===b.size?' selected':''}" onclick="selectBox(${b.size})">
             ${badgeHtml}
             <span class="box-check">✓</span>
             <div class="box-num">${b.size}</div>
             <div class="box-label">${b.label}</div>
-            ${priceHtml}
+            ${discountHtml}
         </div>`;
     }).join('');
 }
@@ -1250,7 +1328,6 @@ function selectBox(size){
     renderBoxSizes();
     renderChocoCards();
     updateCounter();
-    // Show a quick toast confirming format
     const T=I18N[currentLang];
     const data=CHOCO_DATA[currentLang];
     const box=data.box_sizes.find(b=>b.size===size);
@@ -1271,7 +1348,7 @@ function renderChocoCards(){
             <div class="cc-body">
                 <div class="cc-name">${c.name}</div>
                 <div class="cc-desc">${c.desc}</div>
-                <div class="cc-price">${c.price_per} ${T.c_da} / pièce</div>
+                <div class="cc-price">${c.price_per} ${T.c_da} / ${T.c_pieces==='pièces'?'pièce':'قطعة'}</div>
             </div>
             <div class="cc-qty">
                 <button class="cc-btn" id="ccminus_${c.id}" onclick="ccChange('${c.id}',-1)" ${qty===0?'disabled':''}>−</button>
@@ -1282,7 +1359,6 @@ function renderChocoCards(){
     }).join('');
 }
 
-/* ── Handle +/− with animation ── */
 function ccChange(id,delta){
     const T=I18N[currentLang];
     const total=getChocoTotal(),cur=chocoQuantities[id]||0,newQty=cur+delta;
@@ -1292,23 +1368,18 @@ function ccChange(id,delta){
         if(total>=selectedBoxSize){showChocoToast(T.c_toast_over,true);return;}
     }
     chocoQuantities[id]=newQty;
-
-    // Update num with bump animation
     const numEl=document.getElementById('ccnum_'+id);
     if(numEl){
         numEl.textContent=newQty;
         numEl.classList.remove('bump');
-        void numEl.offsetWidth;// reflow
+        void numEl.offsetWidth;
         numEl.classList.add('bump');
         setTimeout(()=>numEl.classList.remove('bump'),200);
     }
-    // Card selected state
     const card=document.getElementById('cccard_'+id);
     if(card) card.classList.toggle('selected',newQty>0);
-    // Minus button state
     const minusBtn=document.getElementById('ccminus_'+id);
     if(minusBtn) minusBtn.disabled=(newQty===0);
-
     if(delta>0) spawnParticle(id);
     updateCounter();
 }
@@ -1321,40 +1392,32 @@ function getBoxDiscount(){
     return box?box.discount:0;
 }
 
-/* ── Counter bar ── */
 function updateCounter(){
     const T=I18N[currentLang];
     const total=getChocoTotal(),cap=selectedBoxSize||0,pct=cap>0?Math.min(100,(total/cap)*100):0;
     const remaining=cap-total;
-
     const bigEl=document.getElementById('cnt_big');
     bigEl.textContent=total;
     bigEl.classList.toggle('over-limit',total>cap&&cap>0);
     bigEl.classList.toggle('exact',total===cap&&cap>0);
-
     document.getElementById('cnt_of').textContent=`/ ${cap} ${T.c_pieces}`;
-
     const fill=document.getElementById('cnt_fill');
     fill.style.width=pct+'%';
     fill.classList.toggle('over',total>cap&&cap>0);
     fill.classList.toggle('done',total===cap&&cap>0);
-
     let msg=T.c_cnt_select;
     if(cap>0&&total<cap) msg=`${remaining} ${T.c_cnt_remaining}`;
     if(total===cap&&cap>0) msg=T.c_cnt_done;
     if(total>cap&&cap>0) msg=T.c_cnt_over;
     document.getElementById('cnt_msg').textContent=msg;
-
     const nextBtn=document.getElementById('cnt_next_btn');
     if(nextBtn) nextBtn.disabled=(total!==cap||cap===0);
 }
 
-/* ── Recap ── */
 function renderRecap(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
     const items=data.chocolates.filter(c=>(chocoQuantities[c.id]||0)>0);
     let baseTotal=0;
-
     document.getElementById('recap_title').textContent=`🍫 ${currentLang==='fr'?'Coffret':'علبة'} ${selectedBoxSize} ${T.c_pieces}`;
     document.getElementById('recap_list').innerHTML=items.map(c=>{
         const qty=chocoQuantities[c.id],sub=qty*c.price_per;baseTotal+=sub;
@@ -1367,11 +1430,9 @@ function renderRecap(){
             <div class="recap-sub-total">${(qty*c.price_per).toLocaleString()} ${T.c_da}</div>
         </div>`;
     }).join('');
-
     const discount=getBoxDiscount();
     const savings=Math.round(baseTotal*discount);
     const final=baseTotal-savings;
-
     if(discount>0){
         document.getElementById('recap_orig_wrap').style.display='block';
         document.getElementById('recap_orig_val').textContent=`${baseTotal.toLocaleString()} ${T.c_da}`;
@@ -1385,7 +1446,6 @@ function renderRecap(){
     document.getElementById('recap_total_val').textContent=`${final.toLocaleString()} ${T.c_da}`;
 }
 
-/* ── Validate & transfer to order ── */
 function validateCoffret(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
     const items=data.chocolates.filter(c=>(chocoQuantities[c.id]||0)>0);
@@ -1396,27 +1456,23 @@ function validateCoffret(){
     const itemsStr=items.map(c=>`${chocoQuantities[c.id]}x ${c.name}`).join(', ');
     const boxLabel=currentLang==='fr'?`Coffret ${selectedBoxSize} pièces`:`علبة ${selectedBoxSize} قطعة`;
     const discInfo=discount>0?(currentLang==='fr'?` (-${Math.round(discount*100)}%)`:`(-${Math.round(discount*100)}%)`):'';
-
     cart.push({
         id:Date.now(),variantKey:`choco_box_${selectedBoxSize}_${Date.now()}`,
         productId:'choco_box',name:`🍫 ${T.choco_cart_name} (${boxLabel}${discInfo})`,
         variantName:itemsStr.length>80?itemsStr.slice(0,80)+'…':itemsStr,
         variant:`box_${selectedBoxSize}`,qty:1,price:priceTotal,originalPrice:discount>0?baseTotal:null,isChocoBox:true
     });
-
     const banner=document.getElementById('choco_transfer_banner');
     banner.style.display='block';
     document.getElementById('banner_title_txt').textContent=T.choco_banner_title;
     const discLine=discount>0?`<span style="color:#5dde87;font-weight:800;">🎉 ${currentLang==='fr'?`Réduction -${Math.round(discount*100)}% appliquée ! Économie : ${savings.toLocaleString()} DA`:`تخفيض -${Math.round(discount*100)}% مطبق! وفرت: ${savings.toLocaleString()} دج`}</span><br>`:'';
     document.getElementById('banner_detail_txt').innerHTML=`${T.choco_banner_msg}<br>${discLine}<strong style="color:var(--gold2);">${boxLabel} — ${priceTotal.toLocaleString()} ${T.c_da}</strong><br><small style="opacity:0.65;">${itemsStr}</small>`;
-
     const ta=document.getElementById('f_message');
     const discNote=discount>0?(currentLang==='fr'?`• Réduction -${Math.round(discount*100)}% : -${savings.toLocaleString()} DA\n`:`• تخفيض -${Math.round(discount*100)}%: -${savings.toLocaleString()} دج\n`):'';
     const note=currentLang==='fr'
         ?`🍫 COFFRET CHOCOLATS :\n• ${boxLabel}\n• Contenu : ${itemsStr}\n${discNote}• Total : ${priceTotal.toLocaleString()} DA\n\n`
         :`🍫 علبة شوكولاتة:\n• ${boxLabel}\n• المحتوى: ${itemsStr}\n${discNote}• الإجمالي: ${priceTotal.toLocaleString()} دج\n\n`;
     ta.value=note+ta.value;
-
     confetti({particleCount:150,spread:120,origin:{y:0.6}});
     showChocoToast(T.c_toast_add,false);
     setTimeout(()=>{
@@ -1425,7 +1481,6 @@ function validateCoffret(){
     },1500);
 }
 
-/* ── Helpers ── */
 function spawnParticle(id){
     const card=document.getElementById('cccard_'+id);if(!card)return;
     const rect=card.getBoundingClientRect();
