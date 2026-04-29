@@ -18,9 +18,11 @@
         [dir="rtl"]{font-family:'Amiri',Georgia,serif;}
         [dir="ltr"]{font-family:'Lora',Georgia,serif;}
         *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
         html{scroll-behavior:smooth;font-size:20px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;}
         @media(max-width:480px){html{font-size:18px;}}
         @media(min-width:1400px){html{font-size:22px;}}
+
         body{background:var(--burg);color:var(--white);line-height:1.7;overflow-x:hidden;opacity:0;animation:fadeIn 0.8s ease 0.1s forwards;}
         @keyframes fadeIn{to{opacity:1;}}
         h1,h2,h3,h4,.display{font-family:'Playfair Display',Georgia,serif;line-height:1.2;letter-spacing:-0.01em;}
@@ -48,207 +50,55 @@
         nav a:hover{color:var(--gold2);border-bottom-color:var(--gold);}
         .choco-nav-link{background:linear-gradient(135deg,#3b1a08,#1a0a00)!important;border:2px solid var(--gold)!important;color:var(--gold2)!important;padding:14px 26px!important;border-radius:50px!important;border-bottom:none!important;}
 
-        /* ══════════════════════════════════════
-           PROMO SLIDER
-        ══════════════════════════════════════ */
-        .promo-slider-section{
-            position:relative;overflow:hidden;
-            background:var(--dark);
-            border-bottom:2px solid rgba(201,153,58,0.3);
+        /* ══════════════════════════════════
+           ██ PROMO SLIDER ██
+        ══════════════════════════════════ */
+        .promo-slider{position:relative;overflow:hidden;background:var(--dark);border-bottom:2px solid rgba(201,153,58,0.3);}
+        .promo-track{display:flex;transition:transform 0.7s cubic-bezier(0.23,1,0.32,1);}
+        .promo-slide{min-width:100%;position:relative;overflow:hidden;}
+        .promo-slide-inner{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            min-height:420px;
+            align-items:stretch;
         }
-        .promo-track{
-            display:flex;
-            transition:transform 0.75s cubic-bezier(0.23,1,0.32,1);
-            will-change:transform;
+        @media(max-width:640px){
+            .promo-slide-inner{grid-template-columns:1fr;min-height:auto;}
         }
-        .promo-slide{
-            min-width:100%;
-            height:420px;
-            position:relative;
-            display:flex;
-            align-items:center;
-            overflow:hidden;
+        .promo-img-side{overflow:hidden;position:relative;}
+        .promo-img-side img{width:100%;height:100%;object-fit:cover;transition:transform 6s ease;}
+        .promo-slide.active .promo-img-side img{transform:scale(1.06);}
+        .promo-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,transparent 50%,rgba(45,2,2,0.7) 100%);}
+        @media(max-width:640px){
+            .promo-img-side{height:260px;}
+            .promo-img-overlay{background:linear-gradient(0deg,rgba(45,2,2,0.8) 0%,transparent 60%);}
         }
-        @media(max-width:600px){.promo-slide{height:340px;}}
-        @media(min-width:1100px){.promo-slide{height:480px;}}
-
-        /* Backgrounds per slide */
-        .ps-sable{background:linear-gradient(125deg,#2a1500 0%,#5c2e08 40%,#8b4513 70%,#2a1500 100%);}
-        .ps-new{background:linear-gradient(125deg,#0a0a1a 0%,#1a0a2e 40%,#2e1052 70%,#0a0a1a 100%);}
-        .ps-choco{background:linear-gradient(125deg,#0d0500 0%,#1a0800 40%,#3b1a08 70%,#0d0500 100%);}
-        .ps-livraison{background:linear-gradient(125deg,#021a08 0%,#05350e 40%,#0a5218 70%,#021a08 100%);}
-
-        /* Geometric deco elements */
-        .ps-deco{
-            position:absolute;inset:0;pointer-events:none;overflow:hidden;
+        .promo-content-side{
+            padding:3rem 3rem 3rem 2.5rem;
+            display:flex;flex-direction:column;justify-content:center;gap:1.2rem;
+            background:linear-gradient(135deg,var(--dark),var(--burg));
         }
-        .ps-deco::before{
-            content:'';position:absolute;
-            width:600px;height:600px;
-            border-radius:50%;
-            border:1.5px solid rgba(201,153,58,0.1);
-            top:-200px;right:-150px;
+        @media(max-width:640px){
+            .promo-content-side{padding:2rem 1.5rem;order:-1;}
         }
-        .ps-deco::after{
-            content:'';position:absolute;
-            width:400px;height:400px;
-            border-radius:50%;
-            border:1px solid rgba(201,153,58,0.07);
-            bottom:-180px;left:-100px;
-        }
-
-        /* Slide image */
-        .ps-img{
-            position:absolute;
-            right:0;top:0;bottom:0;
-            width:52%;
-            object-fit:cover;
-            opacity:0.55;
-            mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.6) 25%,black 60%);
-            -webkit-mask-image:linear-gradient(to right,transparent 0%,rgba(0,0,0,0.6) 25%,black 60%);
-            transition:transform 8s ease,opacity 0.5s;
-        }
-        [dir="rtl"] .ps-img{
-            left:0;right:auto;
-            mask-image:linear-gradient(to left,transparent 0%,rgba(0,0,0,0.6) 25%,black 60%);
-            -webkit-mask-image:linear-gradient(to left,transparent 0%,rgba(0,0,0,0.6) 25%,black 60%);
-        }
-        .promo-slide.ps-active .ps-img{transform:scale(1.06);}
-
-        @media(max-width:700px){
-            .ps-img{width:100%;opacity:0.25;mask-image:none;-webkit-mask-image:none;}
-        }
-
-        /* Content */
-        .ps-content{
-            position:relative;z-index:2;
-            padding:0 5% 0 6%;
-            max-width:620px;
-        }
-        [dir="rtl"] .ps-content{padding:0 6% 0 5%;}
-
-        .ps-eyebrow{
-            display:inline-flex;align-items:center;gap:8px;
-            background:rgba(201,153,58,0.15);
-            border:1.5px solid rgba(201,153,58,0.5);
-            border-radius:50px;
-            padding:8px 20px;
-            color:var(--gold2);
-            font-size:0.78rem;
-            font-weight:800;
-            letter-spacing:3px;
-            text-transform:uppercase;
-            margin-bottom:1.2rem;
-            opacity:0;transform:translateY(14px);
-            transition:opacity 0.5s 0.1s,transform 0.5s 0.1s;
-        }
-        .ps-active .ps-eyebrow{opacity:1;transform:translateY(0);}
-
-        .ps-title{
-            font-family:'Playfair Display',serif;
-            font-size:clamp(1.7rem,4.5vw,3rem);
-            color:var(--white);
-            line-height:1.2;
-            margin-bottom:0.9rem;
-            opacity:0;transform:translateY(18px);
-            transition:opacity 0.55s 0.22s,transform 0.55s 0.22s;
-        }
-        [dir="rtl"] .ps-title{font-family:'Amiri',serif;font-size:clamp(1.9rem,5vw,3.2rem);}
-        .ps-active .ps-title{opacity:1;transform:translateY(0);}
-        .ps-title em{color:var(--gold2);font-style:italic;}
-
-        .ps-desc{
-            font-size:clamp(0.95rem,2.2vw,1.15rem);
-            color:rgba(245,234,214,0.82);
-            line-height:1.75;
-            margin-bottom:1.6rem;
-            opacity:0;transform:translateY(14px);
-            transition:opacity 0.5s 0.34s,transform 0.5s 0.34s;
-        }
-        .ps-active .ps-desc{opacity:1;transform:translateY(0);}
-
-        .ps-cta{
-            display:inline-flex;align-items:center;gap:10px;
-            padding:16px 34px;
-            background:var(--gold);color:var(--dark);
-            border:none;border-radius:50px;
-            font-family:'Playfair Display',serif;
-            font-size:1.05rem;font-weight:900;
-            text-transform:uppercase;letter-spacing:1.5px;
-            cursor:pointer;
-            opacity:0;transform:translateY(14px);
-            transition:opacity 0.5s 0.44s,transform 0.5s 0.44s,background 0.25s,scale 0.2s;
-        }
-        .ps-active .ps-cta{opacity:1;transform:translateY(0);}
-        .ps-cta:hover{background:var(--gold2);scale:1.04;}
-
-        .ps-badge{
-            position:absolute;top:28px;left:5%;
-            background:linear-gradient(135deg,#c0392b,#962424);
-            color:white;font-size:0.75rem;font-weight:900;
-            padding:7px 18px;border-radius:50px;
-            text-transform:uppercase;letter-spacing:1.5px;
-            box-shadow:0 4px 16px rgba(192,57,43,0.5);
-            z-index:5;
-        }
-        [dir="rtl"] .ps-badge{left:auto;right:5%;}
-
-        /* Flavor dots */
-        .ps-flavors{
-            display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.4rem;
-            opacity:0;transform:translateY(10px);
-            transition:opacity 0.5s 0.38s,transform 0.5s 0.38s;
-        }
-        .ps-active .ps-flavors{opacity:1;transform:translateY(0);}
-        .ps-flavor-pill{
-            background:rgba(255,255,255,0.08);
-            border:1px solid rgba(201,153,58,0.3);
-            color:rgba(245,234,214,0.85);
-            padding:5px 14px;border-radius:50px;
-            font-size:0.76rem;font-weight:600;
-            letter-spacing:0.5px;
-        }
-
-        /* ── Dots navigation ── */
-        .ps-dots{
-            position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
-            display:flex;gap:8px;z-index:10;
-        }
-        .ps-dot{
-            width:8px;height:8px;border-radius:50%;
-            background:rgba(201,153,58,0.3);
-            border:1.5px solid rgba(201,153,58,0.5);
-            cursor:pointer;
-            transition:all 0.3s;
-        }
-        .ps-dot.active{width:28px;border-radius:6px;background:var(--gold);}
-
-        /* ── Arrow buttons ── */
-        .ps-arrow{
-            position:absolute;top:50%;transform:translateY(-50%);
-            background:rgba(201,153,58,0.12);
-            border:1.5px solid rgba(201,153,58,0.4);
-            color:var(--gold2);
-            width:52px;height:52px;border-radius:50%;
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.3rem;cursor:pointer;z-index:10;
-            transition:background 0.25s,border-color 0.25s;
-        }
-        .ps-arrow:hover{background:rgba(201,153,58,0.28);border-color:var(--gold);}
-        .ps-arrow-prev{left:16px;}
-        .ps-arrow-next{right:16px;}
-        @media(max-width:480px){.ps-arrow{width:42px;height:42px;font-size:1rem;}}
-
-        /* ── Progress bar ── */
-        .ps-progress{
-            position:absolute;bottom:0;left:0;right:0;
-            height:3px;background:rgba(201,153,58,0.15);z-index:10;
-        }
-        .ps-progress-fill{
-            height:100%;background:var(--gold);
-            width:0%;
-            transition:width 4.5s linear;
-        }
+        .promo-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,153,58,0.15);border:1.5px solid rgba(201,153,58,0.4);border-radius:50px;padding:7px 18px;color:var(--gold2);font-size:0.8rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;width:fit-content;}
+        .promo-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3.5vw,2.6rem);color:var(--white);line-height:1.2;}
+        [dir="rtl"] .promo-title{font-family:'Amiri',serif;font-size:clamp(1.8rem,4vw,3rem);}
+        .promo-title em{color:var(--gold2);font-style:italic;}
+        .promo-desc{font-size:1rem;color:rgba(245,234,214,0.82);line-height:1.75;max-width:380px;}
+        [dir="rtl"] .promo-desc{font-family:'Amiri',serif;font-size:1.1rem;}
+        .promo-badge{display:inline-flex;align-items:center;gap:10px;background:var(--gold);color:var(--dark);padding:10px 22px;border-radius:50px;font-weight:900;font-size:0.92rem;text-transform:uppercase;letter-spacing:1.5px;width:fit-content;cursor:pointer;transition:background 0.25s,transform 0.2s;border:none;}
+        .promo-badge:hover{background:var(--gold2);transform:scale(1.03);}
+        /* Dots */
+        .promo-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10;}
+        .promo-dot{width:28px;height:4px;border-radius:4px;background:rgba(201,153,58,0.3);cursor:pointer;transition:all 0.3s;}
+        .promo-dot.active{background:var(--gold);width:40px;}
+        /* Arrows */
+        .promo-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(201,153,58,0.15);border:2px solid rgba(201,153,58,0.4);color:var(--gold2);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:10;transition:background 0.25s,border-color 0.25s;backdrop-filter:blur(8px);}
+        .promo-arrow:hover{background:rgba(201,153,58,0.3);border-color:var(--gold);}
+        .promo-arrow.prev{left:14px;}
+        .promo-arrow.next{right:14px;}
+        @media(max-width:480px){.promo-arrow{display:none;}}
 
         /* ══ HERO ══ */
         .hero{padding:6rem 1.5rem 6rem;text-align:center;max-width:900px;margin:0 auto;}
@@ -270,41 +120,8 @@
         @media(min-width:1200px){.products-grid{grid-template-columns:repeat(4,1fr);}}
         .product-card{background:var(--white);border-radius:20px;overflow:hidden;border:1px solid rgba(201,153,58,0.18);box-shadow:0 6px 24px rgba(0,0,0,0.08);cursor:pointer;transition:transform 0.35s var(--r),box-shadow 0.35s var(--r),border-color 0.3s;display:flex;flex-direction:column;}
         .product-card:hover{transform:translateY(-6px);box-shadow:0 20px 48px rgba(74,4,4,0.14);border-color:var(--gold);}
-
-        /* ── Sablé featured card ── */
-        .product-card.sable-featured{
-            grid-column:span 1;
-            border:2px solid rgba(201,153,58,0.4);
-            position:relative;
-        }
-        @media(min-width:900px){.product-card.sable-featured{grid-column:span 2;}}
-        .sable-new-ribbon{
-            position:absolute;top:0;left:0;
-            background:linear-gradient(135deg,var(--gold),#b8841a);
-            color:var(--dark);
-            font-size:0.72rem;font-weight:900;
-            padding:7px 24px 7px 14px;
-            border-radius:0 0 20px 0;
-            text-transform:uppercase;letter-spacing:1.5px;
-            z-index:2;box-shadow:0 4px 14px rgba(0,0,0,0.2);
-        }
-        [dir="rtl"] .sable-new-ribbon{left:auto;right:0;border-radius:0 0 0 20px;padding:7px 14px 7px 24px;}
-
-        /* ── Sablé flavors strip on card ── */
-        .sable-flavors-strip{
-            display:flex;gap:6px;flex-wrap:wrap;
-            padding:0 1.5rem 1.2rem;
-        }
-        .sable-flavor-chip{
-            background:#fdf8f0;border:1px solid rgba(201,153,58,0.25);
-            color:var(--burg);padding:4px 12px;border-radius:50px;
-            font-size:0.78rem;font-weight:600;
-        }
-
         .product-img-wrap{height:260px;overflow:hidden;position:relative;}
         @media(min-width:520px){.product-img-wrap{height:280px;}}
-        .product-card.sable-featured .product-img-wrap{height:300px;}
-        @media(min-width:900px){.product-card.sable-featured .product-img-wrap{height:340px;}}
         .product-img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;}
         .product-card:hover .product-img{transform:scale(1.07);}
         .product-info{padding:1.75rem 1.5rem;flex-grow:1;display:flex;flex-direction:column;justify-content:space-between;gap:1.2rem;}
@@ -429,9 +246,9 @@
         .variant-details{transition:opacity 0.25s,transform 0.25s;}
         .variant-details.fading{opacity:0;transform:translateY(5px);}
 
-        /* ═══════════════════════════════════════
-           ██████  CHOCO PAGE ██████
-        ═══════════════════════════════════════ */
+        /* ══════════════════════════════════
+           CHOCO PAGE
+        ══════════════════════════════════ */
         #page_choco{background:var(--choco-deep);min-height:100vh;}
         .choco-site-header{position:sticky;top:0;z-index:100;background:rgba(26,10,0,0.97);backdrop-filter:blur(20px);border-bottom:2px solid rgba(201,153,58,0.25);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
         .choco-back-btn{display:flex;align-items:center;gap:8px;color:var(--gold2);font-weight:700;font-size:1rem;text-transform:uppercase;letter-spacing:1.5px;cursor:pointer;transition:opacity 0.25s;background:none;border:none;min-height:48px;}
@@ -461,14 +278,14 @@
         .c-panel-title{text-align:center;margin:2rem 0 1.5rem;}
         .c-panel-title h2{font-size:clamp(1.6rem,4vw,2.5rem);color:var(--gold2);margin-bottom:0.4rem;}
         .c-panel-title p{color:rgba(245,234,214,0.7);font-size:1rem;font-style:italic;}
+
+        /* Box sizes */
         .box-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;max-width:800px;margin:0 auto 2rem;}
         @media(min-width:520px){.box-grid{grid-template-columns:repeat(4,1fr);gap:1.5rem;}}
         .box-card{background:linear-gradient(160deg,rgba(59,26,8,0.7),rgba(20,8,0,0.9));border:2.5px solid rgba(201,153,58,0.2);border-radius:24px;padding:2.5rem 1rem 2rem;cursor:pointer;transition:all 0.3s var(--r);text-align:center;position:relative;overflow:hidden;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.5rem;}
         @media(min-width:520px){.box-card{min-height:200px;padding:3rem 1rem 2.5rem;}}
-        .box-card::after{content:'';position:absolute;inset:0;background:rgba(201,153,58,0.06);opacity:0;transition:opacity 0.3s;}
         .box-card:hover{border-color:rgba(201,153,58,0.6);transform:translateY(-5px);box-shadow:0 12px 40px rgba(0,0,0,0.4);}
         .box-card.selected{border-color:var(--gold);box-shadow:0 0 35px rgba(201,153,58,0.35),0 12px 40px rgba(0,0,0,0.4);background:linear-gradient(160deg,rgba(90,42,16,0.6),rgba(40,16,0,0.95));}
-        .box-card.selected::after{opacity:1;}
         .box-check{position:absolute;top:12px;right:14px;color:var(--gold);font-size:1.1rem;font-weight:900;opacity:0;transition:opacity 0.2s;}
         .box-card.selected .box-check{opacity:1;}
         .box-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--choco-deep);font-size:0.7rem;font-weight:900;padding:4px 14px;border-radius:0 0 12px 12px;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;}
@@ -482,6 +299,8 @@
         .step1-next-btn:hover{background:var(--gold2);transform:scale(1.03);}
         .step1-next-btn:disabled{opacity:0.35;cursor:not-allowed;transform:none;}
         .c-err-msg{color:#e74c3c;font-weight:700;font-size:0.95rem;text-align:center;margin:0.75rem auto;display:none;background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.3);border-radius:10px;padding:12px;max-width:400px;}
+
+        /* Choco grid */
         .choco-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-bottom:1rem;}
         @media(min-width:380px){.choco-grid{grid-template-columns:repeat(2,1fr);gap:1rem;}}
         @media(min-width:700px){.choco-grid{grid-template-columns:repeat(3,1fr);gap:1.3rem;}}
@@ -507,7 +326,21 @@
         .cc-desc{font-size:0.82rem;color:rgba(245,234,214,0.78);font-style:italic;line-height:1.55;display:block;margin-bottom:0.4rem;}
         @media(min-width:380px){.cc-desc{font-size:0.86rem;}}
         @media(min-width:560px){.cc-desc{font-size:0.9rem;}}
-        .cc-price{font-family:'Josefin Sans',sans-serif;font-size:0.9rem;color:var(--gold);font-weight:700;margin-top:3px;direction:ltr;unicode-bidi:embed;}
+        /* FIX: prix toujours en LTR même en mode RTL */
+        .cc-price{
+            font-family:'Josefin Sans',sans-serif;
+            font-size:0.9rem;
+            color:var(--gold);
+            font-weight:700;
+            margin-top:3px;
+            direction:ltr !important;
+            unicode-bidi:embed;
+            text-align:left;
+        }
+        [dir="rtl"] .cc-price{
+            text-align:right;
+            direction:ltr !important;
+        }
         .cc-qty{display:flex;align-items:center;justify-content:space-between;background:rgba(0,0,0,0.55);border-top:1.5px solid rgba(201,153,58,0.2);padding:12px 12px;margin-top:10px;gap:8px;}
         .cc-btn{width:56px;height:56px;min-width:56px;border-radius:14px;border:2px solid rgba(201,153,58,0.3);background:rgba(201,153,58,0.12);color:var(--gold2);font-size:1.9rem;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.18s;-webkit-tap-highlight-color:transparent;}
         .cc-btn:hover{background:rgba(201,153,58,0.28);border-color:var(--gold);}
@@ -515,6 +348,8 @@
         .cc-btn:disabled{opacity:0.2;cursor:default;transform:none;}
         .cc-num{font-family:'Josefin Sans',sans-serif;font-size:2rem;font-weight:700;color:var(--white);min-width:38px;text-align:center;transition:transform 0.15s,color 0.15s;}
         .cc-num.bump{transform:scale(1.4);color:var(--gold2);}
+
+        /* Sticky counter */
         .c-counter{position:sticky;bottom:0;z-index:50;background:rgba(8,3,0,0.97);backdrop-filter:blur(20px);border-top:2px solid rgba(201,153,58,0.3);padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;}
         .c-cnt-left{display:flex;flex-direction:column;gap:6px;}
         .c-cnt-nums{display:flex;align-items:baseline;gap:8px;}
@@ -533,6 +368,8 @@
         .c-cnt-next{padding:14px 24px;border-radius:50px;background:var(--gold);color:var(--choco-deep);font-weight:900;font-size:0.9rem;cursor:pointer;border:none;text-transform:uppercase;letter-spacing:1.2px;white-space:nowrap;transition:all 0.22s;min-height:54px;}
         .c-cnt-next:hover{background:var(--gold2);}
         .c-cnt-next:disabled{opacity:0.3;cursor:not-allowed;}
+
+        /* Recap */
         .recap-box{background:linear-gradient(150deg,rgba(59,26,8,0.75),rgba(20,8,0,0.95));border:2px solid rgba(201,153,58,0.3);border-radius:24px;padding:2rem 1.5rem;max-width:640px;margin:0 auto;}
         .recap-box h3{font-size:1.8rem;color:var(--gold2);margin-bottom:0.3rem;}
         .recap-sub{color:rgba(245,234,214,0.75);font-size:0.95rem;font-style:italic;margin-bottom:1.5rem;}
@@ -561,7 +398,12 @@
         .choco-toast.error{background:#c0392b;border-color:#e74c3c;color:white;}
         @keyframes floatUp{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-70px) scale(1.5);}}
         .float-particle{position:fixed;pointer-events:none;z-index:9999;font-size:1.8rem;animation:floatUp 0.7s ease forwards;}
-        @media(max-width:480px){.choco-hero-strip{padding:1.5rem 1rem 1rem;}.c-panels-wrap{padding:0 0.75rem 7rem;}.c-cnt-big{font-size:2rem;}.box-num{font-size:4rem;}}
+        @media(max-width:480px){
+            .choco-hero-strip{padding:1.5rem 1rem 1rem;}
+            .c-panels-wrap{padding:0 0.75rem 7rem;}
+            .c-cnt-big{font-size:2rem;}
+            .box-num{font-size:4rem;}
+        }
     </style>
 </head>
 <body>
@@ -576,6 +418,7 @@
     <div class="divider-line"><span></span><span class="divider-star">✦</span><span></span></div>
     <span class="site-tagline" id="tagline_txt">L'Excellence de la Pâtisserie Algérienne</span>
     <nav>
+        <a onclick="scrollToAnchor('promo_slider_section')" data-key="nav0">Nouveautés</a>
         <a onclick="scrollToAnchor('produits')" data-key="nav1">Nos Créations</a>
         <a onclick="scrollToAnchor('qualite')" data-key="nav2">Nos Gammes</a>
         <a onclick="scrollToAnchor('commande')" data-key="nav3">Commander</a>
@@ -583,114 +426,65 @@
     </nav>
 </header>
 
-<!-- ══════════════════════════════════════════
-     PROMO SLIDER — after header
-══════════════════════════════════════════ -->
-<div class="promo-slider-section" id="promo_slider_section">
+<!-- ══════════════════════════════════
+     PROMO SLIDER
+══════════════════════════════════ -->
+<div id="promo_slider_section" class="promo-slider">
     <div class="promo-track" id="promo_track">
-
-        <!-- SLIDE 1: Sablés Collection -->
-        <div class="promo-slide ps-sable ps-active" id="ps0">
-            <div class="ps-deco"></div>
-            <span class="ps-badge" id="ps_badge_0">Nouveauté 2026</span>
-            <img class="ps-img"
-                 src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png"
-                 alt="Sablés"
-                 onerror="this.src='https://via.placeholder.com/800x480/5c2e08/e8c86d?text=Sablés'">
-            <div class="ps-content">
-                <div class="ps-eyebrow" id="ps_eyebrow_0">✦ Nouvelle Collection</div>
-                <h2 class="ps-title" id="ps_title_0">Découvrez nos<br><em>Sablés Artisanaux</em></h2>
-                <div class="ps-flavors" id="ps_flavors_0">
-                    <span class="ps-flavor-pill">Vanille</span>
-                    <span class="ps-flavor-pill">Chocolat</span>
-                    <span class="ps-flavor-pill">Citron</span>
-                    <span class="ps-flavor-pill">Pistache</span>
-                    <span class="ps-flavor-pill">Coco</span>
-                    <span class="ps-flavor-pill">+3 saveurs</span>
+        <!-- Slide 1 : Sablés -->
+        <div class="promo-slide active" id="pslide_0">
+            <div class="promo-slide-inner">
+                <div class="promo-img-side">
+                    <img src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png" alt="Sablés MyZina" onerror="this.style.display='none'">
+                    <div class="promo-img-overlay"></div>
                 </div>
-                <p class="ps-desc" id="ps_desc_0">8 saveurs artisanales, fondantes et généreuses. Fabriquées chaque matin avec du beurre frais et des ingrédients sélectionnés.</p>
-                <button class="ps-cta" onclick="openProduct('sable_collection')" id="ps_cta_0">Découvrir les Sablés →</button>
+                <div class="promo-content-side">
+                    <div class="promo-eyebrow" id="ps0_eyebrow">✨ Nouveauté</div>
+                    <div class="promo-title" id="ps0_title">Les Sablés <em>MyZina</em><br>8 Saveurs Inédites</div>
+                    <p class="promo-desc" id="ps0_desc">Fondants, délicatement dorés, nos sablés artisanaux revisitent les grands classiques avec des garnitures généreuses. Disponibles en 8 variantes exclusives.</p>
+                    <button class="promo-badge" onclick="scrollToAnchor('produits')" id="ps0_cta">Découvrir les Sablés →</button>
+                </div>
             </div>
         </div>
-
-        <!-- SLIDE 2: Coffrets Chocolats -->
-        <div class="promo-slide ps-choco" id="ps1">
-            <div class="ps-deco"></div>
-            <img class="ps-img"
-                 src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generer%20photo%20affiche%20bniwen%20sans%20ecritures%20230901.png"
-                 alt="Chocolats"
-                 onerror="this.src='https://via.placeholder.com/800x480/1a0a00/c9993a?text=Chocolats'">
-            <div class="ps-content">
-                <div class="ps-eyebrow" id="ps_eyebrow_1">🍫 Exclusivité</div>
-                <h2 class="ps-title" id="ps_title_1">Coffrets Chocolats<br><em>sur mesure</em></h2>
-                <div class="ps-flavors" id="ps_flavors_1">
-                    <span class="ps-flavor-pill">6 pièces</span>
-                    <span class="ps-flavor-pill">12 pièces</span>
-                    <span class="ps-flavor-pill">20 pièces</span>
-                    <span class="ps-flavor-pill">30 pièces</span>
+        <!-- Slide 2 : Coffrets Chocolats -->
+        <div class="promo-slide" id="pslide_1">
+            <div class="promo-slide-inner">
+                <div class="promo-img-side">
+                    <img src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generer%20photo%20affiche%20bniwen%20sans%20ecritures%20230901.png" alt="Coffrets Chocolats" onerror="this.style.display='none'">
+                    <div class="promo-img-overlay"></div>
                 </div>
-                <p class="ps-desc" id="ps_desc_1">Composez votre propre box parmi 9 variétés de chocolats artisanaux. Idéal en cadeau. Réductions jusqu'à -10% sur les grands coffrets.</p>
-                <button class="ps-cta" onclick="openChocoPage()" id="ps_cta_1">Composer mon Coffret →</button>
+                <div class="promo-content-side">
+                    <div class="promo-eyebrow" id="ps1_eyebrow">🍫 Collection Exclusive</div>
+                    <div class="promo-title" id="ps1_title">Coffrets <em>Chocolats</em><br>Artisanaux</div>
+                    <p class="promo-desc" id="ps1_desc">Composez votre propre box de 6 à 30 chocolats premium. 9 saveurs uniques, des réductions jusqu'à -10% pour les grands coffrets.</p>
+                    <button class="promo-badge" onclick="openChocoPage()" id="ps1_cta">Composer mon Coffret →</button>
+                </div>
             </div>
         </div>
-
-        <!-- SLIDE 3: Livraison Alger -->
-        <div class="promo-slide ps-livraison" id="ps2">
-            <div class="ps-deco"></div>
-            <img class="ps-img"
-                 src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png"
-                 alt="Livraison"
-                 onerror="this.src='https://via.placeholder.com/800x480/05350e/c9993a?text=Livraison'">
-            <div class="ps-content">
-                <div class="ps-eyebrow" id="ps_eyebrow_2">📦 Service Premium</div>
-                <h2 class="ps-title" id="ps_title_2">Livraison rapide<br><em>à Alger</em></h2>
-                <div class="ps-flavors" id="ps_flavors_2">
-                    <span class="ps-flavor-pill">🏙 Alger 450 DA</span>
-                    <span class="ps-flavor-pill">🗺 Autres 800 DA</span>
+        <!-- Slide 3 : Prestige -->
+        <div class="promo-slide" id="pslide_2">
+            <div class="promo-slide-inner">
+                <div class="promo-img-side">
+                    <img src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png" alt="Prestige MyZina" onerror="this.style.display='none'">
+                    <div class="promo-img-overlay"></div>
                 </div>
-                <p class="ps-desc" id="ps_desc_2">Vos douceurs emballées avec soin et livrées dans les meilleures conditions. Commandez avant 14h pour une livraison le jour même.</p>
-                <button class="ps-cta" onclick="scrollToAnchor('commande')" id="ps_cta_2">Commander Maintenant →</button>
+                <div class="promo-content-side">
+                    <div class="promo-eyebrow" id="ps2_eyebrow">👑 Gamme Prestige</div>
+                    <div class="promo-title" id="ps2_title">L'Art de la <em>Pâtisserie</em><br>Algérienne</div>
+                    <p class="promo-desc" id="ps2_desc">Amandes extra-fines, miel de montagne et finitions artisanales. Chaque pièce est façonnée à la main selon les traditions ancestrales algériennes.</p>
+                    <button class="promo-badge" onclick="scrollToAnchor('qualite')" id="ps2_cta">Notre Gamme Prestige →</button>
+                </div>
             </div>
         </div>
-
-        <!-- SLIDE 4: Savoir-faire -->
-        <div class="promo-slide ps-new" id="ps3">
-            <div class="ps-deco"></div>
-            <img class="ps-img"
-                 src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png"
-                 alt="Artisanat"
-                 onerror="this.src='https://via.placeholder.com/800x480/1a0a2e/c9993a?text=Prestige'">
-            <div class="ps-content">
-                <div class="ps-eyebrow" id="ps_eyebrow_3">👑 Prestige</div>
-                <h2 class="ps-title" id="ps_title_3">L'Art de la<br><em>Pâtisserie Algérienne</em></h2>
-                <div class="ps-flavors" id="ps_flavors_3">
-                    <span class="ps-flavor-pill">Classique</span>
-                    <span class="ps-flavor-pill">Prestige</span>
-                    <span class="ps-flavor-pill">Gamme Chocolats</span>
-                </div>
-                <p class="ps-desc" id="ps_desc_3">Recettes familiales transmises de génération en génération. Ingrédients de première qualité, façonnés avec amour chaque jour.</p>
-                <button class="ps-cta" onclick="scrollToAnchor('qualite')" id="ps_cta_3">Nos Gammes →</button>
-            </div>
-        </div>
-
-    </div><!-- /promo-track -->
-
-    <!-- Arrows -->
-    <button class="ps-arrow ps-arrow-prev" onclick="sliderPrev()" aria-label="Précédent">‹</button>
-    <button class="ps-arrow ps-arrow-next" onclick="sliderNext()" aria-label="Suivant">›</button>
-
-    <!-- Dots -->
-    <div class="ps-dots" id="ps_dots">
-        <div class="ps-dot active" onclick="sliderGoTo(0)"></div>
-        <div class="ps-dot" onclick="sliderGoTo(1)"></div>
-        <div class="ps-dot" onclick="sliderGoTo(2)"></div>
-        <div class="ps-dot" onclick="sliderGoTo(3)"></div>
     </div>
-
-    <!-- Progress -->
-    <div class="ps-progress"><div class="ps-progress-fill" id="ps_progress"></div></div>
+    <button class="promo-arrow prev" onclick="sliderMove(-1)">‹</button>
+    <button class="promo-arrow next" onclick="sliderMove(1)">›</button>
+    <div class="promo-dots" id="promo_dots">
+        <div class="promo-dot active" onclick="sliderGo(0)"></div>
+        <div class="promo-dot" onclick="sliderGo(1)"></div>
+        <div class="promo-dot" onclick="sliderGo(2)"></div>
+    </div>
 </div>
-<!-- /PROMO SLIDER -->
 
 <div class="hero">
     <h2 id="hero_h">L'Art des Gâteaux<br>Traditionnels Algériens</h2>
@@ -712,9 +506,9 @@
         <p style="color:rgba(245,234,214,0.7)" id="qual_p">Deux expériences adaptées à vos exigences</p>
     </div>
     <div class="quality-grid">
-        <div class="quality-card"><span class="q-icon">🌸</span><div class="q-name" id="q1_n">Classique</div><div class="q-desc" id="q1_d">L'authenticité pure. Recettes familiales transmises et saveurs équilibrées.</div></div>
-        <div class="quality-card" style="border:2px solid var(--gold);"><span class="q-icon">👑</span><div class="q-name" id="q2_n">Prestige</div><div class="q-desc" id="q2_d">Le luxe ultime. Amandes extra-fines, miel de montagne pur et finitions dorées.</div></div>
-        <div class="quality-card" style="border:2px solid rgba(201,153,58,0.5);background:rgba(59,26,8,0.35);"><span class="q-icon">🍫</span><div class="q-name" id="q3_n">Coffrets Chocolats</div><div class="q-desc" id="q3_d">Nouvelle collection. Composez votre box de 6, 12, 20 ou 30 chocolats artisanaux.</div></div>
+        <div class="quality-card"><span class="q-icon">🌸</span><div class="q-name" id="q1_n">Classique</div><div class="q-desc" id="q1_d">L'authenticité pure. Recettes familiales transmises et saveurs équilibrées pour vos moments quotidiens.</div></div>
+        <div class="quality-card" style="border:2px solid var(--gold);"><span class="q-icon">👑</span><div class="q-name" id="q2_n">Prestige</div><div class="q-desc" id="q2_d">Le luxe ultime. Amandes extra-fines, miel de montagne pur et finitions délicates à la feuille d'or.</div></div>
+        <div class="quality-card" style="border:2px solid rgba(201,153,58,0.5);background:rgba(59,26,8,0.35);"><span class="q-icon">🍫</span><div class="q-name" id="q3_n">Coffrets Chocolats</div><div class="q-desc" id="q3_d">Nouvelle collection. Composez votre propre box de 6, 12, 20 ou 30 chocolats artisanaux. Idéal en cadeau.</div></div>
     </div>
 </section>
 
@@ -861,10 +655,12 @@
         <div class="c-panel-title"><h2 id="cp1_h">Choisissez votre format</h2><p id="cp1_sub">Chaque coffret est une expérience unique !</p></div>
         <div class="box-grid" id="box_grid_container"></div>
         <p class="c-err-msg" id="c_err1">Veuillez sélectionner un format pour continuer.</p>
-        <div class="step1-cta"><button class="step1-next-btn" id="step1_next_btn" onclick="chocoGoToStep(2)">Choisir mes chocolats <span style="font-size:1.3em;">→</span></button></div>
+        <div class="step1-cta">
+            <button class="step1-next-btn" id="step1_next_btn" onclick="chocoGoToStep(2)">Choisir mes chocolats <span style="font-size:1.3em;">→</span></button>
+        </div>
     </div>
     <div class="c-panel" id="cpanel2">
-        <div class="c-panel-title"><h2 id="cp2_h">Choisissez vos chocolats</h2><p id="cp2_sub">Appuyez sur <strong style="color:var(--gold2);">+</strong> pour ajouter.</p></div>
+        <div class="c-panel-title"><h2 id="cp2_h">Choisissez vos chocolats</h2><p id="cp2_sub">Appuyez sur <strong style="color:var(--gold2);">+</strong> pour ajouter — le compteur vous guide en temps réel.</p></div>
         <div class="choco-grid" id="choco_grid"></div>
         <p class="c-err-msg" id="c_err2">Le total doit être exactement égal à la taille du coffret.</p>
     </div>
@@ -896,7 +692,10 @@
 </div>
 <div class="c-counter" id="c_counter" style="display:none;">
     <div class="c-cnt-left">
-        <div class="c-cnt-nums"><span class="c-cnt-big" id="cnt_big">0</span><span class="c-cnt-of" id="cnt_of">/ 0 pièces</span></div>
+        <div class="c-cnt-nums">
+            <span class="c-cnt-big" id="cnt_big">0</span>
+            <span class="c-cnt-of" id="cnt_of">/ 0 pièces</span>
+        </div>
         <div class="c-cnt-bar-wrap"><div class="c-cnt-fill" id="cnt_fill" style="width:0%"></div></div>
         <div class="c-cnt-msg" id="cnt_msg">Sélectionnez vos chocolats</div>
     </div>
@@ -910,74 +709,42 @@
 <div class="choco-toast" id="choco_toast"></div>
 
 <script>
-/* ═══════════════════════════════
+/* ════════════════════════════════
    DATA
-═══════════════════════════════ */
+════════════════════════════════ */
 const WILAYAS = ["16 Alger"];
 
-/* ── Images sablés ── */
-const SABLE_IMGS = {
-    vanille:  'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',
-    chocolat: 'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
-    citron:   'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',
-    coco:     'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',
-    amande:   'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/LOUZIYA.png',
-    pistache: 'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_rendre%20la%20photo%20variante%20baklawa%20prestige%20avec%20pistache%20%20766352.png',
-    caramel:  'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
-    framboise:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_transformer%20au%20arayeshe%20couleur%20framboise%20rose%20claire%20avec%20une%20indication%20framboise%20737184.png',
-};
+/* Sablé — 8 variantes */
+const SABLE_VARIANTS = [
+    {key:'nature_vanille', fr:'Nature Vanille', ar:'فانيليا طبيعية',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:65, ingredients:{fr:['Farine T55','Beurre doux','Sucre glace','Vanille naturelle','Œuf'],ar:['دقيق فاخر','زبدة طازجة','سكر ناعم','فانيليا طبيعية','بيض']},nutrition:{calories:'230 kcal',sucre:'17 g',gras:'12 g'}},
+    {key:'chocolat_noir', fr:'Chocolat Noir', ar:'شوكولاتة داكنة',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:75, ingredients:{fr:['Farine','Beurre','Chocolat noir 70%','Sucre','Cacao en poudre'],ar:['دقيق','زبدة','شوكولاتة داكنة 70%','سكر','مسحوق الكاكاو']},nutrition:{calories:'260 kcal',sucre:'19 g',gras:'14 g'}},
+    {key:'amande_pistache', fr:'Amande & Pistache', ar:'لوز وفستق',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:90, prix_promo:80, ingredients:{fr:['Farine d\'amandes','Pistaches torréfiées','Beurre','Sucre glace','Fleur d\'oranger'],ar:['دقيق لوز','فستق محمص','زبدة','سكر ناعم','ماء زهر']},nutrition:{calories:'275 kcal',sucre:'18 g',gras:'16 g'}},
+    {key:'citron_pavot', fr:'Citron & Pavot', ar:'ليمون وبذور الخشخاش',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:70, ingredients:{fr:['Farine','Beurre','Zeste de citron','Graines de pavot','Sucre glace'],ar:['دقيق','زبدة','قشر ليمون','بذور الخشخاش','سكر ناعم']},nutrition:{calories:'240 kcal',sucre:'16 g',gras:'11 g'}},
+    {key:'caramel_noix', fr:'Caramel & Noix', ar:'كراميل وجوز',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:80, ingredients:{fr:['Farine','Beurre','Caramel maison','Noix concassées','Fleur de sel'],ar:['دقيق','زبدة','كراميل بيتي','جوز محطم','ملح البحر']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'14 g'}},
+    {key:'rose_framboise', fr:'Rose & Framboise', ar:'ورد وتوت أحمر',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:80, prix_promo:72, ingredients:{fr:['Farine','Beurre','Confiture framboise','Eau de rose','Sucre glace'],ar:['دقيق','زبدة','مربى توت أحمر','ماء الورد','سكر ناعم']},nutrition:{calories:'245 kcal',sucre:'20 g',gras:'11 g'}},
+    {key:'sesame_miel', fr:'Sésame & Miel', ar:'سمسم وعسل',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:70, ingredients:{fr:['Farine','Beurre','Miel d\'acacia','Graines de sésame grillées','Cannelle'],ar:['دقيق','زبدة','عسل أكاسيا','سمسم محمص','قرفة']},nutrition:{calories:'255 kcal',sucre:'21 g',gras:'12 g'}},
+    {key:'prestige_or', fr:'Prestige Feuille d\'Or', ar:'بريستيج ورق ذهب',
+     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+     prix:120, ingredients:{fr:['Farine T45','Beurre clarifié','Amandes de Californie','Miel Sidr','Feuille d\'or comestible'],ar:['دقيق فاخر','سمن مذاب','لوز كاليفورني','عسل سدر','ورق ذهب صالح للأكل']},nutrition:{calories:'295 kcal',sucre:'20 g',gras:'18 g'}},
+];
 
 const CATALOG = [
-  /* ★ SABLÉS — carte featured avec 8 variantes ★ */
-  {id:'sable_collection',
-   fr:'Sablés Artisanaux',ar:'سابلِي فاخر',
-   img:SABLE_IMGS.vanille,
-   featured:true,
-   flavors_fr:['Vanille','Chocolat','Citron','Coco','Amande','Pistache','Caramel','Framboise'],
-   flavors_ar:['فانيليا','شوكولاتة','ليمون','جوز الهند','لوز','فستق','كراميل','توت'],
-   variants:[
-     {key:'vanille',
-      fr:'Vanille Pure',ar:'فانيليا',
-      img:SABLE_IMGS.vanille,prix:55,
-      ingredients:{fr:['Beurre frais','Farine T55','Sucre glace','Vanille Bourbon','Sel fin'],ar:['زبدة طازجة','دقيق','سكر ناعم','فانيليا بوربون','ملح']},
-      nutrition:{calories:'210 kcal',sucre:'12 g',gras:'11 g'}},
-     {key:'chocolat',
-      fr:'Chocolat Intense',ar:'شوكولاتة',
-      img:SABLE_IMGS.chocolat,prix:60,
-      ingredients:{fr:['Beurre frais','Cacao noir 70%','Farine','Sucre','Œuf'],ar:['زبدة','كاكاو 70٪','دقيق','سكر','بيض']},
-      nutrition:{calories:'230 kcal',sucre:'14 g',gras:'13 g'}},
-     {key:'citron',
-      fr:'Citron Frais',ar:'ليمون',
-      img:SABLE_IMGS.citron,prix:55,
-      ingredients:{fr:['Beurre','Farine','Sucre glace','Zeste de citron','Jus de citron'],ar:['زبدة','دقيق','سكر ناعم','قشر ليمون','عصير ليمون']},
-      nutrition:{calories:'200 kcal',sucre:'11 g',gras:'10 g'}},
-     {key:'coco',
-      fr:'Noix de Coco',ar:'جوز الهند',
-      img:SABLE_IMGS.coco,prix:55,
-      ingredients:{fr:['Beurre','Farine','Noix de coco râpée','Sucre','Vanille'],ar:['زبدة','دقيق','جوز هند مبشور','سكر','فانيليا']},
-      nutrition:{calories:'215 kcal',sucre:'12 g',gras:'12 g'}},
-     {key:'amande',
-      fr:'Amande & Fleur d\'oranger',ar:'لوز وماء زهر',
-      img:SABLE_IMGS.amande,prix:65,
-      ingredients:{fr:['Beurre','Poudre d\'amandes','Farine','Fleur d\'oranger','Sucre glace'],ar:['زبدة','مسحوق لوز','دقيق','ماء زهر','سكر ناعم']},
-      nutrition:{calories:'235 kcal',sucre:'13 g',gras:'14 g'}},
-     {key:'pistache',
-      fr:'Pistache & Rose',ar:'فستق وورد',
-      img:SABLE_IMGS.pistache,prix:70,prix_promo:62,
-      ingredients:{fr:['Beurre','Pâte de pistache','Farine','Rose naturelle','Sucre glace'],ar:['زبدة','عجينة فستق','دقيق','ورد طبيعي','سكر ناعم']},
-      nutrition:{calories:'240 kcal',sucre:'13 g',gras:'15 g'}},
-     {key:'caramel',
-      fr:'Caramel Beurre Salé',ar:'كراميل مملح',
-      img:SABLE_IMGS.caramel,prix:65,prix_promo:58,
-      ingredients:{fr:['Beurre salé','Caramel maison','Farine','Sucre roux','Fleur de sel'],ar:['زبدة مملحة','كراميل بيتي','دقيق','سكر بني','ملح بحري']},
-      nutrition:{calories:'245 kcal',sucre:'16 g',gras:'14 g'}},
-     {key:'framboise',
-      fr:'Framboise & Rose',ar:'توت وورد',
-      img:SABLE_IMGS.framboise,prix:60,
-      ingredients:{fr:['Beurre','Confiture framboise','Farine','Pétales de rose','Sucre glace'],ar:['زبدة','مربى توت','دقيق','بتلات ورد','سكر ناعم']},
-      nutrition:{calories:'218 kcal',sucre:'14 g',gras:'11 g'}},
-   ]},
-  /* ── Existing products ── */
+  {id:'sable',fr:'Sablé Artisanal',ar:'سابلِي فاخر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+   variants: SABLE_VARIANTS},
   {id:'Makrout pâte amande',fr:'Makrout pâte amande',ar:'مقروط بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',variants:[
     {key:'Makrout pâte amande',fr:'Makrout pâte amande',ar:'مقروط بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',prix:140,ingredients:{fr:['Semoule fine','Miel d\'acacia','Beurre','Cannelle','Graines de sésame'],ar:['سميدة ناعمة','عسل أكاسيا','زبدة','قرفة','سمسم']},nutrition:{calories:'320 kcal',sucre:'30 g',gras:'14 g'}},
   ]},
@@ -1008,7 +775,7 @@ const CATALOG = [
   ]},
   {id:'mchawek',fr:'Mchawek',ar:'مشوك باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',variants:[
     {key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:110,ingredients:{fr:['Pâte d\'amandes','Blancs d\'œufs','Sucre','Colorant naturel'],ar:['عجينة لوز','بياض بيض','سكر','صبغة طبيعية']},nutrition:{calories:'280 kcal',sucre:'26 g',gras:'10 g'}},
-    {key:'prestige',fr:'Prestige',ar:'بريستيج',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:160,ingredients:{fr:['Amandes de Californie','Blancs d\'œufs frais','Sucre glace','Extrait de pistache'],ar:['لوز كاليفورني','بياض بيض طازج','سكر ناعم','خلاصة فستق']},nutrition:{calories:'295 kcal',sucre:'28 g',gras:'12 g'}}
+    {key:'prestige',fr:'Prestige',ar:'بريستيج',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:160,ingredients:{fr:['Amandes de Californie','Blancs d\'œufs frais','Sucre glace','Extrait de pistache','Rose naturelle'],ar:['لوز كاليفورني','بياض بيض طازج','سكر ناعم','خلاصة فستق','ورد طبيعي']},nutrition:{calories:'295 kcal',sucre:'28 g',gras:'12 g'}}
   ]},
   {id:'ghribia',fr:'Ghribia',ar:'غريبية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',variants:[
     {key:'nature',fr:'Nature',ar:'طبيعية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},
@@ -1018,6 +785,19 @@ const CATALOG = [
     {key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:90,ingredients:{fr:['Beurre','Farine','Chocolat noir','Sucre','Œuf'],ar:['زبدة','دقيق','شوكولاتة داكنة','سكر','بيض']},nutrition:{calories:'260 kcal',sucre:'20 g',gras:'14 g'}},
     {key:'nature',fr:'Nature Vanille',ar:'فانيليا طبيعية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,ingredients:{fr:['Beurre','Farine','Vanille naturelle','Sucre glace'],ar:['زبدة','دقيق','فانيليا طبيعية','سكر ناعم']},nutrition:{calories:'240 kcal',sucre:'17 g',gras:'13 g'}},
     {key:'prestige',fr:'Prestige Caramel',ar:'كراميل فاخر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:140,ingredients:{fr:['Beurre clarifié','Farine T45','Caramel fleur de sel','Chocolat belge'],ar:['سمن مذاب','دقيق فاخر','كراميل بملح البحر','شوكولاتة بلجيكية']},nutrition:{calories:'300 kcal',sucre:'24 g',gras:'17 g'}}
+  ]},
+  {id:'mini_cake',fr:'Mini Cake',ar:'ميني كيك',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',variants:[
+    {key:'citron',fr:'Citron',ar:'بالليمون',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:90,ingredients:{fr:['Farine','Œufs','Beurre','Citron','Sucre'],ar:['دقيق','بيض','زبدة','ليمون','سكر']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'13 g'}},
+    {key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/madelinchocolati.png',prix:100,prix_promo:90,ingredients:{fr:['Farine','Œufs','Beurre','Chocolat noir 70%','Crème'],ar:['دقيق','بيض','زبدة','شوكولاتة 70٪','كريمة']},nutrition:{calories:'310 kcal',sucre:'26 g',gras:'16 g'}},
+    {key:'prestige',fr:'Prestige Fruits Rouges',ar:'بريستيج فواكه حمراء',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:140,ingredients:{fr:['Farine T55','Œufs bio','Beurre clarifié','Fraises','Framboises','Myrtilles'],ar:['دقيق فاخر','بيض عضوي','سمن','فراولة','توت','عنب بري']},nutrition:{calories:'290 kcal',sucre:'24 g',gras:'14 g'}}
+  ]},
+  {id:'petit_four',fr:'Petit Four',ar:'بيتي فور',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',variants:[
+    {key:'assortis',fr:'Assortis',ar:'متنوع',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:90,ingredients:{fr:['Pâte sablée','Ganache chocolat','Confiture fraise','Amandes','Sucre glace'],ar:['عجينة هشة','غاناش شوكولاتة','مربى فراولة','لوز','سكر ناعم']},nutrition:{calories:'250 kcal',sucre:'20 g',gras:'13 g'}},
+    {key:'prestige',fr:'Prestige',ar:'بريستيج',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:140,ingredients:{fr:['Pâte feuilletée','Ganache Valrhona','Gelée fruits exotiques','Pistaches','Feuille d\'or comestible'],ar:['عجينة مورقة','غاناش فالرونا','هلام فواكه استوائية','فستق','ورق ذهب صالح للأكل']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'15 g'}}
+  ]},
+  {id:'pomme_amande',fr:'Pomme Amande',ar:'حلوى التفاح بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',variants:[
+    {key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:90,ingredients:{fr:['Pâte d\'amandes','Colorant vert','Sucre','Clou de girofle'],ar:['عجينة لوز','صبغة خضراء','سكر','قرنفل']},nutrition:{calories:'265 kcal',sucre:'24 g',gras:'11 g'}},
+    {key:'prestige',fr:'Prestige Pistache',ar:'بريستيج بالفستق',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:140,ingredients:{fr:['Pâte d\'amandes premium','Poudre de pistache','Colorant naturel','Rose','Sucre glace'],ar:['عجينة لوز ممتازة','مسحوق فستق','صبغة طبيعية','ورد','سكر ناعم']},nutrition:{calories:'280 kcal',sucre:'26 g',gras:'13 g'}}
   ]},
   {id:'araysh',fr:'Arayech',ar:'عرايش',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',variants:[
     {key:'Arayech',fr:'Arayech',ar:'عرايش',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',prix:140,ingredients:{fr:['Semoule fine','Miel d\'acacia','Beurre','Cannelle','Graines de sésame'],ar:['سميدة ناعمة','عسل أكاسيا','زبدة','قرفة','سمسم']},nutrition:{calories:'320 kcal',sucre:'30 g',gras:'14 g'}},
@@ -1039,10 +819,10 @@ const CHOCO_DATA = {
       {id:"speculoos",name:"Spéculoos Caramel",desc:"Biscuit spéculoos fondant dans un écrin de chocolat caramel.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
     ],
     box_sizes:[
-      {size:6,label:"pièces",badge:"",discount:0},
-      {size:12,label:"pièces",badge:"Populaire",discount:0},
-      {size:20,label:"pièces",badge:"-5%",discount:0.05},
-      {size:30,label:"pièces",badge:"Meilleur Prix",discount:0.10},
+      {size:6,  label:"pièces",  badge:"",              discount:0},
+      {size:12, label:"pièces",  badge:"Populaire",     discount:0},
+      {size:20, label:"pièces",  badge:"-5%",           discount:0.05},
+      {size:30, label:"pièces",  badge:"Meilleur Prix", discount:0.10},
     ]
   },
   ar:{
@@ -1058,10 +838,10 @@ const CHOCO_DATA = {
       {id:"speculoos",name:"كراميل مقرمش",desc:"بسكويت مقرمش في شوكولاتة كراميل.",img:"https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_remouve%20fork%20%20860115.png",price_per:31},
     ],
     box_sizes:[
-      {size:6,label:"قطع",badge:"",discount:0},
-      {size:12,label:"قطعة",badge:"الأكثر طلبًا",discount:0},
-      {size:20,label:"قطعة",badge:"-5%",discount:0.05},
-      {size:30,label:"قطعة",badge:"أفضل سعر",discount:0.10},
+      {size:6,  label:"قطع",    badge:"",                discount:0},
+      {size:12, label:"قطعة",   badge:"الأكثر طلبًا",   discount:0},
+      {size:20, label:"قطعة",   badge:"-5%",             discount:0.05},
+      {size:30, label:"قطعة",   badge:"أفضل سعر",        discount:0.10},
     ]
   }
 };
@@ -1069,7 +849,7 @@ const CHOCO_DATA = {
 const I18N = {
   fr:{
     tagline:"L'Excellence de la Pâtisserie Algérienne",
-    nav1:"Nos Créations",nav2:"Nos Gammes",nav3:"Commander",nav_choco:"🍫 Coffrets Chocolats",
+    nav0:"Nouveautés",nav1:"Nos Créations",nav2:"Nos Gammes",nav3:"Commander",nav_choco:"🍫 Coffrets Chocolats",
     hero_h:"L'Art des Gâteaux<br>Traditionnels Algériens",
     spec_h:"Nos Spécialités",spec_p:"Sélectionnez vos douceurs pour composer votre coffret",
     qual_h:"Nos Standards d'Excellence",qual_p:"Deux expériences adaptées à vos exigences",
@@ -1081,8 +861,7 @@ const I18N = {
     lbl_occ:"Événement",select_default:"-- Sélectionner votre Wilaya --",
     occ_0:"-- Choisir une occasion --",occ_1:"Mariage / Fiançailles",occ_2:"Naissance / Circoncision",
     occ_3:"Aïd El Fitr / El Adha",occ_4:"Cadeau Prestige",
-    lbl_msg:"Demandes Spécifiques / Personnalisation",
-    f_msg_ph:"Indiquez vos souhaits particuliers...",
+    lbl_msg:"Demandes Spécifiques / Personnalisation",f_msg_ph:"Indiquez vos souhaits particuliers...",
     btn_order:"Confirmer ma Commande",sum_h:"Récapitulatif de votre Panier",
     sum_empty:"Aucun produit sélectionné...",
     s_sub:"Sous-total",s_disc:"Remise Volume",s_ship:"Frais de Livraison",s_total:"Total Général",
@@ -1116,26 +895,20 @@ const I18N = {
     c_to_step2:"Choisir mes chocolats →",c_da:"DA",
     c_discount_lbl_5:"🎉 Réduction -5% coffret 20 pièces",
     c_discount_lbl_10:"🎉 Réduction -10% coffret 30 pièces",
-    /* slider i18n */
-    ps_new_badge:"Nouveauté 2026",
-    ps0_eyebrow:"✦ Nouvelle Collection",ps0_title:"Découvrez nos<br><em>Sablés Artisanaux</em>",
-    ps0_desc:"8 saveurs artisanales, fondantes et généreuses. Fabriquées chaque matin avec du beurre frais.",
-    ps0_cta:"Découvrir les Sablés →",ps0_badge:"Nouveauté 2026",
-    ps1_eyebrow:"🍫 Exclusivité",ps1_title:"Coffrets Chocolats<br><em>sur mesure</em>",
-    ps1_desc:"Composez votre box parmi 9 variétés. Réductions jusqu'à -10% sur les grands coffrets.",
+    // Slider
+    ps0_eyebrow:"✨ Nouveauté",ps0_title:"Les Sablés <em>MyZina</em><br>8 Saveurs Inédites",
+    ps0_desc:"Fondants, délicatement dorés, nos sablés artisanaux revisitent les grands classiques. Disponibles en 8 variantes exclusives.",
+    ps0_cta:"Découvrir les Sablés →",
+    ps1_eyebrow:"🍫 Collection Exclusive",ps1_title:"Coffrets <em>Chocolats</em><br>Artisanaux",
+    ps1_desc:"Composez votre propre box de 6 à 30 chocolats premium. 9 saveurs, réductions jusqu'à -10%.",
     ps1_cta:"Composer mon Coffret →",
-    ps2_eyebrow:"📦 Service Premium",ps2_title:"Livraison rapide<br><em>à Alger</em>",
-    ps2_desc:"Commandez avant 14h pour une livraison le jour même à Alger.",
-    ps2_cta:"Commander Maintenant →",
-    ps3_eyebrow:"👑 Prestige",ps3_title:"L'Art de la<br><em>Pâtisserie Algérienne</em>",
-    ps3_desc:"Recettes familiales transmises de génération en génération avec des ingrédients d'exception.",
-    ps3_cta:"Nos Gammes →",
-    sable_featured_label:"Nouvelle Collection",
-    sable_promo_label:"8 Saveurs",
+    ps2_eyebrow:"👑 Gamme Prestige",ps2_title:"L'Art de la <em>Pâtisserie</em><br>Algérienne",
+    ps2_desc:"Amandes extra-fines, miel de montagne et finitions artisanales façonnées à la main selon les traditions ancestrales.",
+    ps2_cta:"Notre Gamme Prestige →",
   },
   ar:{
     tagline:"التميز في الحلويات الجزائرية التقليدية",
-    nav1:"إبداعاتنا",nav2:"مجموعاتنا",nav3:"اطلب الآن",nav_choco:"🍫 علب الشوكولاتة",
+    nav0:"المستجدات",nav1:"إبداعاتنا",nav2:"مجموعاتنا",nav3:"اطلب الآن",nav_choco:"🍫 علب الشوكولاتة",
     hero_h:"فن الحلويات<br>الجزائرية التقليدية",
     spec_h:"تخصصاتنا",spec_p:"اختر حلوياتك المفضلة لتكوين علبتك الخاصة",
     qual_h:"معايير التميز لدينا",qual_p:"تجربتان راقيتان تتناسبان مع جميع متطلباتكم",
@@ -1147,8 +920,7 @@ const I18N = {
     lbl_occ:"نوع المناسبة",select_default:"-- اختر الولاية --",
     occ_0:"-- اختر المناسبة --",occ_1:"زواج / خطوبة",occ_2:"ولادة / ختان",
     occ_3:"عيد الفطر / الأضحى",occ_4:"هدية فاخرة",
-    lbl_msg:"طلبات خاصة / تخصيص الطلبية",
-    f_msg_ph:"أدخل هنا أي طلبات خاصة...",
+    lbl_msg:"طلبات خاصة / تخصيص الطلبية",f_msg_ph:"أدخل هنا أي طلبات خاصة...",
     btn_order:"تأكيد الطلبية الآن",sum_h:"ملخص سلة المشتريات",
     sum_empty:"السلة فارغة حالياً...",
     s_sub:"المجموع الفرعي",s_disc:"خصم الكمية",s_ship:"تكاليف التوصيل",s_total:"الإجمالي العام",
@@ -1182,132 +954,76 @@ const I18N = {
     c_to_step2:"اختر شوكولاتتي →",c_da:"دج",
     c_discount_lbl_5:"🎉 تخفيض -5% علبة 20 قطعة",
     c_discount_lbl_10:"🎉 تخفيض -10% علبة 30 قطعة",
-    /* slider i18n */
-    ps_new_badge:"جديد 2026",
-    ps0_eyebrow:"✦ مجموعة جديدة",ps0_title:"اكتشفي<br><em>سابلِي الفاخر</em>",
-    ps0_desc:"8 نكهات حرفية طرية وشهية. تُصنع كل صباح بزبدة طازجة ومكونات مختارة.",
-    ps0_cta:"اكتشفي السابلِي ←",ps0_badge:"جديد 2026",
-    ps1_eyebrow:"🍫 حصري",ps1_title:"علب شوكولاتة<br><em>مخصصة لك</em>",
-    ps1_desc:"اختر من 9 أنواع شوكولاتة يدوية. تخفيضات حتى -10% على العلب الكبيرة.",
+    // Slider
+    ps0_eyebrow:"✨ جديد",ps0_title:"سابلِي <em>ميزينا</em><br>8 نكهات لا مثيل لها",
+    ps0_desc:"هشة ومذهبة بلمسة يدوية، سابليات ميزينا بـ 8 نكهات حصرية تعيد ابتكار الكلاسيكيات.",
+    ps0_cta:"اكتشف السابلِي ←",
+    ps1_eyebrow:"🍫 مجموعة حصرية",ps1_title:"علب <em>الشوكولاتة</em><br>اليدوية",
+    ps1_desc:"صمم علبتك من 6 إلى 30 شوكولاتة. 9 نكهات فاخرة، خصومات تصل إلى -10%.",
     ps1_cta:"صمم علبتي ←",
-    ps2_eyebrow:"📦 خدمة متميزة",ps2_title:"توصيل سريع<br><em>في الجزائر</em>",
-    ps2_desc:"اطلب قبل الساعة 14:00 للتوصيل في نفس اليوم في الجزائر العاصمة.",
-    ps2_cta:"اطلب الآن ←",
-    ps3_eyebrow:"👑 بريستيج",ps3_title:"فن<br><em>الحلويات الجزائرية</em>",
-    ps3_desc:"وصفات عائلية متوارثة من جيل إلى جيل مع مكونات استثنائية الجودة.",
-    ps3_cta:"مجموعاتنا ←",
-    sable_featured_label:"مجموعة جديدة",
-    sable_promo_label:"8 نكهات",
+    ps2_eyebrow:"👑 مجموعة بريستيج",ps2_title:"فن <em>الحلويات</em><br>الجزائرية",
+    ps2_desc:"لوز رفيع، عسل جبلي وتشطيبات يدوية حسب التقاليد الجزائرية العريقة.",
+    ps2_cta:"مجموعة بريستيج ←",
   }
 };
 
-/* ═══════════════════════════════
+/* ════════════════════════════════
    STATE
-═══════════════════════════════ */
+════════════════════════════════ */
 let currentLang='fr', cart=[], currentSel={product:null,variantIndex:0,qty:10};
 let chocoStep=1, selectedBoxSize=null, chocoQuantities={};
+let sliderIndex=0, sliderTimer=null;
 
-/* ── Slider state ── */
-let sliderIndex=0, sliderTotal=4, sliderTimer=null, sliderPaused=false;
-
-/* ═══════════════════════════════
+/* ════════════════════════════════
    INIT
-═══════════════════════════════ */
+════════════════════════════════ */
 document.addEventListener('DOMContentLoaded',()=>{
-    populateWilayas();
-    renderProducts();
-    setupMainEvents();
-    applyI18N();
-    renderBoxSizes();
-    renderChocoCards();
-    applyChocoI18N();
-    initSlider();
+    populateWilayas();renderProducts();setupMainEvents();applyI18N();
+    renderBoxSizes();renderChocoCards();applyChocoI18N();
+    startSlider();
 });
 
-/* ═══════════════════════════════
-   PROMO SLIDER
-═══════════════════════════════ */
-function initSlider(){
-    sliderGoTo(0);
-    startSliderTimer();
-    const section=document.getElementById('promo_slider_section');
-    if(section){
-        section.addEventListener('mouseenter',()=>{sliderPaused=true;stopSliderTimer();});
-        section.addEventListener('mouseleave',()=>{sliderPaused=false;startSliderTimer();});
-        /* Touch swipe */
-        let touchStartX=0;
-        section.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
-        section.addEventListener('touchend',e=>{
-            const dx=e.changedTouches[0].clientX-touchStartX;
-            if(Math.abs(dx)>50){dx<0?sliderNext():sliderPrev();}
-        },{passive:true});
+/* ════════════════════════════════
+   SLIDER
+════════════════════════════════ */
+const SLIDE_COUNT = 3;
+
+function sliderGo(idx){
+    sliderIndex = (idx + SLIDE_COUNT) % SLIDE_COUNT;
+    document.getElementById('promo_track').style.transform = `translateX(-${sliderIndex * 100}%)`;
+    document.querySelectorAll('.promo-dot').forEach((d,i) => d.classList.toggle('active', i===sliderIndex));
+    document.querySelectorAll('.promo-slide').forEach((s,i) => s.classList.toggle('active', i===sliderIndex));
+    resetSliderTimer();
+}
+
+function sliderMove(dir){ sliderGo(sliderIndex + dir); }
+
+function startSlider(){
+    sliderTimer = setInterval(() => sliderGo(sliderIndex + 1), 5500);
+}
+
+function resetSliderTimer(){
+    clearInterval(sliderTimer);
+    sliderTimer = setInterval(() => sliderGo(sliderIndex + 1), 5500);
+}
+
+function updateSliderI18N(){
+    const T = I18N[currentLang];
+    for(let i=0;i<3;i++){
+        const eyebrow=document.getElementById(`ps${i}_eyebrow`);
+        const title=document.getElementById(`ps${i}_title`);
+        const desc=document.getElementById(`ps${i}_desc`);
+        const cta=document.getElementById(`ps${i}_cta`);
+        if(eyebrow && T[`ps${i}_eyebrow`]) eyebrow.innerHTML=T[`ps${i}_eyebrow`];
+        if(title && T[`ps${i}_title`]) title.innerHTML=T[`ps${i}_title`];
+        if(desc && T[`ps${i}_desc`]) desc.innerHTML=T[`ps${i}_desc`];
+        if(cta && T[`ps${i}_cta`]) cta.innerHTML=T[`ps${i}_cta`];
     }
 }
 
-function startSliderTimer(){
-    stopSliderTimer();
-    const fill=document.getElementById('ps_progress');
-    if(fill){fill.style.transition='none';fill.style.width='0%';setTimeout(()=>{fill.style.transition='width 4.5s linear';fill.style.width='100%';},30);}
-    sliderTimer=setTimeout(()=>{sliderNext();},4800);
-}
-function stopSliderTimer(){
-    clearTimeout(sliderTimer);
-    const fill=document.getElementById('ps_progress');
-    if(fill){fill.style.transition='none';fill.style.width='0%';}
-}
-
-function sliderGoTo(idx){
-    sliderIndex=((idx%sliderTotal)+sliderTotal)%sliderTotal;
-    const track=document.getElementById('promo_track');
-    if(track) track.style.transform=`translateX(-${sliderIndex*100}%)`;
-    /* active class for animations */
-    document.querySelectorAll('.promo-slide').forEach((s,i)=>{
-        s.classList.toggle('ps-active',i===sliderIndex);
-    });
-    /* dots */
-    document.querySelectorAll('.ps-dot').forEach((d,i)=>d.classList.toggle('active',i===sliderIndex));
-    startSliderTimer();
-}
-function sliderNext(){sliderGoTo(sliderIndex+1);}
-function sliderPrev(){sliderGoTo(sliderIndex-1);}
-
-function applySliderI18N(){
-    const T=I18N[currentLang];
-    /* Slide 0 */
-    setHTML('ps_badge_0',T.ps0_badge);
-    setHTML('ps_eyebrow_0',T.ps0_eyebrow);
-    setHTML('ps_title_0',T.ps0_title);
-    setHTML('ps_desc_0',T.ps0_desc);
-    setHTML('ps_cta_0',T.ps0_cta);
-    /* Slide 1 */
-    setHTML('ps_eyebrow_1',T.ps1_eyebrow);
-    setHTML('ps_title_1',T.ps1_title);
-    setHTML('ps_desc_1',T.ps1_desc);
-    setHTML('ps_cta_1',T.ps1_cta);
-    /* Slide 2 */
-    setHTML('ps_eyebrow_2',T.ps2_eyebrow);
-    setHTML('ps_title_2',T.ps2_title);
-    setHTML('ps_desc_2',T.ps2_desc);
-    setHTML('ps_cta_2',T.ps2_cta);
-    /* Slide 3 */
-    setHTML('ps_eyebrow_3',T.ps3_eyebrow);
-    setHTML('ps_title_3',T.ps3_title);
-    setHTML('ps_desc_3',T.ps3_desc);
-    setHTML('ps_cta_3',T.ps3_cta);
-    /* Flavor pills slide 0 */
-    const flavors0=document.getElementById('ps_flavors_0');
-    if(flavors0){
-        const pills=currentLang==='fr'
-          ?['Vanille','Chocolat','Citron','Coco','Amande','Pistache','Caramel','Framboise']
-          :['فانيليا','شوكولاتة','ليمون','جوز الهند','لوز','فستق','كراميل','توت'];
-        flavors0.innerHTML=pills.map(p=>`<span class="ps-flavor-pill">${p}</span>`).join('');
-    }
-}
-function setHTML(id,html){const el=document.getElementById(id);if(el&&html!==undefined)el.innerHTML=html;}
-
-/* ═══════════════════════════════
+/* ════════════════════════════════
    PAGE NAVIGATION
-═══════════════════════════════ */
+════════════════════════════════ */
 function openChocoPage(){
     document.getElementById('page_main').classList.remove('active');
     document.getElementById('page_choco').classList.add('active');
@@ -1321,9 +1037,9 @@ function closeChocoPage(){
     window.scrollTo(0,0);
 }
 
-/* ═══════════════════════════════
+/* ════════════════════════════════
    LANG
-═══════════════════════════════ */
+════════════════════════════════ */
 function toggleLang(){
     currentLang=currentLang==='fr'?'ar':'fr';
     document.documentElement.lang=currentLang;
@@ -1332,7 +1048,8 @@ function toggleLang(){
     document.getElementById('lang_btn').textContent=lbl;
     document.getElementById('choco_lang_btn').textContent=lbl;
     applyI18N();renderProducts();updateCartUI();
-    renderBoxSizes();renderChocoCards();applyChocoI18N();applySliderI18N();
+    renderBoxSizes();renderChocoCards();applyChocoI18N();
+    updateSliderI18N();
     if(chocoStep===3)renderRecap();
 }
 
@@ -1358,7 +1075,7 @@ function applyI18N(){
         const[id,k]=pair.split(':');const el=document.getElementById(id);if(el&&T[k])el.textContent=T[k];
     });
     const ta=document.getElementById('f_message');if(ta&&T.f_msg_ph)ta.placeholder=T.f_msg_ph;
-    applySliderI18N();
+    updateSliderI18N();
 }
 
 function applyChocoI18N(){
@@ -1377,9 +1094,9 @@ function applyChocoI18N(){
     Object.entries(ids).forEach(([id,key])=>{const el=document.getElementById(id);if(el&&T[key]!==undefined)el.innerHTML=T[key];});
 }
 
-/* ═══════════════════════════════
+/* ════════════════════════════════
    MAIN CATALOG
-═══════════════════════════════ */
+════════════════════════════════ */
 function populateWilayas(){
     const sel=document.getElementById('f_wilaya');
     WILAYAS.forEach(w=>{const o=document.createElement('option');o.value=w;o.textContent=w;sel.appendChild(o);});
@@ -1392,42 +1109,21 @@ function renderProducts(){
         const hasPromo=p.variants.some(v=>v.prix_promo);
         const minPrice=Math.min(...p.variants.map(v=>v.prix_promo||v.prix));
         const maxPrice=Math.max(...p.variants.map(v=>v.prix));
-
-        /* ── Featured Sablé card ── */
-        if(p.featured){
-            const flavors=(p[`flavors_${currentLang}`]||p.flavors_fr);
-            const flavorsHTML=flavors.map(f=>`<span class="sable-flavor-chip">${f}</span>`).join('');
-            const labelNew=T.sable_featured_label||'Nouvelle Collection';
-            const labelPromo=T.sable_promo_label||'8 Saveurs';
-            return `<div class="product-card sable-featured" onclick="openProduct('${p.id}')">
-                <span class="sable-new-ribbon">✦ ${labelNew} — ${labelPromo}</span>
-                <div class="product-img-wrap">
-                    <img src="${p.img}" class="product-img" alt="${p[currentLang]||p.fr}"
-                         onerror="this.src='https://via.placeholder.com/600x400/4a0404/c9993a?text=Sablés'">
-                </div>
-                <div class="product-info">
-                    <h4>${p[currentLang]||p.fr}</h4>
-                    <div class="price-tag">
-                        <span class="price-current">${minPrice} – ${maxPrice} DA</span>
-                        <span class="price-badge">${labelPromo}</span>
-                    </div>
-                </div>
-                <div class="sable-flavors-strip">${flavorsHTML}</div>
-            </div>`;
-        }
-
         const priceHtml=hasPromo
             ?`<span class="price-current">${minPrice} DA</span><span class="price-badge">${T.promo}</span>`
             :(p.variants.length>1
                 ?`<span class="price-current">${minPrice} – ${maxPrice} DA</span>`
                 :`<span class="price-current">${p.variants[0].prix} DA</span>`);
-        return `<div class="product-card" onclick="openProduct('${p.id}')">
+        // Badge Nouveau pour sablé
+        const isNew = p.id==='sable';
+        return `<div class="product-card" onclick="openProduct('${p.id}')" style="position:relative;">
+            ${isNew?`<div style="position:absolute;top:14px;left:14px;z-index:5;background:var(--gold);color:#1a0a00;font-weight:900;font-size:0.72rem;padding:5px 14px;border-radius:50px;letter-spacing:1.5px;text-transform:uppercase;">${currentLang==='fr'?'Nouveau ✨':'جديد ✨'}</div>`:''}
             <div class="product-img-wrap"><img src="${p.variants[0].img}" class="product-img" alt="${p[currentLang]||p.fr}" onerror="this.src='https://via.placeholder.com/600x400/4a0404/c9993a?text=MyZina'"></div>
-            <div class="product-info"><h4>${p[currentLang]||p.fr}</h4><div class="price-tag">${priceHtml}</div></div>
+            <div class="product-info"><h4>${p[currentLang]||p.fr}</h4>
+            ${p.id==='sable'?`<p style="font-size:0.88rem;color:var(--muted);font-style:italic;margin-top:-0.5rem;">${currentLang==='fr'?'8 variantes disponibles':'8 نكهات متاحة'}</p>`:''}
+            <div class="price-tag">${priceHtml}</div></div>
         </div>`;
     }).join('');
-
-    /* Choco promo card */
     html+=`<div class="choco-promo-card" onclick="openChocoPage()">
         <span class="choco-promo-new-badge">${currentLang==='fr'?'Nouveau':'جديد'}</span>
         <div class="choco-promo-img"><img src="https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generer%20photo%20affiche%20bniwen%20sans%20ecritures%20230901.png" alt="Chocolats" onerror="this.src='https://via.placeholder.com/600x400/1a0a00/c9993a?text=Chocolats'"></div>
@@ -1510,6 +1206,14 @@ function setupMainEvents(){
     document.getElementById('add_to_cart_btn').addEventListener('click',addToCart);
     document.getElementById('f_wilaya').addEventListener('change',updateCartUI);
     document.getElementById('order_form').addEventListener('submit',handleOrder);
+    // Touch swipe for slider
+    let touchStartX=0;
+    const slider=document.getElementById('promo_slider_section');
+    slider.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
+    slider.addEventListener('touchend',e=>{
+        const dx=touchStartX-e.changedTouches[0].clientX;
+        if(Math.abs(dx)>50) sliderMove(dx>0?1:-1);
+    },{passive:true});
 }
 
 function scrollToAnchor(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
@@ -1588,12 +1292,14 @@ async function handleOrder(e){
     finally{btn.disabled=false;btnText.textContent=I18N[currentLang].btn_order;spinner.style.display='none';}
 }
 
-/* ═══════════════════════════════
+/* ════════════════════════════════
    CHOCO PAGE
-═══════════════════════════════ */
+════════════════════════════════ */
 function chocoGoToStep(step){
     const T=I18N[currentLang];
-    if(step>1&&!selectedBoxSize){document.getElementById('c_err1').style.display='block';return;}
+    if(step>1&&!selectedBoxSize){
+        document.getElementById('c_err1').style.display='block';return;
+    }
     document.getElementById('c_err1').style.display='none';
     if(step>2){
         const total=getChocoTotal();
@@ -1606,9 +1312,9 @@ function chocoGoToStep(step){
         renderRecap();
     }
     chocoStep=step;
-    ['cpanel1','cpanel2','cpanel3'].forEach((id,i)=>document.getElementById(id).classList.toggle('active',i+1===step));
+    ['cpanel1','cpanel2','cpanel3'].forEach((id,i)=>{document.getElementById(id).classList.toggle('active',i+1===step);});
     [1,2,3].forEach(i=>{
-        const item=document.getElementById('csi'+i),circle=document.getElementById('csc'+i);
+        const item=document.getElementById('csi'+i);const circle=document.getElementById('csc'+i);
         item.classList.toggle('active',i===step);item.classList.toggle('done',i<step);
         circle.textContent=i<step?'✓':i;
     });
@@ -1632,16 +1338,19 @@ function renderBoxSizes(){
 }
 
 function selectBox(size){
-    selectedBoxSize=size;chocoQuantities={};renderBoxSizes();renderChocoCards();updateCounter();
-    const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
+    selectedBoxSize=size;chocoQuantities={};
+    renderBoxSizes();renderChocoCards();updateCounter();
+    const T=I18N[currentLang];const data=CHOCO_DATA[currentLang];
     const box=data.box_sizes.find(b=>b.size===size);
     showChocoToast(`${currentLang==='fr'?'Coffret':'علبة'} ${size} ${box.label} ${currentLang==='fr'?'sélectionné !':'تم اختياره!'}`,false);
 }
 
 function renderChocoCards(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
+    /* FIX prix arabe: toujours afficher "N DA" en LTR */
     document.getElementById('choco_grid').innerHTML=data.chocolates.map(c=>{
         const qty=chocoQuantities[c.id]||0;
+        const priceStr = `<span style="direction:ltr;unicode-bidi:embed;display:inline-block;">${c.price_per} DA</span>`;
         return `<div class="cc-card${qty>0?' selected':''}" id="cccard_${c.id}">
             <div class="cc-img-wrap">
                 <img class="cc-img" src="${c.img}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/400x300/3b1a08/c9993a?text=🍫'">
@@ -1650,7 +1359,7 @@ function renderChocoCards(){
             <div class="cc-body">
                 <div class="cc-name">${c.name}</div>
                 <div class="cc-desc">${c.desc}</div>
-                <div class="cc-price">${c.price_per} ${T.c_da} / ${T.c_pieces==='pièces'?'pièce':'قطعة'}</div>
+                <div class="cc-price">${priceStr} / ${T.c_pieces==='pièces'?'pièce':'قطعة'}</div>
             </div>
             <div class="cc-qty">
                 <button class="cc-btn" id="ccminus_${c.id}" onclick="ccChange('${c.id}',-1)" ${qty===0?'disabled':''}>−</button>
@@ -1662,7 +1371,8 @@ function renderChocoCards(){
 }
 
 function ccChange(id,delta){
-    const T=I18N[currentLang],total=getChocoTotal(),cur=chocoQuantities[id]||0,newQty=cur+delta;
+    const T=I18N[currentLang];
+    const total=getChocoTotal(),cur=chocoQuantities[id]||0,newQty=cur+delta;
     if(newQty<0)return;
     if(delta>0){
         if(!selectedBoxSize){showChocoToast(T.c_err_format,true);return;}
@@ -1671,17 +1381,24 @@ function ccChange(id,delta){
     chocoQuantities[id]=newQty;
     const numEl=document.getElementById('ccnum_'+id);
     if(numEl){numEl.textContent=newQty;numEl.classList.remove('bump');void numEl.offsetWidth;numEl.classList.add('bump');setTimeout(()=>numEl.classList.remove('bump'),200);}
-    const card=document.getElementById('cccard_'+id);if(card)card.classList.toggle('selected',newQty>0);
-    const minusBtn=document.getElementById('ccminus_'+id);if(minusBtn)minusBtn.disabled=(newQty===0);
+    const card=document.getElementById('cccard_'+id);
+    if(card)card.classList.toggle('selected',newQty>0);
+    const minusBtn=document.getElementById('ccminus_'+id);
+    if(minusBtn)minusBtn.disabled=(newQty===0);
     if(delta>0)spawnParticle(id);
     updateCounter();
 }
 
 function getChocoTotal(){return Object.values(chocoQuantities).reduce((a,b)=>a+b,0);}
-function getBoxDiscount(){if(!selectedBoxSize)return 0;const box=CHOCO_DATA[currentLang].box_sizes.find(b=>b.size===selectedBoxSize);return box?box.discount:0;}
+function getBoxDiscount(){
+    if(!selectedBoxSize)return 0;
+    const box=CHOCO_DATA[currentLang].box_sizes.find(b=>b.size===selectedBoxSize);
+    return box?box.discount:0;
+}
 
 function updateCounter(){
-    const T=I18N[currentLang],total=getChocoTotal(),cap=selectedBoxSize||0,pct=cap>0?Math.min(100,(total/cap)*100):0;
+    const T=I18N[currentLang];
+    const total=getChocoTotal(),cap=selectedBoxSize||0,pct=cap>0?Math.min(100,(total/cap)*100):0;
     const remaining=cap-total;
     const bigEl=document.getElementById('cnt_big');
     bigEl.textContent=total;
@@ -1689,13 +1406,16 @@ function updateCounter(){
     bigEl.classList.toggle('exact',total===cap&&cap>0);
     document.getElementById('cnt_of').textContent=`/ ${cap} ${T.c_pieces}`;
     const fill=document.getElementById('cnt_fill');
-    fill.style.width=pct+'%';fill.classList.toggle('over',total>cap&&cap>0);fill.classList.toggle('done',total===cap&&cap>0);
+    fill.style.width=pct+'%';
+    fill.classList.toggle('over',total>cap&&cap>0);
+    fill.classList.toggle('done',total===cap&&cap>0);
     let msg=T.c_cnt_select;
     if(cap>0&&total<cap)msg=`${remaining} ${T.c_cnt_remaining}`;
     if(total===cap&&cap>0)msg=T.c_cnt_done;
     if(total>cap&&cap>0)msg=T.c_cnt_over;
     document.getElementById('cnt_msg').textContent=msg;
-    const nextBtn=document.getElementById('cnt_next_btn');if(nextBtn)nextBtn.disabled=(total!==cap||cap===0);
+    const nextBtn=document.getElementById('cnt_next_btn');
+    if(nextBtn)nextBtn.disabled=(total!==cap||cap===0);
 }
 
 function renderRecap(){
@@ -1707,38 +1427,50 @@ function renderRecap(){
         const qty=chocoQuantities[c.id],sub=qty*c.price_per;baseTotal+=sub;
         return `<div class="recap-item">
             <img class="recap-thumb" src="${c.img}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/50x50/3b1a08/c9993a?text=M'">
-            <div class="recap-info"><div class="recap-name">${c.name}</div><div class="recap-qty">${qty} × ${c.price_per} ${T.c_da}</div></div>
-            <div class="recap-sub-total">${(qty*c.price_per).toLocaleString()} ${T.c_da}</div>
+            <div class="recap-info">
+                <div class="recap-name">${c.name}</div>
+                <div class="recap-qty" style="direction:ltr;unicode-bidi:embed;">${qty} × ${c.price_per} DA</div>
+            </div>
+            <div class="recap-sub-total" style="direction:ltr;unicode-bidi:embed;">${(qty*c.price_per).toLocaleString()} DA</div>
         </div>`;
     }).join('');
-    const discount=getBoxDiscount(),savings=Math.round(baseTotal*discount),final=baseTotal-savings;
+    const discount=getBoxDiscount();
+    const savings=Math.round(baseTotal*discount);
+    const final=baseTotal-savings;
     if(discount>0){
         document.getElementById('recap_orig_wrap').style.display='block';
-        document.getElementById('recap_orig_val').textContent=`${baseTotal.toLocaleString()} ${T.c_da}`;
+        document.getElementById('recap_orig_val').textContent=`${baseTotal.toLocaleString()} DA`;
         document.getElementById('recap_disc_row').style.display='flex';
         document.getElementById('recap_disc_lbl').textContent=discount===0.05?T.c_discount_lbl_5:T.c_discount_lbl_10;
-        document.getElementById('recap_disc_amt').textContent=`-${savings.toLocaleString()} ${T.c_da}`;
+        document.getElementById('recap_disc_amt').textContent=`-${savings.toLocaleString()} DA`;
     }else{
         document.getElementById('recap_orig_wrap').style.display='none';
         document.getElementById('recap_disc_row').style.display='none';
     }
-    document.getElementById('recap_total_val').textContent=`${final.toLocaleString()} ${T.c_da}`;
+    document.getElementById('recap_total_val').textContent=`${final.toLocaleString()} DA`;
 }
 
 function validateCoffret(){
     const T=I18N[currentLang],data=CHOCO_DATA[currentLang];
     const items=data.chocolates.filter(c=>(chocoQuantities[c.id]||0)>0);
     const baseTotal=items.reduce((s,c)=>s+(chocoQuantities[c.id]*c.price_per),0);
-    const discount=getBoxDiscount(),savings=Math.round(baseTotal*discount),priceTotal=baseTotal-savings;
+    const discount=getBoxDiscount();
+    const savings=Math.round(baseTotal*discount);
+    const priceTotal=baseTotal-savings;
     const itemsStr=items.map(c=>`${chocoQuantities[c.id]}x ${c.name}`).join(', ');
     const boxLabel=currentLang==='fr'?`Coffret ${selectedBoxSize} pièces`:`علبة ${selectedBoxSize} قطعة`;
     const discInfo=discount>0?(currentLang==='fr'?` (-${Math.round(discount*100)}%)`:`(-${Math.round(discount*100)}%)`):'';
-    cart.push({id:Date.now(),variantKey:`choco_box_${selectedBoxSize}_${Date.now()}`,productId:'choco_box',name:`🍫 ${T.choco_cart_name} (${boxLabel}${discInfo})`,variantName:itemsStr.length>80?itemsStr.slice(0,80)+'…':itemsStr,variant:`box_${selectedBoxSize}`,qty:1,price:priceTotal,originalPrice:discount>0?baseTotal:null,isChocoBox:true});
+    cart.push({
+        id:Date.now(),variantKey:`choco_box_${selectedBoxSize}_${Date.now()}`,
+        productId:'choco_box',name:`🍫 ${T.choco_cart_name} (${boxLabel}${discInfo})`,
+        variantName:itemsStr.length>80?itemsStr.slice(0,80)+'…':itemsStr,
+        variant:`box_${selectedBoxSize}`,qty:1,price:priceTotal,originalPrice:discount>0?baseTotal:null,isChocoBox:true
+    });
     const banner=document.getElementById('choco_transfer_banner');
     banner.style.display='block';
     document.getElementById('banner_title_txt').textContent=T.choco_banner_title;
-    const discLine=discount>0?`<span style="color:#5dde87;font-weight:800;">🎉 ${currentLang==='fr'?`Réduction -${Math.round(discount*100)}% ! Économie : ${savings.toLocaleString()} DA`:`تخفيض -${Math.round(discount*100)}%! وفرت: ${savings.toLocaleString()} دج`}</span><br>`:'';
-    document.getElementById('banner_detail_txt').innerHTML=`${T.choco_banner_msg}<br>${discLine}<strong style="color:var(--gold2);">${boxLabel} — ${priceTotal.toLocaleString()} ${T.c_da}</strong><br><small style="opacity:0.65;">${itemsStr}</small>`;
+    const discLine=discount>0?`<span style="color:#5dde87;font-weight:800;">🎉 ${currentLang==='fr'?`Réduction -${Math.round(discount*100)}% appliquée ! Économie : ${savings.toLocaleString()} DA`:`تخفيض -${Math.round(discount*100)}% مطبق! وفرت: ${savings.toLocaleString()} دج`}</span><br>`:'';
+    document.getElementById('banner_detail_txt').innerHTML=`${T.choco_banner_msg}<br>${discLine}<strong style="color:var(--gold2);direction:ltr;unicode-bidi:embed;">${boxLabel} — ${priceTotal.toLocaleString()} DA</strong><br><small style="opacity:0.65;">${itemsStr}</small>`;
     const ta=document.getElementById('f_message');
     const discNote=discount>0?(currentLang==='fr'?`• Réduction -${Math.round(discount*100)}% : -${savings.toLocaleString()} DA\n`:`• تخفيض -${Math.round(discount*100)}%: -${savings.toLocaleString()} دج\n`):'';
     const note=currentLang==='fr'
@@ -1747,14 +1479,18 @@ function validateCoffret(){
     ta.value=note+ta.value;
     confetti({particleCount:150,spread:120,origin:{y:0.6}});
     showChocoToast(T.c_toast_add,false);
-    setTimeout(()=>{closeChocoPage();updateCartUI();setTimeout(()=>{document.getElementById('commande').scrollIntoView({behavior:'smooth'});},400);},1500);
+    setTimeout(()=>{
+        closeChocoPage();updateCartUI();
+        setTimeout(()=>{document.getElementById('commande').scrollIntoView({behavior:'smooth'});},400);
+    },1500);
 }
 
 function spawnParticle(id){
     const card=document.getElementById('cccard_'+id);if(!card)return;
     const rect=card.getBoundingClientRect();
     const el=document.createElement('div');el.className='float-particle';el.textContent='🍫';
-    el.style.left=(rect.left+rect.width/2-14)+'px';el.style.top=(rect.top+window.scrollY+20)+'px';
+    el.style.left=(rect.left+rect.width/2-14)+'px';
+    el.style.top=(rect.top+window.scrollY+20)+'px';
     document.body.appendChild(el);setTimeout(()=>el.remove(),800);
 }
 
