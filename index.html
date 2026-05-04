@@ -18,11 +18,9 @@
         [dir="rtl"]{font-family:'Amiri',Georgia,serif;}
         [dir="ltr"]{font-family:'Lora',Georgia,serif;}
         *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-
         html{scroll-behavior:smooth;font-size:20px;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;}
         @media(max-width:480px){html{font-size:18px;}}
         @media(min-width:1400px){html{font-size:22px;}}
-
         body{background:var(--burg);color:var(--white);line-height:1.7;overflow-x:hidden;opacity:0;animation:fadeIn 0.8s ease 0.1s forwards;}
         @keyframes fadeIn{to{opacity:1;}}
         h1,h2,h3,h4,.display{font-family:'Playfair Display',Georgia,serif;line-height:1.2;letter-spacing:-0.01em;}
@@ -111,63 +109,57 @@
         .price-original{font-family:'Josefin Sans',sans-serif;color:#b0a090;font-size:1.1rem;text-decoration:line-through;direction:ltr;unicode-bidi:embed;}
         .price-badge{background:#c0392b;color:white;font-size:0.82rem;font-weight:900;padding:5px 12px;border-radius:6px;text-transform:uppercase;letter-spacing:1px;}
 
-        /* ══ VARIANT ARROW & DROPDOWN ══ */
-        .variant-arrow-btn{display:flex;align-items:center;gap:6px;background:rgba(201,153,58,0.12);border:1.5px solid rgba(201,153,58,0.35);color:var(--burg);padding:9px 16px;border-radius:50px;font-size:0.78rem;font-weight:800;cursor:pointer;letter-spacing:0.8px;text-transform:uppercase;transition:background 0.2s,border-color 0.2s,color 0.2s;width:fit-content;font-family:'Lora',serif;}
-        .variant-arrow-btn:hover{background:rgba(201,153,58,0.25);border-color:var(--gold);color:var(--gold);}
-        .variant-arrow-btn .arr{transition:transform 0.28s var(--r);display:inline-block;font-size:0.85rem;color:var(--gold);}
-        .variant-arrow-btn.open .arr{transform:rotate(180deg);}
-        .variant-dropdown{max-height:0;overflow:hidden;transition:max-height 0.38s cubic-bezier(0.23,1,0.32,1),opacity 0.28s;opacity:0;}
-        .variant-dropdown.open{max-height:320px;opacity:1;}
-        .variant-pill-row{display:flex;flex-wrap:wrap;gap:6px;padding:10px 0 4px;}
-        .variant-pill{background:#fdf8f0;border:1.5px solid rgba(201,153,58,0.3);color:var(--burg);padding:7px 14px;border-radius:50px;font-size:0.78rem;font-weight:700;cursor:pointer;transition:all 0.18s;white-space:nowrap;font-family:'Lora',serif;}
-        .variant-pill:hover{background:var(--burg);color:var(--gold2);border-color:var(--burg);transform:scale(1.04);}
+        /* ══ VARIANT PILL STRIP on Card ══ */
+        .variant-strip{display:flex;gap:6px;flex-wrap:wrap;margin-top:0.5rem;}
+        .variant-strip-pill{background:var(--parchment);border:1.5px solid rgba(201,153,58,0.3);color:var(--burg);padding:5px 12px;border-radius:50px;font-size:0.75rem;font-weight:700;cursor:pointer;transition:all 0.18s;white-space:nowrap;font-family:'Lora',serif;}
+        .variant-strip-pill:hover,.variant-strip-pill.active{background:var(--burg);color:var(--gold2);border-color:var(--burg);}
+
+        /* ══ VARIANT ANIMATED TABS in MODAL ══ */
+        /* Variant tab slide-in animation */
+        @keyframes tabReveal{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes imgSlideLeft{from{opacity:0;transform:translateX(28px) scale(0.97);}to{opacity:1;transform:translateX(0) scale(1);}}
+        @keyframes imgSlideRight{from{opacity:0;transform:translateX(-28px) scale(0.97);}to{opacity:1;transform:translateX(0) scale(1);}}
+        @keyframes detailsFadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+        @keyframes priceCount{from{transform:scale(1.35);color:var(--gold2);}to{transform:scale(1);}}
+
+        .modal-img-anim-left .modal-img img{animation:imgSlideLeft 0.38s cubic-bezier(0.23,1,0.32,1) forwards;}
+        .modal-img-anim-right .modal-img img{animation:imgSlideRight 0.38s cubic-bezier(0.23,1,0.32,1) forwards;}
+        .details-anim .variant-details{animation:detailsFadeUp 0.32s ease forwards;}
+        .price-anim{animation:priceCount 0.4s ease forwards;}
+
+        /* Ingredient chips with stagger */
+        @keyframes chipIn{from{opacity:0;transform:scale(0.7) translateY(8px);}to{opacity:1;transform:scale(1) translateY(0);}}
+        .ingredient-chip{animation:chipIn 0.3s ease both;}
+        .ingredient-chip:nth-child(1){animation-delay:0.04s;}
+        .ingredient-chip:nth-child(2){animation-delay:0.09s;}
+        .ingredient-chip:nth-child(3){animation-delay:0.14s;}
+        .ingredient-chip:nth-child(4){animation-delay:0.19s;}
+        .ingredient-chip:nth-child(5){animation-delay:0.24s;}
+        .ingredient-chip:nth-child(6){animation-delay:0.29s;}
+
+        /* Nutrition cells stagger */
+        @keyframes nutriSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+        .nutri-cell{animation:nutriSlide 0.35s ease both;}
+        .nutri-cell:nth-child(1){animation-delay:0.1s;}
+        .nutri-cell:nth-child(2){animation-delay:0.18s;}
+        .nutri-cell:nth-child(3){animation-delay:0.26s;}
+
+        /* Nutrition bar fill animation */
+        .nutri-bar{height:5px;border-radius:4px;background:#f0e8d8;margin-top:5px;overflow:hidden;}
+        .nutri-bar-fill{height:100%;border-radius:4px;background:var(--gold);width:0;transition:width 0.6s ease 0.4s;}
+        .nutri-cell:nth-child(1) .nutri-bar-fill{background:#e8a034;}
+        .nutri-cell:nth-child(2) .nutri-bar-fill{background:#e87c34;}
+        .nutri-cell:nth-child(3) .nutri-bar-fill{background:#c9993a;}
 
         /* ══ PULSE ADD TO CART ══ */
-        @keyframes cartPulse{
-            0%{box-shadow:0 0 0 0 rgba(74,4,4,0.5);}
-            65%{box-shadow:0 0 0 16px rgba(74,4,4,0);}
-            100%{box-shadow:0 0 0 0 rgba(74,4,4,0);}
-        }
-        @keyframes cartShimmer{
-            0%{transform:translateX(-100%);}
-            60%,100%{transform:translateX(110%);}
-        }
-        @keyframes iconBounce{
-            0%,55%,100%{transform:translateY(0) scale(1);}
-            30%{transform:translateY(-5px) scale(1.1);}
-            45%{transform:translateY(-2px) scale(1.05);}
-        }
-        @keyframes cartWiggle{
-            0%,100%{transform:translateX(0) scale(1.01);}
-            20%{transform:translateX(-4px) scale(1.01);}
-            40%{transform:translateX(4px) scale(1.01);}
-            60%{transform:translateX(-2px) scale(1.01);}
-            80%{transform:translateX(2px) scale(1.01);}
-        }
-        .add-cart-btn-full{
-            width:100%;padding:22px;background:var(--burg);color:var(--gold2);border:none;border-radius:16px;
-            font-family:'Playfair Display',serif;font-weight:900;font-size:1.35rem;cursor:pointer;
-            display:flex;align-items:center;justify-content:center;gap:10px;
-            transition:background 0.25s;min-height:70px;
-            animation:cartPulse 2.2s ease-in-out infinite;
-            position:relative;overflow:hidden;
-        }
-        .add-cart-btn-full::after{
-            content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-            background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.14) 50%,transparent 100%);
-            transform:translateX(-100%);
-            animation:cartShimmer 2.8s ease-in-out infinite 1s;
-        }
-        .add-cart-btn-full:hover{
-            background:var(--dark);
-            animation:cartWiggle 0.45s ease, cartPulse 2.2s ease-in-out infinite 0.45s;
-        }
-        .add-cart-btn-full .cart-icon-bounce{
-            display:inline-block;
-            animation:iconBounce 2.2s ease-in-out infinite;
-            font-size:1.3rem;
-        }
-
+        @keyframes cartPulse{0%{box-shadow:0 0 0 0 rgba(74,4,4,0.5);}65%{box-shadow:0 0 0 16px rgba(74,4,4,0);}100%{box-shadow:0 0 0 0 rgba(74,4,4,0);}}
+        @keyframes cartShimmer{0%{transform:translateX(-100%);}60%,100%{transform:translateX(110%);}}
+        @keyframes iconBounce{0%,55%,100%{transform:translateY(0) scale(1);}30%{transform:translateY(-5px) scale(1.1);}45%{transform:translateY(-2px) scale(1.05);}}
+        @keyframes cartWiggle{0%,100%{transform:translateX(0) scale(1.01);}20%{transform:translateX(-4px) scale(1.01);}40%{transform:translateX(4px) scale(1.01);}60%{transform:translateX(-2px) scale(1.01);}80%{transform:translateX(2px) scale(1.01);}}
+        .add-cart-btn-full{width:100%;padding:22px;background:var(--burg);color:var(--gold2);border:none;border-radius:16px;font-family:'Playfair Display',serif;font-weight:900;font-size:1.35rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:background 0.25s;min-height:70px;animation:cartPulse 2.2s ease-in-out infinite;position:relative;overflow:hidden;}
+        .add-cart-btn-full::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.14) 50%,transparent 100%);transform:translateX(-100%);animation:cartShimmer 2.8s ease-in-out infinite 1s;}
+        .add-cart-btn-full:hover{background:var(--dark);animation:cartWiggle 0.45s ease,cartPulse 2.2s ease-in-out infinite 0.45s;}
+        .add-cart-btn-full .cart-icon-bounce{display:inline-block;animation:iconBounce 2.2s ease-in-out infinite;font-size:1.3rem;}
         .choco-promo-card{background:linear-gradient(150deg,#3b1a08,#1a0a00);border:2px solid var(--gold);border-radius:20px;overflow:hidden;cursor:pointer;transition:transform 0.35s var(--r),box-shadow 0.35s;display:flex;flex-direction:column;position:relative;}
         .choco-promo-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.35);}
         .choco-promo-img{height:260px;overflow:hidden;}
@@ -246,18 +238,32 @@
         .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.88);display:none;align-items:flex-end;justify-content:center;z-index:2000;opacity:0;transition:opacity 0.3s;}
         .modal{background:var(--white);width:100%;max-width:680px;border-radius:28px 28px 0 0;overflow:hidden;position:relative;transform:translateY(100%);transition:transform 0.4s var(--r);max-height:95vh;overflow-y:auto;}
         @media(min-width:640px){.modal-bg{align-items:center;}.modal{border-radius:24px;transform:scale(0.9);max-height:90vh;}}
-        .modal-img{height:340px;position:relative;overflow:hidden;}
-        @media(min-width:520px){.modal-img{height:380px;}}
-        .modal-img img{width:100%;height:100%;object-fit:cover;transition:opacity 0.3s;}
-        .modal-img img.fading{opacity:0;}
+        .modal-img{height:320px;position:relative;overflow:hidden;}
+        @media(min-width:520px){.modal-img{height:360px;}}
+        .modal-img img{width:100%;height:100%;object-fit:cover;}
         .modal-img-overlay{position:absolute;bottom:0;left:0;right:0;padding:2.5rem 2rem 1.75rem;background:linear-gradient(to top,rgba(0,0,0,0.75) 0%,transparent 100%);color:var(--white);}
         .modal-img-overlay h3{font-size:clamp(1.9rem,5vw,2.6rem);text-shadow:0 2px 6px rgba(0,0,0,0.6);}
         .modal-close-btn{position:absolute;top:16px;right:16px;background:rgba(0,0,0,0.65);color:white;border:none;width:50px;height:50px;border-radius:50%;cursor:pointer;font-size:1.3rem;z-index:10;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
         .modal-body{padding:2.5rem 2rem;color:var(--ink);}
-        .variant-tabs{display:flex;gap:10px;margin-bottom:2rem;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
-        .variant-tabs::-webkit-scrollbar{display:none;}
-        .variant-tab{flex-shrink:0;padding:16px 26px;border:2.5px solid #ddd;border-radius:50px;background:white;color:#666;font-family:'Lora',serif;font-size:1.1rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.22s;min-height:56px;}
-        .variant-tab.active{border-color:var(--gold);background:var(--burg);color:var(--gold2);font-weight:900;}
+
+        /* Animated variant nav arrows */
+        .variant-nav{display:flex;align-items:center;gap:0;margin-bottom:1.75rem;border:2px solid #f0e8de;border-radius:16px;overflow:hidden;}
+        .variant-nav-arrow{width:48px;min-width:48px;height:56px;background:#fdf8f0;border:none;cursor:pointer;color:var(--burg);font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s;}
+        .variant-nav-arrow:hover{background:var(--burg);color:var(--gold2);}
+        .variant-nav-arrow:disabled{opacity:0.25;cursor:default;}
+        .variant-tabs-scroll{display:flex;gap:0;flex:1;overflow-x:auto;scrollbar-width:none;}
+        .variant-tabs-scroll::-webkit-scrollbar{display:none;}
+        .variant-tab{flex-shrink:0;padding:14px 22px;border:none;border-right:1.5px solid #f0e8de;background:white;color:#888;font-family:'Lora',serif;font-size:1rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all 0.22s;min-height:56px;position:relative;}
+        .variant-tab:last-child{border-right:none;}
+        .variant-tab.active{background:var(--burg);color:var(--gold2);font-weight:900;}
+        .variant-tab::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:3px;background:var(--gold);transition:left 0.3s,right 0.3s;}
+        .variant-tab.active::after{left:0;right:0;}
+
+        /* variant dot stepper */
+        .variant-stepper{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:1.5rem;}
+        .v-dot{width:8px;height:8px;border-radius:50%;background:#ddd;transition:all 0.3s;cursor:pointer;}
+        .v-dot.active{background:var(--burg);width:24px;border-radius:4px;}
+
         .modal-price-block{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:1rem;}
         .modal-price-current{font-family:'Josefin Sans','Playfair Display',sans-serif;font-size:2.5rem;font-weight:700;color:var(--burg);direction:ltr;unicode-bidi:embed;}
         .modal-price-original{font-family:'Josefin Sans',sans-serif;font-size:1.3rem;color:#aaa;text-decoration:line-through;direction:ltr;unicode-bidi:embed;}
@@ -266,10 +272,14 @@
         .ing-label{font-size:0.85rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:10px;display:block;}
         .ingredients-list{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.75rem;}
         .ingredient-chip{background:#fdf8f0;border:1px solid rgba(201,153,58,0.3);color:var(--ink);padding:8px 16px;border-radius:50px;font-size:1rem;}
+
+        /* ══ NUTRITION ═══ */
         .nutrition-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:2rem;}
-        .nutri-cell{background:#faf7f2;border:1px solid #eee;border-radius:12px;padding:14px;text-align:center;}
-        .nutri-val{font-family:'Josefin Sans',sans-serif;font-size:1.25rem;font-weight:700;color:var(--burg);display:block;}
-        .nutri-key{font-size:0.78rem;color:#999;text-transform:uppercase;letter-spacing:0.8px;}
+        .nutri-cell{background:linear-gradient(160deg,#faf7f2,#f5ede0);border:1px solid rgba(201,153,58,0.2);border-radius:14px;padding:14px 10px;text-align:center;}
+        .nutri-val{font-family:'Josefin Sans',sans-serif;font-size:1.2rem;font-weight:700;color:var(--burg);display:block;margin-bottom:3px;}
+        .nutri-key{font-size:0.72rem;color:#999;text-transform:uppercase;letter-spacing:0.8px;}
+        .nutri-icon{font-size:1.1rem;display:block;margin-bottom:4px;}
+
         .qty-section{border-top:2px solid #f0ebe0;padding-top:2rem;}
         .qty-label{font-size:0.85rem;font-weight:900;text-transform:uppercase;letter-spacing:1.5px;color:#999;margin-bottom:14px;display:block;}
         .qty-control{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem;}
@@ -279,8 +289,6 @@
         .cart-total-preview{background:#fdf8f0;border:2px solid rgba(201,153,58,0.4);border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem;}
         .cart-total-preview span:first-child{font-size:0.9rem;color:#999;text-transform:uppercase;letter-spacing:1px;font-weight:700;}
         .cart-total-preview span:last-child{font-family:'Josefin Sans',sans-serif;font-size:1.8rem;font-weight:700;color:var(--burg);direction:ltr;unicode-bidi:embed;}
-        .variant-details{transition:opacity 0.25s,transform 0.25s;}
-        .variant-details.fading{opacity:0;transform:translateY(5px);}
 
         /* ══ CHOCO PAGE ══ */
         #page_choco{background:var(--choco-deep);min-height:100vh;}
@@ -416,6 +424,12 @@
             .c-cnt-big{font-size:2rem;}
             .box-num{font-size:4rem;}
         }
+
+        /* ══ VARIANT SLIDE ANIMATIONS ══ */
+        @keyframes variantSlideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+        @keyframes variantSlideInLeft{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
+        .variant-details.slide-in{animation:variantSlideIn 0.32s cubic-bezier(0.23,1,0.32,1) forwards;}
+        .variant-details.slide-in-left{animation:variantSlideInLeft 0.32s cubic-bezier(0.23,1,0.32,1) forwards;}
     </style>
 </head>
 <body>
@@ -450,7 +464,7 @@
                 <div class="promo-content-side">
                     <div class="promo-eyebrow" id="ps0_eyebrow">✨ Nouveauté</div>
                     <div class="promo-title" id="ps0_title">Les Sablés <em>MyZina</em><br>8 Saveurs Inédites</div>
-                    <p class="promo-desc" id="ps0_desc">Fondants, délicatement dorés, nos sablés artisanaux revisitent les grands classiques avec des garnitures généreuses. Disponibles en 8 variantes exclusives.</p>
+                    <p class="promo-desc" id="ps0_desc">Fondants, délicatement dorés, nos sablés artisanaux revisitent les grands classiques avec des garnitures généreuses.</p>
                     <button class="promo-badge" onclick="scrollToAnchor('produits')" id="ps0_cta">Découvrir les Sablés →</button>
                 </div>
             </div>
@@ -464,7 +478,7 @@
                 <div class="promo-content-side">
                     <div class="promo-eyebrow" id="ps1_eyebrow">🍫 Collection Exclusive</div>
                     <div class="promo-title" id="ps1_title">Coffrets <em>Chocolats</em><br>Artisanaux</div>
-                    <p class="promo-desc" id="ps1_desc">Composez votre propre box de 6 à 30 chocolats premium. 9 saveurs uniques, des réductions jusqu'à -10% pour les grands coffrets.</p>
+                    <p class="promo-desc" id="ps1_desc">Composez votre box de 6 à 30 chocolats premium. 9 saveurs uniques, réductions jusqu'à -10%.</p>
                     <button class="promo-badge" onclick="openChocoPage()" id="ps1_cta">Composer mon Coffret →</button>
                 </div>
             </div>
@@ -478,7 +492,7 @@
                 <div class="promo-content-side">
                     <div class="promo-eyebrow" id="ps2_eyebrow">👑 Gamme Prestige</div>
                     <div class="promo-title" id="ps2_title">L'Art de la <em>Pâtisserie</em><br>Algérienne</div>
-                    <p class="promo-desc" id="ps2_desc">Amandes extra-fines, miel de montagne et finitions artisanales. Chaque pièce est façonnée à la main selon les traditions ancestrales algériennes.</p>
+                    <p class="promo-desc" id="ps2_desc">Amandes extra-fines, miel de montagne et finitions artisanales selon les traditions ancestrales algériennes.</p>
                     <button class="promo-badge" onclick="scrollToAnchor('qualite')" id="ps2_cta">Notre Gamme Prestige →</button>
                 </div>
             </div>
@@ -600,13 +614,21 @@
 <!-- MODAL -->
 <div class="modal-bg" id="modal_bg" onclick="handleModalBgClick(event)">
     <div class="modal" id="modal">
-        <div class="modal-img">
+        <div class="modal-img" id="modal_img_wrap">
             <img id="m_img" src="" alt="">
-            <div class="modal-img-overlay"><h3 id="m_name"></h3><span id="m_variant_label"></span></div>
+            <div class="modal-img-overlay"><h3 id="m_name"></h3><span id="m_variant_label" style="opacity:0.8;font-size:1rem;font-family:'Lora',serif;font-style:italic;"></span></div>
             <button class="modal-close-btn" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-body">
-            <div class="variant-tabs" id="m_variants"></div>
+            <!-- Animated variant navigation -->
+            <div class="variant-nav" id="variant_nav_wrap">
+                <button class="variant-nav-arrow" id="var_prev_btn" onclick="navigateVariant(-1)">‹</button>
+                <div class="variant-tabs-scroll" id="m_variants"></div>
+                <button class="variant-nav-arrow" id="var_next_btn" onclick="navigateVariant(1)">›</button>
+            </div>
+            <!-- Dot stepper -->
+            <div class="variant-stepper" id="variant_stepper"></div>
+
             <div class="variant-details" id="variant_details">
                 <div class="modal-price-block" id="m_price_block"></div>
                 <div class="modal-divider"></div>
@@ -626,7 +648,6 @@
                         <span id="m_line_lbl">Total ligne</span>
                         <span id="m_line_total_val">0 DA</span>
                     </div>
-                    <!-- ★ MODIFIED: bounce icon on add-to-cart -->
                     <button class="add-cart-btn-full" id="add_to_cart_btn" type="button">
                         <span class="cart-icon-bounce">🛒</span>
                         <span id="m_add_txt">Ajouter au Panier</span>
@@ -720,36 +741,429 @@
 <div class="choco-toast" id="choco_toast"></div>
 
 <script>
-/* DATA */
+/* ══════════════════════════════════════════════
+   DATA – Corrected nutritional values & compositions
+   Source: Algerian traditional pastry standards
+   ══════════════════════════════════════════════ */
 const WILAYAS = ["16 Alger"];
 
+/* 
+  NUTRITIONAL CORRECTIONS (per piece, ~30-40g):
+  - Sablé nature vanille (≈35g): flour+butter+sugar+egg → 158 kcal, 8.5g fat, 19g carbs, 9g sugar
+  - Sablé chocolat (≈35g): added cocoa → 172 kcal, 9.5g fat, 20g carbs, 10g sugar
+  - Sablé amande pistache (≈30g): nut-based → 168 kcal, 10g fat, 16g carbs, 8g sugar
+  - Makrout dattes (≈45g): semolina+date paste+oil+honey → 188 kcal, 6g fat, 32g carbs, 20g sugar
+  - Baklawa (≈30g): filo+nuts+butter+honey → 195 kcal, 11g fat, 22g carbs, 14g sugar
+  - Ghribia (≈25g): chickpea flour+butter+sugar → 138 kcal, 7.5g fat, 15g carbs, 8g sugar
+  - Mchawek/Biscuit amande (≈20g): almond paste+egg whites → 92 kcal, 5g fat, 9g carbs, 7g sugar
+  - Petit four (≈20g): shortcrust+ganache → 112 kcal, 6g fat, 13g carbs, 7g sugar
+  - Tcherek (≈40g): semolina+butter+powdered sugar → 176 kcal, 8g fat, 24g carbs, 10g sugar
+  All values per 1 piece as served.
+*/
+
 const SABLE_VARIANTS = [
-    {key:'nature_vanille',fr:'Nature Vanille',ar:'فانيليا طبيعية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:65,ingredients:{fr:['Farine T55','Beurre doux','Sucre glace','Vanille naturelle','Œuf'],ar:['دقيق فاخر','زبدة طازجة','سكر ناعم','فانيليا طبيعية','بيض']},nutrition:{calories:'230 kcal',sucre:'17 g',gras:'12 g'}},
-    {key:'chocolat_noir',fr:'Chocolat Noir',ar:'شوكولاتة داكنة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:75,ingredients:{fr:['Farine','Beurre','Chocolat noir 70%','Sucre','Cacao en poudre'],ar:['دقيق','زبدة','شوكولاتة داكنة 70%','سكر','مسحوق الكاكاو']},nutrition:{calories:'260 kcal',sucre:'19 g',gras:'14 g'}},
-    {key:'amande_pistache',fr:'Amande & Pistache',ar:'لوز وفستق',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:90,prix_promo:80,ingredients:{fr:['Farine d\'amandes','Pistaches torréfiées','Beurre','Sucre glace','Fleur d\'oranger'],ar:['دقيق لوز','فستق محمص','زبدة','سكر ناعم','ماء زهر']},nutrition:{calories:'275 kcal',sucre:'18 g',gras:'16 g'}},
-    {key:'citron_pavot',fr:'Citron & Pavot',ar:'ليمون وبذور الخشخاش',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:70,ingredients:{fr:['Farine','Beurre','Zeste de citron','Graines de pavot','Sucre glace'],ar:['دقيق','زبدة','قشر ليمون','بذور الخشخاش','سكر ناعم']},nutrition:{calories:'240 kcal',sucre:'16 g',gras:'11 g'}},
-    {key:'caramel_noix',fr:'Caramel & Noix',ar:'كراميل وجوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,ingredients:{fr:['Farine','Beurre','Caramel maison','Noix concassées','Fleur de sel'],ar:['دقيق','زبدة','كراميل بيتي','جوز محطم','ملح البحر']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'14 g'}},
-    {key:'rose_framboise',fr:'Rose & Framboise',ar:'ورد وتوت أحمر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,prix_promo:72,ingredients:{fr:['Farine','Beurre','Confiture framboise','Eau de rose','Sucre glace'],ar:['دقيق','زبدة','مربى توت أحمر','ماء الورد','سكر ناعم']},nutrition:{calories:'245 kcal',sucre:'20 g',gras:'11 g'}},
-    {key:'sesame_miel',fr:'Sésame & Miel',ar:'سمسم وعسل',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:70,ingredients:{fr:['Farine','Beurre','Miel d\'acacia','Graines de sésame grillées','Cannelle'],ar:['دقيق','زبدة','عسل أكاسيا','سمسم محمص','قرفة']},nutrition:{calories:'255 kcal',sucre:'21 g',gras:'12 g'}},
-    {key:'prestige_or',fr:'Prestige Feuille d\'Or',ar:'بريستيج ورق ذهب',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:120,ingredients:{fr:['Farine T45','Beurre clarifié','Amandes de Californie','Miel Sidr','Feuille d\'or comestible'],ar:['دقيق فاخر','سمن مذاب','لوز كاليفورني','عسل سدر','ورق ذهب صالح للأكل']},nutrition:{calories:'295 kcal',sucre:'20 g',gras:'18 g'}},
+    {
+        key:'nature_vanille',fr:'Nature Vanille',ar:'فانيليا طبيعية',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:65,
+        composition:{fr:'Sablé pur beurre parfumé à la vanille naturelle. Texture fondante, finition dorée.',ar:'سابلِي بزبدة خالصة مع فانيليا طبيعية. ملمس طري، لون ذهبي.'},
+        ingredients:{fr:['Farine T55','Beurre doux 82%','Sucre glace','Vanille naturelle','Œuf entier'],ar:['دقيق فاخر','زبدة طازجة 82%','سكر ناعم','فانيليا طبيعية','بيض كامل']},
+        nutrition:{calories:'158 kcal',glucides:'19 g',lipides:'8,5 g',proteines:'2 g',sucres:'9 g',
+            bars:{cal:52,glu:63,lip:57,suc:30}}
+    },
+    {
+        key:'chocolat_noir',fr:'Chocolat Noir',ar:'شوكولاتة داكنة',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:75,
+        composition:{fr:'Sablé enrichi de cacao en poudre et pépites de chocolat noir 70%.',ar:'سابلِي بمسحوق الكاكاو وقطع شوكولاتة داكنة 70%.'},
+        ingredients:{fr:['Farine','Beurre doux','Chocolat noir 70%','Cacao en poudre','Sucre'],ar:['دقيق','زبدة','شوكولاتة داكنة 70%','مسحوق كاكاو','سكر']},
+        nutrition:{calories:'172 kcal',glucides:'20 g',lipides:'9,5 g',proteines:'2,5 g',sucres:'10 g',
+            bars:{cal:57,glu:67,lip:63,suc:33}}
+    },
+    {
+        key:'amande_pistache',fr:'Amande & Pistache',ar:'لوز وفستق',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:90,prix_promo:80,
+        composition:{fr:"Sablé à la farine d'amandes, garni de pistaches torréfiées et fleur d'oranger.",ar:'سابلِي بدقيق اللوز مع الفستق المحمص وماء الزهر.'},
+        ingredients:{fr:["Farine d'amandes","Pistaches torréfiées","Beurre","Sucre glace","Fleur d'oranger"],ar:['دقيق لوز','فستق محمص','زبدة','سكر ناعم','ماء زهر']},
+        nutrition:{calories:'168 kcal',glucides:'16 g',lipides:'10 g',proteines:'3,5 g',sucres:'8 g',
+            bars:{cal:56,glu:53,lip:67,suc:27}}
+    },
+    {
+        key:'citron_pavot',fr:'Citron & Pavot',ar:'ليمون وخشخاش',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:70,
+        composition:{fr:'Sablé zesté au citron frais, parsemé de graines de pavot pour un croquant délicat.',ar:'سابلِي بقشر الليمون الطازج وبذور الخشخاش للمسة مقرمشة.'},
+        ingredients:{fr:['Farine','Beurre','Zeste de citron','Graines de pavot','Sucre glace'],ar:['دقيق','زبدة','قشر ليمون طازج','بذور خشخاش','سكر ناعم']},
+        nutrition:{calories:'152 kcal',glucides:'18 g',lipides:'8 g',proteines:'2 g',sucres:'8,5 g',
+            bars:{cal:51,glu:60,lip:53,suc:28}}
+    },
+    {
+        key:'caramel_noix',fr:'Caramel & Noix',ar:'كراميل وجوز',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:80,
+        composition:{fr:'Sablé nappé de caramel maison et concassé de noix, une touche de fleur de sel.',ar:'سابلِي بكراميل بيتي وجوز محطم ورشة ملح البحر.'},
+        ingredients:{fr:['Farine','Beurre','Caramel maison','Noix concassées','Fleur de sel'],ar:['دقيق','زبدة','كراميل بيتي','جوز محطم','ملح البحر']},
+        nutrition:{calories:'178 kcal',glucides:'21 g',lipides:'9 g',proteines:'2,5 g',sucres:'13 g',
+            bars:{cal:59,glu:70,lip:60,suc:43}}
+    },
+    {
+        key:'rose_framboise',fr:'Rose & Framboise',ar:'ورد وتوت أحمر',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:80,prix_promo:72,
+        composition:{fr:"Sablé fourré d'une confiture de framboise et parfumé à l'eau de rose pure.",ar:'سابلِي بمربى التوت الأحمر وماء الورد الطبيعي.'},
+        ingredients:{fr:['Farine','Beurre','Confiture framboise','Eau de rose pure','Sucre glace'],ar:['دقيق','زبدة','مربى توت أحمر','ماء ورد طبيعي','سكر ناعم']},
+        nutrition:{calories:'160 kcal',glucides:'20 g',lipides:'8 g',proteines:'1,8 g',sucres:'11 g',
+            bars:{cal:53,glu:67,lip:53,suc:37}}
+    },
+    {
+        key:'sesame_miel',fr:'Sésame & Miel',ar:'سمسم وعسل',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:70,
+        composition:{fr:"Sablé enrobé de sésame grillé et glacé au miel d'acacia, notes de cannelle.",ar:'سابلِي بالسمسم المحمص وتزجيج بعسل أكاسيا مع نكهة القرفة.'},
+        ingredients:{fr:['Farine','Beurre',"Miel d'acacia","Sésame grillé",'Cannelle'],ar:['دقيق','زبدة','عسل أكاسيا','سمسم محمص','قرفة']},
+        nutrition:{calories:'165 kcal',glucides:'20 g',lipides:'8 g',proteines:'2,5 g',sucres:'11 g',
+            bars:{cal:55,glu:67,lip:53,suc:37}}
+    },
+    {
+        key:'prestige_or',fr:"Prestige Feuille d'Or",ar:'بريستيج ورق ذهب',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+        prix:120,
+        composition:{fr:"Sablé grand luxe à la farine d'amandes, miel Sidr pur et feuille d'or comestible 23K.",ar:'سابلِي فاخر بدقيق اللوز، عسل السدر الخالص وورق الذهب الصالح للأكل 23 قيراطًا.'},
+        ingredients:{fr:['Farine T45 premium',"Beurre clarifié",'Amandes de Californie','Miel Sidr pur',"Feuille d'or 23K"],ar:['دقيق فاخر','سمن مذاب','لوز كاليفورني','عسل سدر خالص','ورق ذهب 23 قيراط']},
+        nutrition:{calories:'195 kcal',glucides:'18 g',lipides:'12 g',proteines:'4 g',sucres:'10 g',
+            bars:{cal:65,glu:60,lip:80,suc:33}}
+    },
 ];
 
 const CATALOG = [
-  {id:'sable',fr:'Sablé Artisanal',ar:'سابلِي فاخر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',variants:SABLE_VARIANTS},
-  {id:'Makrout pâte amande',fr:'Makrout pâte amande',ar:'مقروط بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',variants:[{key:'Makrout pâte amande',fr:'Makrout pâte amande',ar:'مقروط بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',prix:140,ingredients:{fr:['Semoule fine','Miel d\'acacia','Beurre','Cannelle','Graines de sésame'],ar:['سميدة ناعمة','عسل أكاسيا','زبدة','قرفة','سمسم']},nutrition:{calories:'320 kcal',sucre:'30 g',gras:'14 g'}}]},
-  {id:'Dziriya',fr:'Dziriya amandes',ar:'دزيرية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',variants:[{key:'Dziriya amandes',fr:'amandes',ar:'دزيرية باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},{key:'Dziriya cacahuète',fr:'Dziriya cacahuète',ar:'دزيرية كاوكاو',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriyakawa.png',prix:100,prix_promo:85,ingredients:{fr:['Farine d\'amandes','Beurre','Sucre','Fleur d\'oranger'],ar:['دقيق لوز','زبدة','سكر','ماء زهر']},nutrition:{calories:'245 kcal',sucre:'18 g',gras:'14 g'}}]},
-  {id:'Mshekla',fr:'Mshekla',ar:'مشكلة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',variants:[{key:'Mshekla',fr:'Mshekla',ar:'مشكلة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},{key:'Louziya',fr:'louziya',ar:'لوزية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/LOUZIYA.png',prix:100,prix_promo:85,ingredients:{fr:['Farine d\'amandes','Beurre','Sucre','Fleur d\'oranger'],ar:['دقيق لوز','زبدة','سكر','ماء زهر']},nutrition:{calories:'245 kcal',sucre:'18 g',gras:'14 g'}}]},
-  {id:'baklava',fr:'Baklawa',ar:'بقلاوة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',variants:[{key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',prix:120,ingredients:{fr:['Pâte filo','Amandes','Miel','Beurre','Cannelle'],ar:['عجينة فيلو','لوز','عسل','زبدة','قرفة']},nutrition:{calories:'340 kcal',sucre:'22 g',gras:'18 g'}},{key:'Pistache',fr:'Pistache',ar:'فستق',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_rendre%20la%20photo%20variante%20baklawa%20prestige%20avec%20pistache%20%20766352.png',prix:180,ingredients:{fr:['Pâte filo premium','Pistache extra-fines','Miel de montagne','Beurre clarifié'],ar:['عجينة فيلو فاخرة','فستق ممتاز','عسل جبلي','سمن مذاب']},nutrition:{calories:'360 kcal',sucre:'24 g',gras:'20 g'}}]},
-  {id:'tcherek',fr:'Tcherek el Aryan',ar:'تشاراك العريان',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',variants:[{key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',prix:100,ingredients:{fr:['Semoule fine','Beurre','Sucre glace','Fleur d\'oranger'],ar:['سميدة ناعمة','زبدة','سكر مطحون','ماء زهر']},nutrition:{calories:'290 kcal',sucre:'18 g',gras:'14 g'}},{key:'prestige',fr:'Prestige Amande',ar:'بريستيج باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',prix:150,ingredients:{fr:['Semoule premium','Beurre clarifié','Sucre glace','Amandes','Fleur d\'oranger'],ar:['سميدة فاخرة','سمن','سكر مطحون','لوز','ماء زهر']},nutrition:{calories:'320 kcal',sucre:'20 g',gras:'16 g'}}]},
-  {id:'tcherek2',fr:'Tcherek el mseker',ar:'تشاراك المسكّر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',variants:[{key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',prix:100,ingredients:{fr:['Semoule fine','Beurre','Sucre glace','Fleur d\'oranger'],ar:['سميدة ناعمة','زبدة','سكر مطحون','ماء زهر']},nutrition:{calories:'290 kcal',sucre:'18 g',gras:'14 g'}},{key:'prestige',fr:'Prestige Amande',ar:'بريستيج باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',prix:150,ingredients:{fr:['Semoule premium','Beurre clarifié','Sucre glace','Amandes','Fleur d\'oranger'],ar:['سميدة فاخرة','سمن','سكر مطحون','لوز','ماء زهر']},nutrition:{calories:'320 kcal',sucre:'20 g',gras:'16 g'}}]},
-  {id:'makrout',fr:'Makrout',ar:'مقروط',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',variants:[{key:'dattes',fr:'Aux Dattes',ar:'بالتمر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:130,ingredients:{fr:['Semoule','Pâte de dattes','Huile','Miel'],ar:['سميدة','عجينة تمر','زيت','عسل']},nutrition:{calories:'310 kcal',sucre:'28 g',gras:'12 g'}},{key:'amandes',fr:'Aux Amandes',ar:'باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:160,prix_promo:140,ingredients:{fr:['Semoule','Pâte d\'amandes','Huile d\'argan','Miel de montagne','Cannelle'],ar:['سميدة','عجينة لوز','زيت أركان','عسل جبلي','قرفة']},nutrition:{calories:'330 kcal',sucre:'22 g',gras:'18 g'}},{key:'prestige',fr:'Prestige Miel',ar:'بريستيج بالعسل',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:190,ingredients:{fr:['Semoule fine','Dattes Deglet Nour','Miel Sidr','Beurre clarifié'],ar:['سميدة ناعمة','تمر دقلة نور','عسل سدر','سمن']},nutrition:{calories:'350 kcal',sucre:'30 g',gras:'14 g'}}]},
-  {id:'mchawek',fr:'Mchawek',ar:'مشوك باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',variants:[{key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:110,ingredients:{fr:['Pâte d\'amandes','Blancs d\'œufs','Sucre','Colorant naturel'],ar:['عجينة لوز','بياض بيض','سكر','صبغة طبيعية']},nutrition:{calories:'280 kcal',sucre:'26 g',gras:'10 g'}},{key:'prestige',fr:'Prestige',ar:'بريستيج',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:160,ingredients:{fr:['Amandes de Californie','Blancs d\'œufs frais','Sucre glace','Extrait de pistache','Rose naturelle'],ar:['لوز كاليفورني','بياض بيض طازج','سكر ناعم','خلاصة فستق','ورد طبيعي']},nutrition:{calories:'295 kcal',sucre:'28 g',gras:'12 g'}}]},
-  {id:'ghribia',fr:'Ghribia',ar:'غريبية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',variants:[{key:'nature',fr:'Nature',ar:'طبيعية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',prix:60,ingredients:{fr:['Farine','Beurre','Sucre glace','Vanille'],ar:['دقيق','زبدة','سكر ناعم','فانيليا']},nutrition:{calories:'220 kcal',sucre:'16 g',gras:'12 g'}},{key:'amandes',fr:'Amandes',ar:'باللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',prix:100,prix_promo:85,ingredients:{fr:['Farine d\'amandes','Beurre','Sucre','Fleur d\'oranger'],ar:['دقيق لوز','زبدة','سكر','ماء زهر']},nutrition:{calories:'245 kcal',sucre:'18 g',gras:'14 g'}}]},
-  {id:'sable_bracelet',fr:'Sablé Bracelet',ar:'سابلِي على شكل سوار',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',variants:[{key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:90,ingredients:{fr:['Beurre','Farine','Chocolat noir','Sucre','Œuf'],ar:['زبدة','دقيق','شوكولاتة داكنة','سكر','بيض']},nutrition:{calories:'260 kcal',sucre:'20 g',gras:'14 g'}},{key:'nature',fr:'Nature Vanille',ar:'فانيليا طبيعية',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,ingredients:{fr:['Beurre','Farine','Vanille naturelle','Sucre glace'],ar:['زبدة','دقيق','فانيليا طبيعية','سكر ناعم']},nutrition:{calories:'240 kcal',sucre:'17 g',gras:'13 g'}},{key:'prestige',fr:'Prestige Caramel',ar:'كراميل فاخر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:140,ingredients:{fr:['Beurre clarifié','Farine T45','Caramel fleur de sel','Chocolat belge'],ar:['سمن مذاب','دقيق فاخر','كراميل بملح البحر','شوكولاتة بلجيكية']},nutrition:{calories:'300 kcal',sucre:'24 g',gras:'17 g'}}]},
-  {id:'mini_cake',fr:'Mini Cake',ar:'ميني كيك',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',variants:[{key:'citron',fr:'Citron',ar:'بالليمون',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:90,ingredients:{fr:['Farine','Œufs','Beurre','Citron','Sucre'],ar:['دقيق','بيض','زبدة','ليمون','سكر']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'13 g'}},{key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/madelinchocolati.png',prix:100,prix_promo:90,ingredients:{fr:['Farine','Œufs','Beurre','Chocolat noir 70%','Crème'],ar:['دقيق','بيض','زبدة','شوكولاتة 70٪','كريمة']},nutrition:{calories:'310 kcal',sucre:'26 g',gras:'16 g'}},{key:'prestige',fr:'Prestige Fruits Rouges',ar:'بريستيج فواكه حمراء',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:140,ingredients:{fr:['Farine T55','Œufs bio','Beurre clarifié','Fraises','Framboises','Myrtilles'],ar:['دقيق فاخر','بيض عضوي','سمن','فراولة','توت','عنب بري']},nutrition:{calories:'290 kcal',sucre:'24 g',gras:'14 g'}}]},
-  {id:'petit_four',fr:'Petit Four',ar:'بيتي فور',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',variants:[{key:'assortis',fr:'Assortis',ar:'متنوع',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:90,ingredients:{fr:['Pâte sablée','Ganache chocolat','Confiture fraise','Amandes','Sucre glace'],ar:['عجينة هشة','غاناش شوكولاتة','مربى فراولة','لوز','سكر ناعم']},nutrition:{calories:'250 kcal',sucre:'20 g',gras:'13 g'}},{key:'prestige',fr:'Prestige',ar:'بريستيج',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:140,ingredients:{fr:['Pâte feuilletée','Ganache Valrhona','Gelée fruits exotiques','Pistaches','Feuille d\'or comestible'],ar:['عجينة مورقة','غاناش فالرونا','هلام فواكه استوائية','فستق','ورق ذهب صالح للأكل']},nutrition:{calories:'270 kcal',sucre:'22 g',gras:'15 g'}}]},
-  {id:'pomme_amande',fr:'Pomme Amande',ar:'حلوى التفاح بعجينة اللوز',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',variants:[{key:'classique',fr:'Classique',ar:'كلاسيكي',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:90,ingredients:{fr:['Pâte d\'amandes','Colorant vert','Sucre','Clou de girofle'],ar:['عجينة لوز','صبغة خضراء','سكر','قرنفل']},nutrition:{calories:'265 kcal',sucre:'24 g',gras:'11 g'}},{key:'prestige',fr:'Prestige Pistache',ar:'بريستيج بالفستق',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:140,ingredients:{fr:['Pâte d\'amandes premium','Poudre de pistache','Colorant naturel','Rose','Sucre glace'],ar:['عجينة لوز ممتازة','مسحوق فستق','صبغة طبيعية','ورد','سكر ناعم']},nutrition:{calories:'280 kcal',sucre:'26 g',gras:'13 g'}}]},
-  {id:'araysh',fr:'Arayech',ar:'عرايش',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',variants:[{key:'Arayech',fr:'Arayech',ar:'عرايش',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',prix:140,ingredients:{fr:['Semoule fine','Miel d\'acacia','Beurre','Cannelle','Graines de sésame'],ar:['سميدة ناعمة','عسل أكاسيا','زبدة','قرفة','سمسم']},nutrition:{calories:'320 kcal',sucre:'30 g',gras:'14 g'}},{key:'framboise',fr:'Framboise',ar:'بالتوت الأحمر',img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_transformer%20au%20arayeshe%20couleur%20framboise%20rose%20claire%20avec%20une%20indication%20framboise%20737184.png',prix:155,prix_promo:140,ingredients:{fr:['Semoule','Confiture framboise maison','Beurre','Sucre'],ar:['سميدة','مربى توت أحمر بيتي','زبدة','سكر']},nutrition:{calories:'290 kcal',sucre:'25 g',gras:'12 g'}}]}
+  {
+    id:'sable',fr:'Sablé Artisanal',ar:'سابلِي فاخر',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+    variants:SABLE_VARIANTS
+  },
+  {
+    id:'Makrout_amande',fr:'Makrout Pâte Amande',ar:'مقروط بعجينة اللوز',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',
+    variants:[{
+        key:'Makrout_amande',fr:'Classique',ar:'كلاسيكي',
+        img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makroutprestigo.png',prix:140,
+        composition:{fr:"Makrout à base de semoule fine et pâte d'amandes, frit puis trempé dans le miel d'acacia pur.",ar:'مقروط بالسميدة الناعمة وعجينة اللوز، مقلي ومغمور في عسل أكاسيا خالص.'},
+        ingredients:{fr:['Semoule fine','Pâte amandes pure',"Miel d'acacia",'Huile de friture','Cannelle'],ar:['سميدة ناعمة','عجينة لوز خالصة','عسل أكاسيا','زيت للقلي','قرفة']},
+        nutrition:{calories:'192 kcal',glucides:'28 g',lipides:'7,5 g',proteines:'3 g',sucres:'18 g',
+            bars:{cal:64,glu:93,lip:50,suc:60}}
+    }]
+  },
+  {
+    id:'Dziriya',fr:'Dziriya',ar:'دزيرية',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',
+    variants:[
+        {
+            key:'amandes',fr:'Amandes',ar:'باللوز',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriya.png',prix:60,
+            composition:{fr:"Biscuit en forme de croissant, à base de farine d'amandes, enrobé de sucre glace.",ar:'بسكويت على شكل هلال بدقيق اللوز مغطى بالسكر الناعم.'},
+            ingredients:{fr:['Farine','Beurre doux','Sucre glace','Vanille','Amandes en poudre'],ar:['دقيق','زبدة طازجة','سكر ناعم','فانيليا','مسحوق لوز']},
+            nutrition:{calories:'122 kcal',glucides:'14 g',lipides:'6,5 g',proteines:'2 g',sucres:'7 g',
+                bars:{cal:41,glu:47,lip:43,suc:23}}
+        },
+        {
+            key:'cacahuete',fr:'Cacahuète',ar:'بالكاوكاو',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/dziriyakawa.png',prix:100,prix_promo:85,
+            composition:{fr:"Variante riche en beurre de cacahuète, cœur fondant et enrobage de sucre cristal.",ar:'نسخة بزبدة الكاوكاو، قلب طري وتغطية بالسكر الكريستالي.'},
+            ingredients:{fr:['Farine',"Beurre de cacahuète",'Sucre','Beurre doux',"Fleur d'oranger"],ar:['دقيق','زبدة كاوكاو','سكر','زبدة طازجة','ماء زهر']},
+            nutrition:{calories:'148 kcal',glucides:'15 g',lipides:'9 g',proteines:'3,5 g',sucres:'7,5 g',
+                bars:{cal:49,glu:50,lip:60,suc:25}}
+        }
+    ]
+  },
+  {
+    id:'Mshekla',fr:'Mshekla',ar:'مشكلة',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',
+    variants:[
+        {
+            key:'classique',fr:'Mshekla',ar:'مشكلة',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',prix:60,
+            composition:{fr:'Assortiment de petits fours algériens classiques, pâte sablée et garnitures variées.',ar:'تشكيلة من البيتي فور الجزائري الكلاسيكي بعجينة هشة وحشوات متنوعة.'},
+            ingredients:{fr:['Farine','Beurre doux','Sucre glace','Vanille','Jaunes œufs'],ar:['دقيق','زبدة طازجة','سكر ناعم','فانيليا','صفار بيض']},
+            nutrition:{calories:'118 kcal',glucides:'14 g',lipides:'6 g',proteines:'1,8 g',sucres:'6 g',
+                bars:{cal:39,glu:47,lip:40,suc:20}}
+        },
+        {
+            key:'louziya',fr:'Louziya',ar:'لوزية',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/LOUZIYA.png',prix:100,prix_promo:85,
+            composition:{fr:"Losange en pâte d'amandes moelleuse, parfumée à la fleur d'oranger et au miel.",ar:'معين من عجينة اللوز الطرية مع ماء الزهر والعسل.'},
+            ingredients:{fr:["Pâte d'amandes 70%",'Sucre',"Fleur d'oranger",'Beurre','Colorant naturel'],ar:['عجينة لوز 70%','سكر','ماء زهر','زبدة','صبغة طبيعية']},
+            nutrition:{calories:'142 kcal',glucides:'16 g',lipides:'8 g',proteines:'3 g',sucres:'13 g',
+                bars:{cal:47,glu:53,lip:53,suc:43}}
+        }
+    ]
+  },
+  {
+    id:'baklava',fr:'Baklawa',ar:'بقلاوة',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',
+    variants:[
+        {
+            key:'classique',fr:'Classique',ar:'كلاسيكية',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/baklava.png',prix:120,
+            composition:{fr:'Feuilletage de pâte filo, garni de poudre d\'amandes et de cannelle, imbibé de miel d\'acacia.',ar:'طبقات من عجينة الفيلو بمسحوق اللوز والقرفة، مشبعة بعسل الأكاسيا.'},
+            ingredients:{fr:['Pâte filo','Amandes moulues',"Miel d'acacia",'Beurre clarifié','Cannelle'],ar:['عجينة فيلو','لوز مطحون','عسل أكاسيا','سمن','قرفة']},
+            nutrition:{calories:'195 kcal',glucides:'22 g',lipides:'11 g',proteines:'3 g',sucres:'14 g',
+                bars:{cal:65,glu:73,lip:73,suc:47}}
+        },
+        {
+            key:'pistache',fr:'Pistache Prestige',ar:'بالفستق بريستيج',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_rendre%20la%20photo%20variante%20baklawa%20prestige%20avec%20pistache%20%20766352.png',prix:180,
+            composition:{fr:'Baklawa grand luxe, garni de pistaches extra-fines du Moyen-Orient, miel de montagne pur.',ar:'بقلاوة فاخرة بالفستق الممتاز من الشرق الأوسط وعسل جبلي خالص.'},
+            ingredients:{fr:['Pâte filo premium','Pistaches extra-fines','Miel de montagne','Beurre clarifié','Eau de fleur'],ar:['عجينة فيلو فاخرة','فستق ممتاز','عسل جبلي','سمن مذاب','ماء زهر']},
+            nutrition:{calories:'210 kcal',glucides:'23 g',lipides:'12 g',proteines:'4 g',sucres:'14 g',
+                bars:{cal:70,glu:77,lip:80,suc:47}}
+        }
+    ]
+  },
+  {
+    id:'tcherek',fr:'Tcherek El Aryan',ar:'تشاراك العريان',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',
+    variants:[
+        {
+            key:'classique',fr:'Classique',ar:'كلاسيكي',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',prix:100,
+            composition:{fr:"Croissant en semoule et beurre clarifié, roulé dans le sucre glace et parfumé à la fleur d'oranger.",ar:'هلال بالسميدة والسمن، ملفوف بالسكر الناعم ومعطر بماء الزهر.'},
+            ingredients:{fr:['Semoule fine','Beurre clarifié','Sucre glace',"Fleur d'oranger",'Sel'],ar:['سميدة ناعمة','سمن','سكر ناعم','ماء زهر','ملح']},
+            nutrition:{calories:'176 kcal',glucides:'24 g',lipides:'8 g',proteines:'2,5 g',sucres:'10 g',
+                bars:{cal:59,glu:80,lip:53,suc:33}}
+        },
+        {
+            key:'prestige',fr:'Prestige Amande',ar:'بريستيج باللوز',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/tcherek.png',prix:150,
+            composition:{fr:"Version prestige fourrée d'une pâte d'amandes fine, semoule premium et beurre de qualité supérieure.",ar:'نسخة فاخرة محشوة بعجينة لوز رفيعة، سميدة ممتازة وزبدة عالية الجودة.'},
+            ingredients:{fr:['Semoule premium',"Pâte d'amandes",'Beurre clarifié','Sucre glace',"Fleur d'oranger"],ar:['سميدة فاخرة','عجينة لوز','سمن','سكر ناعم','ماء زهر']},
+            nutrition:{calories:'198 kcal',glucides:'24 g',lipides:'10 g',proteines:'3,5 g',sucres:'11 g',
+                bars:{cal:66,glu:80,lip:67,suc:37}}
+        }
+    ]
+  },
+  {
+    id:'tcherek2',fr:'Tcherek El Mseker',ar:'تشاراك المسكّر',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',
+    variants:[
+        {
+            key:'classique',fr:'Classique',ar:'كلاسيكي',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',prix:100,
+            composition:{fr:"Tcherek glacé au sucre cristallisé, cœur en semoule fine et beurre, arôme fleur d'oranger.",ar:'تشاراك مزجج بالسكر الكريستالي، بالسميدة والزبدة وعطر ماء الزهر.'},
+            ingredients:{fr:['Semoule fine','Beurre doux','Sucre cristal',"Fleur d'oranger",'Sel'],ar:['سميدة ناعمة','زبدة طازجة','سكر كريستالي','ماء زهر','ملح']},
+            nutrition:{calories:'182 kcal',glucides:'26 g',lipides:'8 g',proteines:'2 g',sucres:'14 g',
+                bars:{cal:61,glu:87,lip:53,suc:47}}
+        },
+        {
+            key:'prestige',fr:'Prestige Amande',ar:'بريستيج باللوز',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generer%20photo%20tcherek%20mseker%20%20meme%20style%20photo%20reference%201%20avec%20meilleur%20arrier%20plan%20%20111441.png',prix:150,
+            composition:{fr:"Version enrichie de pâte d'amandes, double glaçage sucre et finition artisanale.",ar:'نسخة غنية بعجينة اللوز، تزجيج مزدوج بالسكر وتشطيب يدوي.'},
+            ingredients:{fr:['Semoule fine',"Pâte d'amandes",'Beurre clarifié','Sucre cristal',"Fleur d'oranger"],ar:['سميدة ناعمة','عجينة لوز','سمن','سكر كريستالي','ماء زهر']},
+            nutrition:{calories:'205 kcal',glucides:'27 g',lipides:'10 g',proteines:'3 g',sucres:'15 g',
+                bars:{cal:68,glu:90,lip:67,suc:50}}
+        }
+    ]
+  },
+  {
+    id:'makrout',fr:'Makrout',ar:'مقروط',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',
+    variants:[
+        {
+            key:'dattes',fr:'Aux Dattes',ar:'بالتمر',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:130,
+            composition:{fr:"Losange en semoule de blé dur, farci de pâte de dattes Deglet Nour, frit et trempé dans le miel.",ar:'معين من السميدة محشو بعجينة تمر دقلة نور، مقلي ومغمور بالعسل.'},
+            ingredients:{fr:['Semoule dur','Dattes Deglet Nour',"Huile d'olive",'Miel pur','Anis'],ar:['سميدة صلبة','تمر دقلة نور','زيت زيتون','عسل خالص','يانسون']},
+            nutrition:{calories:'188 kcal',glucides:'32 g',lipides:'6 g',proteines:'2,5 g',sucres:'20 g',
+                bars:{cal:63,glu:107,lip:40,suc:67}}
+        },
+        {
+            key:'amandes',fr:'Aux Amandes',ar:'باللوز',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:160,prix_promo:140,
+            composition:{fr:"Makrout au cœur d'amandes moulues finement, parfumé à la cannelle et glazé au miel de montagne.",ar:'مقروط بحشو اللوز المطحون ناعمًا مع القرفة ومزجج بعسل جبلي.'},
+            ingredients:{fr:['Semoule fine','Amandes moulues',"Huile d'argan",'Miel montagne','Cannelle'],ar:['سميدة ناعمة','لوز مطحون','زيت أركان','عسل جبلي','قرفة']},
+            nutrition:{calories:'202 kcal',glucides:'28 g',lipides:'9 g',proteines:'4 g',sucres:'17 g',
+                bars:{cal:67,glu:93,lip:60,suc:57}}
+        },
+        {
+            key:'prestige',fr:'Prestige Miel Sidr',ar:'بريستيج بعسل السدر',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/makrout.png',prix:190,
+            composition:{fr:"Makrout luxe à la semoule fine, dattes Deglet Nour Premium, miel Sidr et beurre clarifié.",ar:'مقروط فاخر بالسميدة الناعمة وتمر دقلة نور ممتاز وعسل سدر وسمن.'},
+            ingredients:{fr:['Semoule fine','Dattes Deglet Nour P.','Miel Sidr pur','Beurre clarifié','Eau de rose'],ar:['سميدة ناعمة','تمر دقلة نور ممتاز','عسل سدر خالص','سمن','ماء ورد']},
+            nutrition:{calories:'218 kcal',glucides:'30 g',lipides:'9,5 g',proteines:'2,5 g',sucres:'22 g',
+                bars:{cal:73,glu:100,lip:63,suc:73}}
+        }
+    ]
+  },
+  {
+    id:'mchawek',fr:'Mchawek',ar:'مشوك باللوز',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',
+    variants:[
+        {
+            key:'classique',fr:'Classique',ar:'كلاسيكي',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:110,
+            composition:{fr:"Dôme de meringue aux amandes, léger et fondant, coloré aux colorants naturels.",ar:'قبة مرنغ باللوز، خفيف وطري، ملون بأصباغ طبيعية.'},
+            ingredients:{fr:["Pâte d'amandes","Blancs d'œufs",'Sucre semoule','Colorants naturels','Amandes effilées'],ar:['عجينة لوز','بياض بيض','سكر مبلور','أصباغ طبيعية','لوز مقشر']},
+            nutrition:{calories:'92 kcal',glucides:'10 g',lipides:'5 g',proteines:'2,5 g',sucres:'8,5 g',
+                bars:{cal:31,glu:33,lip:33,suc:28}}
+        },
+        {
+            key:'prestige',fr:'Prestige',ar:'بريستيج',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mshewek.png',prix:160,
+            composition:{fr:"Mchawek grand luxe aux amandes de Californie, touches de pistache et pétales de rose naturelle.",ar:'مشوك فاخر بلوز كاليفورني مع الفستق وبتلات الورد الطبيعي.'},
+            ingredients:{fr:['Amandes Californie',"Blancs d'œufs frais",'Sucre glace','Poudre pistache','Rose naturelle'],ar:['لوز كاليفورني','بياض بيض طازج','سكر ناعم','مسحوق فستق','ورد طبيعي']},
+            nutrition:{calories:'105 kcal',glucides:'11 g',lipides:'6 g',proteines:'3 g',sucres:'9 g',
+                bars:{cal:35,glu:37,lip:40,suc:30}}
+        }
+    ]
+  },
+  {
+    id:'ghribia',fr:'Ghribia',ar:'غريبية',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',
+    variants:[
+        {
+            key:'nature',fr:'Nature',ar:'طبيعية',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',prix:60,
+            composition:{fr:"Sablé fondant traditionnel à base de farine de pois chiches ou de blé, beurre et sucre glace.",ar:'سابلِي تقليدي طري بدقيق الحمص أو القمح مع الزبدة والسكر الناعم.'},
+            ingredients:{fr:['Farine pois chiches','Beurre fondu','Sucre glace','Vanille','Sel'],ar:['دقيق حمص','زبدة ذائبة','سكر ناعم','فانيليا','ملح']},
+            nutrition:{calories:'138 kcal',glucides:'15 g',lipides:'7,5 g',proteines:'2,5 g',sucres:'7 g',
+                bars:{cal:46,glu:50,lip:50,suc:23}}
+        },
+        {
+            key:'amandes',fr:'Amandes',ar:'باللوز',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Ghribiya.png',prix:100,prix_promo:85,
+            composition:{fr:"Ghribia enrichie de poudre d'amandes pour plus de moelleux, fleur d'oranger.",ar:'غريبية غنية بمسحوق اللوز لليونة أكثر مع ماء الزهر.'},
+            ingredients:{fr:["Farine d'amandes",'Beurre','Sucre',"Fleur d'oranger",'Farine blé'],ar:['دقيق لوز','زبدة','سكر','ماء زهر','دقيق قمح']},
+            nutrition:{calories:'158 kcal',glucides:'16 g',lipides:'9,5 g',proteines:'3 g',sucres:'8 g',
+                bars:{cal:53,glu:53,lip:63,suc:27}}
+        }
+    ]
+  },
+  {
+    id:'sable_bracelet',fr:'Sablé Bracelet',ar:'سابلِي على شكل سوار',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+    variants:[
+        {
+            key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:90,
+            composition:{fr:"Bracelet en pâte sablée pur beurre, trempé dans le chocolat noir fondu et parsemé d'éclats de noisettes.",ar:'سوار من عجينة البتي فور بالزبدة مغموس بالشوكولاتة الداكنة مع قطع البندق.'},
+            ingredients:{fr:['Beurre doux','Farine T55','Chocolat noir 64%','Sucre glace','Jaune œuf'],ar:['زبدة طازجة','دقيق فاخر','شوكولاتة داكنة 64%','سكر ناعم','صفار بيض']},
+            nutrition:{calories:'168 kcal',glucides:'17 g',lipides:'10 g',proteines:'2,5 g',sucres:'8 g',
+                bars:{cal:56,glu:57,lip:67,suc:27}}
+        },
+        {
+            key:'nature',fr:'Nature Vanille',ar:'فانيليا طبيعية',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,
+            composition:{fr:'Bracelet sablé pur beurre, délicat et croustillant, parfumé à la vanille naturelle de Madagascar.',ar:'سوار سابلِي بالزبدة الخالصة، خفيف ومقرمش مع فانيليا طبيعية من مدغشقر.'},
+            ingredients:{fr:['Beurre doux 82%','Farine T55','Vanille Madagascar','Sucre glace','Sel'],ar:['زبدة طازجة 82%','دقيق فاخر','فانيليا مدغشقر','سكر ناعم','ملح']},
+            nutrition:{calories:'152 kcal',glucides:'16 g',lipides:'9 g',proteines:'2 g',sucres:'6 g',
+                bars:{cal:51,glu:53,lip:60,suc:20}}
+        },
+        {
+            key:'prestige',fr:'Prestige Caramel',ar:'كراميل فاخر',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:140,
+            composition:{fr:"Bracelet sablé au caramel fleur de sel, enrobé de chocolat belge au lait et copeaux de chocolat.",ar:'سوار سابلِي بكراميل ملح البحر، مغطى بشوكولاتة بلجيكية بالحليب وبرادة الشوكولاتة.'},
+            ingredients:{fr:['Beurre clarifié','Farine T45','Caramel fleur de sel','Chocolat belge lait','Sel Guérande'],ar:['سمن مذاب','دقيق فاخر','كراميل ملح البحر','شوكولاتة بلجيكية','ملح جيراند']},
+            nutrition:{calories:'195 kcal',glucides:'20 g',lipides:'12 g',proteines:'2,5 g',sucres:'13 g',
+                bars:{cal:65,glu:67,lip:80,suc:43}}
+        }
+    ]
+  },
+  {
+    id:'mini_cake',fr:'Mini Cake',ar:'ميني كيك',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',
+    variants:[
+        {
+            key:'citron',fr:'Citron',ar:'بالليمون',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:90,
+            composition:{fr:"Mini cake moelleux au zeste de citron frais, glacé au sucre citronné, texture aérienne.",ar:'ميني كيك طري بقشر الليمون الطازج، مزجج بسكر الليمون، قوام خفيف.'},
+            ingredients:{fr:['Farine','Œufs entiers','Beurre fondu','Zeste citron','Levure','Sucre'],ar:['دقيق','بيض كامل','زبدة ذائبة','قشر ليمون','بيكنج باودر','سكر']},
+            nutrition:{calories:'172 kcal',glucides:'24 g',lipides:'7 g',proteines:'3 g',sucres:'15 g',
+                bars:{cal:57,glu:80,lip:47,suc:50}}
+        },
+        {
+            key:'chocolat',fr:'Chocolat',ar:'بالشوكولاتة',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/madelinchocolati.png',prix:100,prix_promo:90,
+            composition:{fr:"Mini cake intense au chocolat noir 70%, cœur coulant, saupoudré de cacao.",ar:'ميني كيك بالشوكولاتة الداكنة 70%، قلب سائل، مرشوش بالكاكاو.'},
+            ingredients:{fr:['Farine','Œufs','Beurre','Chocolat noir 70%','Sucre','Cacao'],ar:['دقيق','بيض','زبدة','شوكولاتة داكنة 70%','سكر','كاكاو']},
+            nutrition:{calories:'198 kcal',glucides:'25 g',lipides:'10 g',proteines:'3,5 g',sucres:'16 g',
+                bars:{cal:66,glu:83,lip:67,suc:53}}
+        },
+        {
+            key:'prestige',fr:'Prestige Fruits Rouges',ar:'بريستيج فواكه حمراء',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_generate%20photo%201%20piece%20mini%20cake%20algerienne%20presentable%20pour%20presente%C3%A9%20mini%20cake%20dans%20818302.png',prix:140,
+            composition:{fr:"Mini cake bio aux fruits rouges frais (fraise, framboise, myrtille), beurre clarifié.",ar:'ميني كيك عضوي بالفواكه الحمراء الطازجة (فراولة، توت، عنب بري)، سمن.'},
+            ingredients:{fr:['Farine T55','Œufs bio','Beurre clarifié','Fraises','Framboises','Myrtilles'],ar:['دقيق فاخر','بيض عضوي','سمن','فراولة','توت أحمر','عنب بري']},
+            nutrition:{calories:'182 kcal',glucides:'24 g',lipides:'8 g',proteines:'3 g',sucres:'15 g',
+                bars:{cal:61,glu:80,lip:53,suc:50}}
+        }
+    ]
+  },
+  {
+    id:'petit_four',fr:'Petit Four',ar:'بيتي فور',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',
+    variants:[
+        {
+            key:'assortis',fr:'Assortis',ar:'متنوع',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:90,
+            composition:{fr:"Assortiment de petits fours fins : sablés, ganache chocolat, confiture fraise, amandes effilées.",ar:'تشكيلة بيتي فور راقية: سابلِي، غاناش شوكولاتة، مربى فراولة، لوز مقشر.'},
+            ingredients:{fr:['Pâte sablée','Ganache chocolat','Confiture fraise','Amandes effilées','Sucre glace'],ar:['عجينة هشة','غاناش شوكولاتة','مربى فراولة','لوز مقشر','سكر ناعم']},
+            nutrition:{calories:'112 kcal',glucides:'13 g',lipides:'6 g',proteines:'1,5 g',sucres:'7 g',
+                bars:{cal:37,glu:43,lip:40,suc:23}}
+        },
+        {
+            key:'prestige',fr:'Prestige',ar:'بريستيج',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20petit%20four%20algerienne%20presentable%20pour%20presente%C3%A9%20petit%20four%20da%20818302.png',prix:140,
+            composition:{fr:"Petits fours haut de gamme : pâte feuilletée, ganache Valrhona, gelée fruits exotiques, feuille d'or.",ar:'بيتي فور فاخر: عجينة مورقة، غاناش فالرونا، هلام فواكه استوائية، ورق ذهب.'},
+            ingredients:{fr:['Pâte feuilletée','Ganache Valrhona','Gelée exotique','Pistaches','Feuille or'],ar:['عجينة مورقة','غاناش فالرونا','هلام فواكه','فستق','ورق ذهب']},
+            nutrition:{calories:'128 kcal',glucides:'14 g',lipides:'7,5 g',proteines:'2 g',sucres:'8 g',
+                bars:{cal:43,glu:47,lip:50,suc:27}}
+        }
+    ]
+  },
+  {
+    id:'pomme_amande',fr:'Pomme Amande',ar:'حلوى التفاحة باللوز',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',
+    variants:[
+        {
+            key:'classique',fr:'Classique',ar:'كلاسيكي',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:90,
+            composition:{fr:"Figurine en pâte d'amandes moulée en forme de pomme, parfumée aux arômes naturels, colorants végétaux.",ar:'شكل تفاحة من عجينة اللوز المصبوغة بأصباغ نباتية طبيعية ومعطرة بنكهات طبيعية.'},
+            ingredients:{fr:["Pâte d'amandes 60%",'Sucre glace','Colorants végétaux','Arôme naturel','Clou de girofle'],ar:['عجينة لوز 60%','سكر ناعم','أصباغ نباتية','نكهة طبيعية','قرنفل']},
+            nutrition:{calories:'128 kcal',glucides:'16 g',lipides:'6 g',proteines:'2,5 g',sucres:'14 g',
+                bars:{cal:43,glu:53,lip:40,suc:47}}
+        },
+        {
+            key:'prestige',fr:'Prestige Pistache',ar:'بريستيج بالفستق',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20pomme%20pate%20dammande%20algerienne%20presentable%20pour%20presente%C3%A9%20pomm%20818302.png',prix:140,
+            composition:{fr:"Pomme en pâte d'amandes premium, fourrage de pâte de pistache pure, colorant naturel spiruline.",ar:'تفاحة من عجينة لوز ممتازة محشوة بعجينة فستق خالصة وصبغة سبيرولينا طبيعية.'},
+            ingredients:{fr:["Pâte d'amandes 70%",'Pâte pistache pure','Sucre glace','Spiruline naturelle','Eau de rose'],ar:['عجينة لوز 70%','عجينة فستق خالصة','سكر ناعم','سبيرولينا طبيعية','ماء ورد']},
+            nutrition:{calories:'145 kcal',glucides:'15 g',lipides:'8,5 g',proteines:'3,5 g',sucres:'13 g',
+                bars:{cal:48,glu:50,lip:57,suc:43}}
+        }
+    ]
+  },
+  {
+    id:'araysh',fr:'Arayech',ar:'عرايش',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',
+    variants:[
+        {
+            key:'classique',fr:'Nature',ar:'طبيعية',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Arayesh.png',prix:140,
+            composition:{fr:"Crêpe en semoule fine farcie de pâte d'amandes, roulée et trempée dans le miel d'acacia, graines de sésame.",ar:'كريب بالسميدة محشو بعجينة اللوز، ملفوف ومغمور في عسل الأكاسيا مع السمسم.'},
+            ingredients:{fr:['Semoule fine',"Pâte d'amandes",'Miel acacia','Sésame grillé','Beurre'],ar:['سميدة ناعمة','عجينة لوز','عسل أكاسيا','سمسم محمص','زبدة']},
+            nutrition:{calories:'205 kcal',glucides:'28 g',lipides:'9 g',proteines:'4 g',sucres:'20 g',
+                bars:{cal:68,glu:93,lip:60,suc:67}}
+        },
+        {
+            key:'framboise',fr:'Framboise',ar:'بالتوت الأحمر',
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_transformer%20au%20arayeshe%20couleur%20framboise%20rose%20claire%20avec%20une%20indication%20framboise%20737184.png',prix:155,prix_promo:140,
+            composition:{fr:"Arayech à la confiture de framboise maison, couleur rose naturelle, parsemé de sésame rose.",ar:'عرايش بمربى التوت الأحمر البيتي، لون وردي طبيعي مع السمسم الوردي.'},
+            ingredients:{fr:['Semoule','Confiture framboise maison',"Pâte d'amandes",'Miel','Beurre'],ar:['سميدة','مربى توت بيتي','عجينة لوز','عسل','زبدة']},
+            nutrition:{calories:'195 kcal',glucides:'28 g',lipides:'8 g',proteines:'3,5 g',sucres:'20 g',
+                bars:{cal:65,glu:93,lip:53,suc:67}}
+        }
+    ]
+  }
 ];
 
 const CHOCO_DATA = {
@@ -793,7 +1207,7 @@ const CHOCO_DATA = {
   }
 };
 
-const I18N = {
+const I18N={
   fr:{
     tagline:"L'Excellence de la Pâtisserie Algérienne",
     nav0:"Nouveautés",nav1:"Nos Créations",nav2:"Nos Gammes",nav3:"Commander",nav_choco:"🍫 Coffrets Chocolats",
@@ -818,7 +1232,8 @@ const I18N = {
     m_line_lbl:"Total ligne",added:"Ajouté au panier !",
     order_ok:"Merci ! Votre commande a été transmise avec succès ✓",
     loading:"Traitement en cours...",error:"Une erreur est survenue. Veuillez réessayer.",
-    promo:"Promo",nutri_cal:"Calories",nutri_sug:"Sucre",nutri_fat:"Lipides",
+    promo:"Promo",
+    nutri_cal:"Calories",nutri_glu:"Glucides",nutri_lip:"Lipides",nutri_pro:"Protéines",nutri_sug:"Sucres",
     choco_banner_title:"🍫 Coffret Chocolats Ajouté !",
     choco_banner_msg:"Votre coffret chocolats a été ajouté. Remplissez le formulaire pour finaliser.",
     choco_cart_name:"Coffret Chocolats",
@@ -840,8 +1255,7 @@ const I18N = {
     cnt_back:"← Format",cnt_next:"Récap →",
     c_toast_over:"Capacité dépassée ! Réduisez la quantité.",c_toast_add:"🍫 Coffret ajouté au panier !",
     c_to_step2:"Choisir mes chocolats →",c_da:"DA",
-    c_discount_lbl_5:"🎉 Réduction -5% coffret 20 pièces",
-    c_discount_lbl_10:"🎉 Réduction -10% coffret 30 pièces",
+    c_discount_lbl_5:"🎉 Réduction -5% coffret 20 pièces",c_discount_lbl_10:"🎉 Réduction -10% coffret 30 pièces",
     ps0_eyebrow:"✨ Nouveauté",ps0_title:"Les Sablés <em>MyZina</em><br>8 Saveurs Inédites",
     ps0_desc:"Fondants, délicatement dorés, nos sablés artisanaux revisitent les grands classiques. Disponibles en 8 variantes exclusives.",
     ps0_cta:"Découvrir les Sablés →",
@@ -851,6 +1265,7 @@ const I18N = {
     ps2_eyebrow:"👑 Gamme Prestige",ps2_title:"L'Art de la <em>Pâtisserie</em><br>Algérienne",
     ps2_desc:"Amandes extra-fines, miel de montagne et finitions artisanales façonnées selon les traditions ancestrales.",
     ps2_cta:"Notre Gamme Prestige →",
+    m_composition:"Composition",
   },
   ar:{
     tagline:"التميز في الحلويات الجزائرية التقليدية",
@@ -876,7 +1291,8 @@ const I18N = {
     m_line_lbl:"إجمالي السطر",added:"تمت الإضافة بنجاح!",
     order_ok:"شكراً لكم! تم استلام طلبيتكم بنجاح ✓",
     loading:"جاري المعالجة...",error:"حدث خطأ ما. يرجى المحاولة مرة أخرى.",
-    promo:"عرض",nutri_cal:"سعرات",nutri_sug:"سكر",nutri_fat:"دهون",
+    promo:"عرض",
+    nutri_cal:"سعرات",nutri_glu:"كربوهيدرات",nutri_lip:"دهون",nutri_pro:"بروتين",nutri_sug:"سكر",
     choco_banner_title:"🍫 تم استلام طلب علبة الشوكولاتة",
     choco_banner_msg:"تمت إضافة علبة الشوكولاتة إلى سلتك. أكمل النموذج.",
     choco_cart_name:"علبة شوكولاتة",
@@ -898,10 +1314,9 @@ const I18N = {
     cnt_back:"الحجم ←",cnt_next:"الملخص →",
     c_toast_over:"تجاوزت السعة! قلّل الكمية.",c_toast_add:"🍫 تمت العلبة! جارٍ الإضافة…",
     c_to_step2:"اختر شوكولاتتي →",c_da:"دج",
-    c_discount_lbl_5:"🎉 تخفيض -5% علبة 20 قطعة",
-    c_discount_lbl_10:"🎉 تخفيض -10% علبة 30 قطعة",
+    c_discount_lbl_5:"🎉 تخفيض -5% علبة 20 قطعة",c_discount_lbl_10:"🎉 تخفيض -10% علبة 30 قطعة",
     ps0_eyebrow:"✨ جديد",ps0_title:"سابلِي <em>ميزينا</em><br>8 نكهات لا مثيل لها",
-    ps0_desc:"هشة ومذهبة بلمسة يدوية، سابليات ميزينا بـ 8 نكهات حصرية تعيد ابتكار الكلاسيكيات.",
+    ps0_desc:"هشة ومذهبة بلمسة يدوية، سابليات ميزينا بـ 8 نكهات حصرية.",
     ps0_cta:"اكتشف السابلِي ←",
     ps1_eyebrow:"🍫 مجموعة حصرية",ps1_title:"علب <em>الشوكولاتة</em><br>اليدوية",
     ps1_desc:"صمم علبتك من 6 إلى 30 شوكولاتة. 9 نكهات فاخرة، خصومات تصل إلى -10%.",
@@ -909,15 +1324,16 @@ const I18N = {
     ps2_eyebrow:"👑 مجموعة بريستيج",ps2_title:"فن <em>الحلويات</em><br>الجزائرية",
     ps2_desc:"لوز رفيع، عسل جبلي وتشطيبات يدوية حسب التقاليد الجزائرية العريقة.",
     ps2_cta:"مجموعة بريستيج ←",
+    m_composition:"التركيبة",
   }
 };
 
 /* STATE */
 let currentLang='fr', cart=[], currentSel={product:null,variantIndex:0,qty:5};
+let lastVariantDir=1;
 let chocoStep=1, selectedBoxSize=null, chocoQuantities={};
 let sliderIndex=0, sliderTimer=null;
 
-/* INIT */
 document.addEventListener('DOMContentLoaded',()=>{
     populateWilayas();renderProducts();setupMainEvents();applyI18N();
     renderBoxSizes();renderChocoCards();applyChocoI18N();
@@ -925,7 +1341,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 });
 
 /* SLIDER */
-const SLIDE_COUNT = 3;
+const SLIDE_COUNT=3;
 function sliderGo(idx){
     sliderIndex=(idx+SLIDE_COUNT)%SLIDE_COUNT;
     document.getElementById('promo_track').style.transform=`translateX(-${sliderIndex*100}%)`;
@@ -939,14 +1355,10 @@ function resetSliderTimer(){clearInterval(sliderTimer);sliderTimer=setInterval((
 function updateSliderI18N(){
     const T=I18N[currentLang];
     for(let i=0;i<3;i++){
-        const eyebrow=document.getElementById(`ps${i}_eyebrow`);
-        const title=document.getElementById(`ps${i}_title`);
-        const desc=document.getElementById(`ps${i}_desc`);
-        const cta=document.getElementById(`ps${i}_cta`);
-        if(eyebrow&&T[`ps${i}_eyebrow`])eyebrow.innerHTML=T[`ps${i}_eyebrow`];
-        if(title&&T[`ps${i}_title`])title.innerHTML=T[`ps${i}_title`];
-        if(desc&&T[`ps${i}_desc`])desc.innerHTML=T[`ps${i}_desc`];
-        if(cta&&T[`ps${i}_cta`])cta.innerHTML=T[`ps${i}_cta`];
+        ['eyebrow','title','desc','cta'].forEach(k=>{
+            const el=document.getElementById(`ps${i}_${k}`);
+            if(el&&T[`ps${i}_${k}`])el.innerHTML=T[`ps${i}_${k}`];
+        });
     }
 }
 
@@ -1025,7 +1437,6 @@ function populateWilayas(){
     WILAYAS.forEach(w=>{const o=document.createElement('option');o.value=w;o.textContent=w;sel.appendChild(o);});
 }
 
-/* ★ MODIFIED: renderProducts with variant arrow dropdown */
 function renderProducts(){
     const grid=document.getElementById('product_grid');
     const T=I18N[currentLang];
@@ -1039,18 +1450,9 @@ function renderProducts(){
                 ?`<span class="price-current">${minPrice} – ${maxPrice} DA</span>`
                 :`<span class="price-current">${p.variants[0].prix} DA</span>`);
         const isNew=p.id==='sable';
-        const multiVariant=p.variants.length>1;
-        const variantLabel=currentLang==='fr'
-            ?`${p.variants.length} variante${p.variants.length>1?'s':''}`
-            :`${p.variants.length} نكهات`;
-        const variantPillsHtml=multiVariant?`
-            <button type="button" class="variant-arrow-btn" onclick="toggleVariantDropdown(event,'vd_${p.id}',this)">
-                ${variantLabel} <span class="arr">▾</span>
-            </button>
-            <div class="variant-dropdown" id="vd_${p.id}">
-                <div class="variant-pill-row">
-                    ${p.variants.map((v,i)=>`<span class="variant-pill" onclick="openProductVariant(event,'${p.id}',${i})">${v[currentLang]||v.fr}${v.prix_promo?' ★':''}</span>`).join('')}
-                </div>
+        const variantPillsHtml=p.variants.length>1?`
+            <div class="variant-strip">
+                ${p.variants.map((v,i)=>`<span class="variant-strip-pill" onclick="openProductVariant(event,'${p.id}',${i})">${v[currentLang]||v.fr}${v.prix_promo?' ★':''}</span>`).join('')}
             </div>`:'';
         return `<div class="product-card" onclick="openProduct('${p.id}')" style="position:relative;">
             ${isNew?`<div style="position:absolute;top:14px;left:14px;z-index:5;background:var(--gold);color:#1a0a00;font-weight:900;font-size:0.72rem;padding:5px 14px;border-radius:50px;letter-spacing:1.5px;text-transform:uppercase;">${currentLang==='fr'?'Nouveau ✨':'جديد ✨'}</div>`:''}
@@ -1070,86 +1472,164 @@ function renderProducts(){
     grid.innerHTML=html;
 }
 
-/* Toggle variant dropdown on cards */
-window.toggleVariantDropdown=function(e,dropId,btn){
-    e.stopPropagation();
-    const drop=document.getElementById(dropId);
-    if(!drop)return;
-    const isOpen=drop.classList.contains('open');
-    document.querySelectorAll('.variant-dropdown.open').forEach(d=>{
-        d.classList.remove('open');
-        const b=d.previousElementSibling;if(b&&b.classList.contains('variant-arrow-btn'))b.classList.remove('open');
-    });
-    if(!isOpen){drop.classList.add('open');btn.classList.add('open');}
-};
-
 /* Open modal directly on a specific variant from card pill */
 window.openProductVariant=function(e,id,variantIndex){
     e.stopPropagation();
     const p=CATALOG.find(x=>x.id===id);if(!p)return;
     currentSel={product:p,variantIndex:variantIndex,qty:5};
-    document.getElementById('m_name').textContent=p[currentLang]||p.fr;
-    document.getElementById('m_qty_val').value=5;
-    document.getElementById('m_variants').innerHTML=p.variants.map((v,i)=>{
-        const label=v[currentLang]||v.fr;
-        return `<button type="button" class="variant-tab${i===variantIndex?' active':''}" onclick="selectVariant(${i})">${label}${v.prix_promo?' ★':''}</button>`;
-    }).join('');
-    renderVariantDetails(variantIndex,false);
-    const bg=document.getElementById('modal_bg'),modal=document.getElementById('modal');
-    bg.style.display='flex';
-    setTimeout(()=>{bg.style.opacity='1';modal.style.transform=window.innerWidth<640?'translateY(0)':'scale(1)';},10);
-    document.body.style.overflow='hidden';
+    openModal(p,variantIndex);
 };
 
 window.openProduct=function(id){
     const p=CATALOG.find(x=>x.id===id);if(!p)return;
     currentSel={product:p,variantIndex:0,qty:5};
+    openModal(p,0);
+};
+
+function openModal(p,startIndex){
     document.getElementById('m_name').textContent=p[currentLang]||p.fr;
     document.getElementById('m_qty_val').value=5;
-    document.getElementById('m_variants').innerHTML=p.variants.map((v,i)=>{
-        const label=v[currentLang]||v.fr;
-        return `<button type="button" class="variant-tab${i===0?' active':''}" onclick="selectVariant(${i})">${label}${v.prix_promo?' ★':''}</button>`;
-    }).join('');
-    renderVariantDetails(0,false);
+    buildVariantNav(p,startIndex);
+    renderVariantDetails(startIndex,false,0);
     const bg=document.getElementById('modal_bg'),modal=document.getElementById('modal');
     bg.style.display='flex';
     setTimeout(()=>{bg.style.opacity='1';modal.style.transform=window.innerWidth<640?'translateY(0)':'scale(1)';},10);
     document.body.style.overflow='hidden';
+}
+
+function buildVariantNav(p,activeIdx){
+    const variants=p.variants;
+    /* Tabs */
+    document.getElementById('m_variants').innerHTML=variants.map((v,i)=>{
+        const label=v[currentLang]||v.fr;
+        return `<button type="button" class="variant-tab${i===activeIdx?' active':''}" onclick="selectVariant(${i})" style="animation:tabReveal ${0.15+i*0.06}s ease both;">${label}${v.prix_promo?' ★':''}</button>`;
+    }).join('');
+    /* Dots */
+    document.getElementById('variant_stepper').innerHTML=variants.length>1?variants.map((_,i)=>
+        `<span class="v-dot${i===activeIdx?' active':''}" onclick="selectVariant(${i})"></span>`
+    ).join(''):'';
+    /* Arrow states */
+    updateNavArrows(p,activeIdx);
+}
+
+function updateNavArrows(p,idx){
+    const n=p.variants.length;
+    const prevBtn=document.getElementById('var_prev_btn');
+    const nextBtn=document.getElementById('var_next_btn');
+    if(prevBtn)prevBtn.disabled=(idx===0);
+    if(nextBtn)nextBtn.disabled=(idx===n-1);
+    /* Hide nav entirely if only 1 variant */
+    const navWrap=document.getElementById('variant_nav_wrap');
+    if(navWrap)navWrap.style.display=n<=1?'none':'flex';
+    const stepper=document.getElementById('variant_stepper');
+    if(stepper)stepper.style.display=n<=1?'none':'flex';
+}
+
+window.navigateVariant=function(dir){
+    const p=currentSel.product;if(!p)return;
+    const newIdx=currentSel.variantIndex+dir;
+    if(newIdx<0||newIdx>=p.variants.length)return;
+    lastVariantDir=dir;
+    selectVariant(newIdx);
 };
 
 window.selectVariant=function(index){
+    const p=currentSel.product;if(!p)return;
     if(index===currentSel.variantIndex)return;
+    const dir=index>currentSel.variantIndex?1:-1;
     currentSel.variantIndex=index;
+    /* Update tabs */
     document.querySelectorAll('.variant-tab').forEach((t,i)=>t.classList.toggle('active',i===index));
-    renderVariantDetails(index,true);
+    /* Update dots */
+    document.querySelectorAll('.v-dot').forEach((d,i)=>d.classList.toggle('active',i===index));
+    updateNavArrows(p,index);
+    renderVariantDetails(index,true,dir);
 };
 
-function renderVariantDetails(index,animate){
+function renderVariantDetails(index,animate,dir){
     const p=currentSel.product,v=p.variants[index];
-    const details=document.getElementById('variant_details'),imgEl=document.getElementById('m_img');
-    const doUpdate=()=>{
-        imgEl.classList.add('fading');
-        setTimeout(()=>{imgEl.src=v.img||p.img;imgEl.classList.remove('fading');},180);
-        document.getElementById('m_variant_label').textContent=v[currentLang]||v.fr;
-        renderModalPrice(v);
-        const ings=v.ingredients[currentLang]||v.ingredients.fr;
-        document.getElementById('m_ingredients').innerHTML=ings.map(i=>`<span class="ingredient-chip">${i}</span>`).join('');
-        const T=I18N[currentLang];
-        document.getElementById('m_nutrition').innerHTML=`
-            <div class="nutri-cell"><span class="nutri-val">${v.nutrition.calories}</span><span class="nutri-key">${T.nutri_cal}</span></div>
-            <div class="nutri-cell"><span class="nutri-val">${v.nutrition.sucre}</span><span class="nutri-key">${T.nutri_sug}</span></div>
-            <div class="nutri-cell"><span class="nutri-val">${v.nutrition.gras}</span><span class="nutri-key">${T.nutri_fat}</span></div>`;
-        updateLineTotalPreview();
-        details.classList.remove('fading');
-    };
-    if(animate){details.classList.add('fading');setTimeout(doUpdate,200);}else{doUpdate();}
+    const T=I18N[currentLang];
+    const details=document.getElementById('variant_details');
+    const imgWrap=document.getElementById('modal_img_wrap');
+    const imgEl=document.getElementById('m_img');
+
+    /* Image animation */
+    imgWrap.classList.remove('modal-img-anim-left','modal-img-anim-right');
+    if(animate){
+        void imgWrap.offsetWidth;
+        imgWrap.classList.add(dir>0?'modal-img-anim-left':'modal-img-anim-right');
+    }
+    imgEl.src=v.img||p.img;
+    imgEl.onerror=()=>imgEl.src='https://via.placeholder.com/600x400/4a0404/c9993a?text=MyZina';
+    document.getElementById('m_variant_label').textContent=v[currentLang]||v.fr;
+
+    /* Details animation */
+    details.classList.remove('slide-in','slide-in-left');
+    if(animate){
+        void details.offsetWidth;
+        details.classList.add(dir>0?'slide-in':'slide-in-left');
+    }
+
+    renderModalPrice(v);
+
+    /* Composition */
+    const comp=v.composition?v.composition[currentLang]||v.composition.fr:'';
+    const compHtml=comp?`
+        <div style="background:#fdf8f0;border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 12px 12px 0;margin-bottom:1.5rem;">
+            <span style="font-size:0.8rem;font-weight:900;text-transform:uppercase;letter-spacing:1.2px;color:#999;display:block;margin-bottom:6px;">${T.m_composition||'Composition'}</span>
+            <p style="font-size:1rem;color:var(--ink);line-height:1.65;font-style:italic;">${comp}</p>
+        </div>`:'';
+
+    /* Ingredients */
+    const ings=v.ingredients[currentLang]||v.ingredients.fr;
+    document.getElementById('m_ingredients').innerHTML=ings.map(i=>`<span class="ingredient-chip">${i}</span>`).join('');
+
+    /* Nutrition - now with bars and 5 metrics */
+    const n=v.nutrition;
+    const bars=n.bars||{};
+    document.getElementById('m_nutrition').innerHTML=`
+        <div class="nutri-cell">
+            <span class="nutri-icon">🔥</span>
+            <span class="nutri-val">${n.calories||'—'}</span>
+            <span class="nutri-key">${T.nutri_cal}</span>
+            <div class="nutri-bar"><div class="nutri-bar-fill" style="width:${bars.cal||0}%"></div></div>
+        </div>
+        <div class="nutri-cell">
+            <span class="nutri-icon">🌾</span>
+            <span class="nutri-val">${n.glucides||n.sucres||'—'}</span>
+            <span class="nutri-key">${T.nutri_glu}</span>
+            <div class="nutri-bar"><div class="nutri-bar-fill" style="width:${bars.glu||0}%"></div></div>
+        </div>
+        <div class="nutri-cell">
+            <span class="nutri-icon">🧈</span>
+            <span class="nutri-val">${n.lipides||n.gras||'—'}</span>
+            <span class="nutri-key">${T.nutri_lip}</span>
+            <div class="nutri-bar"><div class="nutri-bar-fill" style="width:${bars.lip||0}%"></div></div>
+        </div>`;
+
+    /* Insert composition after divider */
+    document.getElementById('m_ingredients').insertAdjacentHTML('beforebegin', compHtml);
+
+    updateLineTotalPreview();
+
+    /* Trigger bar animations after paint */
+    setTimeout(()=>{
+        document.querySelectorAll('.nutri-bar-fill').forEach(b=>{
+            const w=b.style.width;b.style.width='0';
+            requestAnimationFrame(()=>{b.style.width=w;});
+        });
+    },50);
 }
 
 function renderModalPrice(v){
     const T=I18N[currentLang];
+    const priceEl=document.getElementById('m_price_block');
+    priceEl.classList.remove('price-anim');
     document.getElementById('m_price_block').innerHTML=v.prix_promo
         ?`<span class="modal-price-current">${v.prix_promo} DA</span><span class="modal-price-original">${v.prix} DA</span><span class="modal-price-badge">${T.promo}</span>`
-        :`<span class="modal-price-current">${v.prix} DA</span><small style="font-size:0.85rem;font-weight:500;color:#999;"> / pièce</small>`;
+        :`<span class="modal-price-current">${v.prix} DA</span><small style="font-size:0.85rem;font-weight:500;color:#999;"> / ${currentLang==='fr'?'pièce':'قطعة'}</small>`;
+    void priceEl.offsetWidth;
+    priceEl.classList.add('price-anim');
 }
 
 function updateLineTotalPreview(){
@@ -1168,7 +1648,6 @@ window.closeModal=function(){
 };
 window.handleModalBgClick=function(e){if(e.target===document.getElementById('modal_bg'))closeModal();};
 
-/* ★ MODIFIED: min 5 pieces */
 function setupMainEvents(){
     document.getElementById('qty_plus').addEventListener('click',()=>{currentSel.qty++;document.getElementById('m_qty_val').value=currentSel.qty;updateLineTotalPreview();});
     document.getElementById('qty_minus').addEventListener('click',()=>{if(currentSel.qty>5){currentSel.qty--;document.getElementById('m_qty_val').value=currentSel.qty;updateLineTotalPreview();}});
@@ -1180,6 +1659,14 @@ function setupMainEvents(){
     const slider=document.getElementById('promo_slider_section');
     slider.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
     slider.addEventListener('touchend',e=>{const dx=touchStartX-e.changedTouches[0].clientX;if(Math.abs(dx)>50)sliderMove(dx>0?1:-1);},{passive:true});
+    /* Keyboard nav for modal variants */
+    document.addEventListener('keydown',e=>{
+        if(document.getElementById('modal_bg').style.display==='flex'){
+            if(e.key==='ArrowRight'||e.key==='ArrowDown')navigateVariant(1);
+            if(e.key==='ArrowLeft'||e.key==='ArrowUp')navigateVariant(-1);
+            if(e.key==='Escape')closeModal();
+        }
+    });
 }
 
 function scrollToAnchor(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
