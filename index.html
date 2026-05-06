@@ -115,7 +115,6 @@
         .variant-strip-pill:hover,.variant-strip-pill.active{background:var(--burg);color:var(--gold2);border-color:var(--burg);}
 
         /* ══ VARIANT ANIMATED TABS in MODAL ══ */
-        /* Variant tab slide-in animation */
         @keyframes tabReveal{from{opacity:0;transform:translateX(12px);}to{opacity:1;transform:translateX(0);}}
         @keyframes imgSlideLeft{from{opacity:0;transform:translateX(28px) scale(0.97);}to{opacity:1;transform:translateX(0) scale(1);}}
         @keyframes imgSlideRight{from{opacity:0;transform:translateX(-28px) scale(0.97);}to{opacity:1;transform:translateX(0) scale(1);}}
@@ -127,7 +126,6 @@
         .details-anim .variant-details{animation:detailsFadeUp 0.32s ease forwards;}
         .price-anim{animation:priceCount 0.4s ease forwards;}
 
-        /* Ingredient chips with stagger */
         @keyframes chipIn{from{opacity:0;transform:scale(0.7) translateY(8px);}to{opacity:1;transform:scale(1) translateY(0);}}
         .ingredient-chip{animation:chipIn 0.3s ease both;}
         .ingredient-chip:nth-child(1){animation-delay:0.04s;}
@@ -137,14 +135,12 @@
         .ingredient-chip:nth-child(5){animation-delay:0.24s;}
         .ingredient-chip:nth-child(6){animation-delay:0.29s;}
 
-        /* Nutrition cells stagger */
         @keyframes nutriSlide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
         .nutri-cell{animation:nutriSlide 0.35s ease both;}
         .nutri-cell:nth-child(1){animation-delay:0.1s;}
         .nutri-cell:nth-child(2){animation-delay:0.18s;}
         .nutri-cell:nth-child(3){animation-delay:0.26s;}
 
-        /* Nutrition bar fill animation */
         .nutri-bar{height:5px;border-radius:4px;background:#f0e8d8;margin-top:5px;overflow:hidden;}
         .nutri-bar-fill{height:100%;border-radius:4px;background:var(--gold);width:0;transition:width 0.6s ease 0.4s;}
         .nutri-cell:nth-child(1) .nutri-bar-fill{background:#e8a034;}
@@ -246,7 +242,6 @@
         .modal-close-btn{position:absolute;top:16px;right:16px;background:rgba(0,0,0,0.65);color:white;border:none;width:50px;height:50px;border-radius:50%;cursor:pointer;font-size:1.3rem;z-index:10;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
         .modal-body{padding:2.5rem 2rem;color:var(--ink);}
 
-        /* Animated variant nav arrows */
         .variant-nav{display:flex;align-items:center;gap:0;margin-bottom:1.75rem;border:2px solid #f0e8de;border-radius:16px;overflow:hidden;}
         .variant-nav-arrow{width:48px;min-width:48px;height:56px;background:#fdf8f0;border:none;cursor:pointer;color:var(--burg);font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:background 0.2s,color 0.2s;}
         .variant-nav-arrow:hover{background:var(--burg);color:var(--gold2);}
@@ -259,7 +254,6 @@
         .variant-tab::after{content:'';position:absolute;bottom:0;left:50%;right:50%;height:3px;background:var(--gold);transition:left 0.3s,right 0.3s;}
         .variant-tab.active::after{left:0;right:0;}
 
-        /* variant dot stepper */
         .variant-stepper{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:1.5rem;}
         .v-dot{width:8px;height:8px;border-radius:50%;background:#ddd;transition:all 0.3s;cursor:pointer;}
         .v-dot.active{background:var(--burg);width:24px;border-radius:4px;}
@@ -620,13 +614,11 @@
             <button class="modal-close-btn" onclick="closeModal()">✕</button>
         </div>
         <div class="modal-body">
-            <!-- Animated variant navigation -->
             <div class="variant-nav" id="variant_nav_wrap">
                 <button class="variant-nav-arrow" id="var_prev_btn" onclick="navigateVariant(-1)">‹</button>
                 <div class="variant-tabs-scroll" id="m_variants"></div>
                 <button class="variant-nav-arrow" id="var_next_btn" onclick="navigateVariant(1)">›</button>
             </div>
-            <!-- Dot stepper -->
             <div class="variant-stepper" id="variant_stepper"></div>
 
             <div class="variant-details" id="variant_details">
@@ -742,24 +734,9 @@
 
 <script>
 /* ══════════════════════════════════════════════
-   DATA – Corrected nutritional values & compositions
-   Source: Algerian traditional pastry standards
+   DATA
    ══════════════════════════════════════════════ */
 const WILAYAS = ["16 Alger"];
-
-/* 
-  NUTRITIONAL CORRECTIONS (per piece, ~30-40g):
-  - Sablé nature vanille (≈35g): flour+butter+sugar+egg → 158 kcal, 8.5g fat, 19g carbs, 9g sugar
-  - Sablé chocolat (≈35g): added cocoa → 172 kcal, 9.5g fat, 20g carbs, 10g sugar
-  - Sablé amande pistache (≈30g): nut-based → 168 kcal, 10g fat, 16g carbs, 8g sugar
-  - Makrout dattes (≈45g): semolina+date paste+oil+honey → 188 kcal, 6g fat, 32g carbs, 20g sugar
-  - Baklawa (≈30g): filo+nuts+butter+honey → 195 kcal, 11g fat, 22g carbs, 14g sugar
-  - Ghribia (≈25g): chickpea flour+butter+sugar → 138 kcal, 7.5g fat, 15g carbs, 8g sugar
-  - Mchawek/Biscuit amande (≈20g): almond paste+egg whites → 92 kcal, 5g fat, 9g carbs, 7g sugar
-  - Petit four (≈20g): shortcrust+ganache → 112 kcal, 6g fat, 13g carbs, 7g sugar
-  - Tcherek (≈40g): semolina+butter+powdered sugar → 176 kcal, 8g fat, 24g carbs, 10g sugar
-  All values per 1 piece as served.
-*/
 
 const SABLE_VARIANTS = [
     {
@@ -836,6 +813,9 @@ const SABLE_VARIANTS = [
     },
 ];
 
+/* ══════════════════════════════════════════════
+   CATALOG — all products correctly structured
+   ══════════════════════════════════════════════ */
 const CATALOG = [
   {
     id:'sable',fr:'Sablé Artisanal',ar:'سابلِي فاخر',
@@ -876,7 +856,7 @@ const CATALOG = [
         }
     ]
   },
- {
+  {
     id:'Nekache',fr:'Nekache',ar:'نقاش',
     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/nekash.png',
     variants:[{
@@ -887,7 +867,7 @@ const CATALOG = [
         nutrition:{calories:'192 kcal',glucides:'28 g',lipides:'7,5 g',proteines:'3 g',sucres:'18 g',
             bars:{cal:64,glu:93,lip:50,suc:60}}
     }]
-},
+  },
   {
     id:'Mshekla',fr:'Mshekla',ar:'مشكلة',
     img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/mchekla.png',
@@ -1050,9 +1030,15 @@ const CATALOG = [
         }
     ]
   },
+  /* ══ BRACELET SABLÉ — restored as proper product entry ══ */
+  {
+    id:'bracelet_sable',fr:'Bracelet Sablé',ar:'سوار السابلِي',
+    img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+    variants:[
         {
             key:'nature',fr:'Nature Vanille',ar:'فانيليا طبيعية',
-            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:80,
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+            prix:80,
             composition:{fr:'Bracelet sablé pur beurre, délicat et croustillant, parfumé à la vanille naturelle de Madagascar.',ar:'سوار سابلِي بالزبدة الخالصة، خفيف ومقرمش مع فانيليا طبيعية من مدغشقر.'},
             ingredients:{fr:['Beurre doux 82%','Farine T55','Vanille Madagascar','Sucre glace','Sel'],ar:['زبدة طازجة 82%','دقيق فاخر','فانيليا مدغشقر','سكر ناعم','ملح']},
             nutrition:{calories:'152 kcal',glucides:'16 g',lipides:'9 g',proteines:'2 g',sucres:'6 g',
@@ -1060,7 +1046,8 @@ const CATALOG = [
         },
         {
             key:'prestige',fr:'Prestige Caramel',ar:'كراميل فاخر',
-            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',prix:140,
+            img:'https://raw.githubusercontent.com/AMKY22/MYZINA/refs/heads/main/Firefly_Gemini%20Flash_generate%20photo%201%20piece%20bracelet%20chocolat%20algerienne%20presentable%20pour%20presente%C3%A9%20bracel%20818302.png',
+            prix:140,
             composition:{fr:"Bracelet sablé au caramel fleur de sel, enrobé de chocolat belge au lait et copeaux de chocolat.",ar:'سوار سابلِي بكراميل ملح البحر، مغطى بشوكولاتة بلجيكية بالحليب وبرادة الشوكولاتة.'},
             ingredients:{fr:['Beurre clarifié','Farine T45','Caramel fleur de sel','Chocolat belge lait','Sel Guérande'],ar:['سمن مذاب','دقيق فاخر','كراميل ملح البحر','شوكولاتة بلجيكية','ملح جيراند']},
             nutrition:{calories:'195 kcal',glucides:'20 g',lipides:'12 g',proteines:'2,5 g',sucres:'13 g',
@@ -1472,7 +1459,6 @@ function renderProducts(){
     grid.innerHTML=html;
 }
 
-/* Open modal directly on a specific variant from card pill */
 window.openProductVariant=function(e,id,variantIndex){
     e.stopPropagation();
     const p=CATALOG.find(x=>x.id===id);if(!p)return;
@@ -1499,16 +1485,13 @@ function openModal(p,startIndex){
 
 function buildVariantNav(p,activeIdx){
     const variants=p.variants;
-    /* Tabs */
     document.getElementById('m_variants').innerHTML=variants.map((v,i)=>{
         const label=v[currentLang]||v.fr;
         return `<button type="button" class="variant-tab${i===activeIdx?' active':''}" onclick="selectVariant(${i})" style="animation:tabReveal ${0.15+i*0.06}s ease both;">${label}${v.prix_promo?' ★':''}</button>`;
     }).join('');
-    /* Dots */
     document.getElementById('variant_stepper').innerHTML=variants.length>1?variants.map((_,i)=>
         `<span class="v-dot${i===activeIdx?' active':''}" onclick="selectVariant(${i})"></span>`
     ).join(''):'';
-    /* Arrow states */
     updateNavArrows(p,activeIdx);
 }
 
@@ -1518,7 +1501,6 @@ function updateNavArrows(p,idx){
     const nextBtn=document.getElementById('var_next_btn');
     if(prevBtn)prevBtn.disabled=(idx===0);
     if(nextBtn)nextBtn.disabled=(idx===n-1);
-    /* Hide nav entirely if only 1 variant */
     const navWrap=document.getElementById('variant_nav_wrap');
     if(navWrap)navWrap.style.display=n<=1?'none':'flex';
     const stepper=document.getElementById('variant_stepper');
@@ -1538,9 +1520,7 @@ window.selectVariant=function(index){
     if(index===currentSel.variantIndex)return;
     const dir=index>currentSel.variantIndex?1:-1;
     currentSel.variantIndex=index;
-    /* Update tabs */
     document.querySelectorAll('.variant-tab').forEach((t,i)=>t.classList.toggle('active',i===index));
-    /* Update dots */
     document.querySelectorAll('.v-dot').forEach((d,i)=>d.classList.toggle('active',i===index));
     updateNavArrows(p,index);
     renderVariantDetails(index,true,dir);
@@ -1553,7 +1533,6 @@ function renderVariantDetails(index,animate,dir){
     const imgWrap=document.getElementById('modal_img_wrap');
     const imgEl=document.getElementById('m_img');
 
-    /* Image animation */
     imgWrap.classList.remove('modal-img-anim-left','modal-img-anim-right');
     if(animate){
         void imgWrap.offsetWidth;
@@ -1563,7 +1542,6 @@ function renderVariantDetails(index,animate,dir){
     imgEl.onerror=()=>imgEl.src='https://via.placeholder.com/600x400/4a0404/c9993a?text=MyZina';
     document.getElementById('m_variant_label').textContent=v[currentLang]||v.fr;
 
-    /* Details animation */
     details.classList.remove('slide-in','slide-in-left');
     if(animate){
         void details.offsetWidth;
@@ -1572,7 +1550,6 @@ function renderVariantDetails(index,animate,dir){
 
     renderModalPrice(v);
 
-    /* Composition */
     const comp=v.composition?v.composition[currentLang]||v.composition.fr:'';
     const compHtml=comp?`
         <div style="background:#fdf8f0;border-left:3px solid var(--gold);padding:14px 18px;border-radius:0 12px 12px 0;margin-bottom:1.5rem;">
@@ -1580,11 +1557,9 @@ function renderVariantDetails(index,animate,dir){
             <p style="font-size:1rem;color:var(--ink);line-height:1.65;font-style:italic;">${comp}</p>
         </div>`:'';
 
-    /* Ingredients */
     const ings=v.ingredients[currentLang]||v.ingredients.fr;
     document.getElementById('m_ingredients').innerHTML=ings.map(i=>`<span class="ingredient-chip">${i}</span>`).join('');
 
-    /* Nutrition - now with bars and 5 metrics */
     const n=v.nutrition;
     const bars=n.bars||{};
     document.getElementById('m_nutrition').innerHTML=`
@@ -1607,12 +1582,10 @@ function renderVariantDetails(index,animate,dir){
             <div class="nutri-bar"><div class="nutri-bar-fill" style="width:${bars.lip||0}%"></div></div>
         </div>`;
 
-    /* Insert composition after divider */
     document.getElementById('m_ingredients').insertAdjacentHTML('beforebegin', compHtml);
 
     updateLineTotalPreview();
 
-    /* Trigger bar animations after paint */
     setTimeout(()=>{
         document.querySelectorAll('.nutri-bar-fill').forEach(b=>{
             const w=b.style.width;b.style.width='0';
@@ -1659,7 +1632,6 @@ function setupMainEvents(){
     const slider=document.getElementById('promo_slider_section');
     slider.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;},{passive:true});
     slider.addEventListener('touchend',e=>{const dx=touchStartX-e.changedTouches[0].clientX;if(Math.abs(dx)>50)sliderMove(dx>0?1:-1);},{passive:true});
-    /* Keyboard nav for modal variants */
     document.addEventListener('keydown',e=>{
         if(document.getElementById('modal_bg').style.display==='flex'){
             if(e.key==='ArrowRight'||e.key==='ArrowDown')navigateVariant(1);
